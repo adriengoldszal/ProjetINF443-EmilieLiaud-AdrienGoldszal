@@ -1,0 +1,116 @@
+﻿  Building Custom Rule D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/CMakeLists.txt
+  basic_types.cpp
+  error.cpp
+  string.cpp
+  test_numarray.cpp
+  test_numarray_stack.cpp
+  files.cpp
+  test_grid.cpp
+  test_grid_stack_2D.cpp
+  offset_grid.cpp
+  mat_functions.cpp
+  test_vec_mat.cpp
+  mat2.cpp
+  mat3.cpp
+  mat4.cpp
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.cpp(185,57): warning C4305: 'argument': truncation from 'double' to 'const T'
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.cpp(185,57): warning C4305:         with
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.cpp(185,57): warning C4305:         [
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.cpp(185,57): warning C4305:             T=float
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.cpp(185,57): warning C4305:         ]
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray\test\test_numarray.cpp(111,49): warning C4305: 'initializing': truncation from 'double' to '_Ty'
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray\test\test_numarray.cpp(111,49): warning C4305:         with
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray\test\test_numarray.cpp(111,49): warning C4305:         [
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray\test\test_numarray.cpp(111,49): warning C4305:             _Ty=float
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray\test\test_numarray.cpp(111,49): warning C4305:         ]
+  test_matrix_stack.cpp
+  image.cpp
+  noise.cpp
+  rand.cpp
+  affine.cpp
+  affine_rt.cpp
+  affine_rts.cpp
+  frame.cpp
+  interpolation.cpp
+  projection.cpp
+  quaternion.cpp
+  rotation_transform.cpp
+  test_rotation.cpp
+  camera_first_person.cpp
+  camera_first_person_euler.cpp
+  camera_generic_base.cpp
+  camera_orbit.cpp
+  camera_orbit_euler.cpp
+  common_functions.cpp
+  camera_projection.cpp
+  mesh.cpp
+  primitive.cpp
+  bounding_box.cpp
+  curve.cpp
+  marching_cubes_lut.cpp
+  marching_cube.cpp
+  intersection.cpp
+  spatial_domain_grid_3D.cpp
+  ebo.cpp
+  opengl_buffer.cpp
+  vbo.cpp
+  debug.cpp
+  emscripten.cpp
+  fbo.cpp
+  cache_uniform_location.cpp
+  shaders.cpp
+  texture.cpp
+  uniform.cpp
+  window.cpp
+  input_devices.cpp
+  curve_drawable.cpp
+  curve_drawable_dynamic_extend.cpp
+  hierarchy_mesh_drawable.cpp
+  material_mesh_drawable_phong.cpp
+  mesh_drawable.cpp
+  skybox_drawable.cpp
+  trajectory_drawable.cpp
+  triangles_drawable.cpp
+  timer_basic.cpp
+  timer_event_periodic.cpp
+  timer_fps.cpp
+  timer_interval.cpp
+  picking_plane.cpp
+  picking_spheres.cpp
+  picking_structure.cpp
+  velocity_tracker.cpp
+  camera_controller_2d_displacement.cpp
+  camera_controller_first_person.cpp
+  camera_controller_first_person_euler.cpp
+  camera_controller_fly_mode.cpp
+  camera_controller_generic_base.cpp
+  camera_controller_orbit.cpp
+  camera_controller_orbit_euler.cpp
+  test_camera_controller.cpp
+  obj.cpp
+  obj_advanced.cpp
+  path.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_glfw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_widgets.cpp
+  jpgd.cpp
+  jpge.cpp
+  lodepng.cpp
+  simplexnoise1234.cpp
+  main.cpp
+  scene.cpp
+  terrain.cpp
+  tree.cpp
+  special_types.cpp
+  special_types.cpp
+  imgui.cpp
+  environment.cpp
+  glad.cpp
+  glad.cpp
+  glad.cpp
+  glad.cpp
+  imgui.cpp
+  environment.cpp
+  03b_modeling.vcxproj -> D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\03b_modeling.exe
