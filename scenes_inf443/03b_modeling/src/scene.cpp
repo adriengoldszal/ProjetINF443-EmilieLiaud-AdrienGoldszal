@@ -2,6 +2,7 @@
 
 #include "terrain.hpp"
 #include "tree.hpp"
+#include "water.hpp"
 
 using namespace cgp;
 
@@ -34,6 +35,16 @@ void scene_structure::initialize()
 
 	tree_position = generate_positions_on_terrain(50, terrain_length);
 
+	mesh const water_mesh = create_water_mesh(N_terrain_samples,terrain_length);
+	water.initialize_data_on_gpu(water_mesh);
+	water.material.color = { 0.0f,0.0f,0.8f };
+	water.material.alpha = 1.0f;                  // Alpha coefficient
+	water.material.phong.ambient = 0.1f;          // Ambient coefficient
+	water.material.phong.diffuse = 0.5f;          // Diffuse coefficient
+	water.material.phong.specular = 0.8f;         // Specular coefficient
+	water.material.phong.specular_exponent = 32.0f; // Specular exponent
+	//water.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/texture_water.jpg", GL_REPEAT, GL_REPEAT);
+
 
 }
 
@@ -53,6 +64,7 @@ void scene_structure::display_frame()
 		draw(tree, environment);
 	}
 	//draw(tree, environment);
+	draw(water, environment);
 
 	if (gui.display_wireframe) {
 		draw_wireframe(terrain, environment);

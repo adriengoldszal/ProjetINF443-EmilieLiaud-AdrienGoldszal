@@ -42,6 +42,7 @@ struct scene_structure : cgp::scene_inputs_generic {
 
 	std::vector<cgp::vec3> tree_position;
 
+	cgp::mesh_drawable water;
 	// ****************************** //
 	// Functions
 	// ****************************** //
