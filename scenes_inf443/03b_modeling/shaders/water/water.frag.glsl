@@ -1,12 +1,18 @@
-#version 330 core
+#version 330 core 
 
-#define PI 3.141592
-#define iSteps 16
-#define jSteps 8
+// Fragment shader - this code is executed for every pixel/fragment that belongs to a displayed shape
+//
+// Compute the color using Phong illumination (ambient, diffuse, specular) 
+//  There is 3 possible input colors:
+//    - fragment_data.color: the per-vertex color defined in the mesh
+//    - material.color: the uniform color (constant for the whole shape)
+//    - image_texture: color coming from the texture image
+//  The color considered is the product of: fragment_data.color x material.color x image_texture
+//  The alpha (/transparent) channel is obtained as the product of: material.alpha x image_texture.a
+// 
 
 // Inputs coming from the vertex shader
-in struct fragment_data
-{
+in struct fragment_data {
     vec3 position; // position in the world space
     vec3 normal;   // normal in the world space
     vec3 color;    // current color on the fragment
@@ -14,68 +20,103 @@ in struct fragment_data
 
 } fragment;
 
-in vec4 clip_space;
-
 // Output of the fragment shader - output color
-layout(location=0) out vec4 FragColor;
+layout(location = 0) out vec4 FragColor;
 
-// View matrix
-uniform mat4 view;
-uniform vec3 camera_position;
-uniform vec3 camera_direction;
-// Light properties
-uniform vec3 light_position;       // Accessible
-uniform vec3 light_color;          // Accessible
-// Material properties
-uniform vec3 material_color;       // Accessible
-uniform float material_shininess;  // Accessible
-// Texture properties
-uniform sampler2D texture_diffuse;  // Not used in the provided code
-uniform sampler2D texture_specular; // Not used in the provided code
+// Uniform values that must be send from the C++ code
+// ***************************************************** //
 
-// Function to compute the fresnel effect
-float fresnel(vec3 normal, vec3 view_direction, float F0)  // All arguments accessible
-{
-    return F0 + (1.0 - F0) * pow(1.0 - dot(normal, view_direction), 5.0);
-}
+uniform sampler2D image_texture;   // Texture image identifiant
 
-// Function to compute the reflection vector
-vec3 reflect(vec3 normal, vec3 view_direction)  // All arguments accessible
-{
-    return normalize(view_direction - 2.0 * dot(view_direction, normal) * normal);
-}
+uniform mat4 view;       // View matrix (rigid transform) of the camera - to compute the camera position
 
-// Function to compute the refraction vector
-vec3 refract(vec3 normal, vec3 view_direction, float eta)  // All arguments accessible
-{
-    float k = 1.0 - eta * eta * (1.0 - dot(normal, view_direction) * dot(normal, view_direction));
-    return k < 0.0 ? vec3(0.0) : normalize(eta * view_direction - (eta * dot(normal, view_direction) + sqrt(k)) * normal);
-}
+uniform vec3 light_position; // position of the light
 
-// Function to compute the Schlick approximation
-vec3 schlick_approximation(vec3 normal, vec3 view_direction, float F0)  // All arguments accessible
-{
-    return reflect(normal, view_direction) * fresnel(normal, view_direction, F0) + refract(normal, view_direction, 1.0 / 1.5) * (1.0 - fresnel(normal, view_direction, F0));
-}
+// Coefficients of phong illumination model
+struct phong_structure {
+    float ambient;
+    float diffuse;
+    float specular;
+    float specular_exponent;
+};
 
-// Function to compute the color of the fragment
-vec3 compute_fragment_color(vec3 normal, vec3 view_direction, vec3 light_direction, vec3 light_color, vec3 material_color, float shininess)  // All arguments accessible
-{
-    float diffuse = max(dot(normal, light_direction), 0.0);
-    float specular = pow(max(dot(reflect(-light_direction, normal), view_direction), 0.0), shininess);
-    return material_color * (diffuse * light_color + specular);
-}
+// Settings for texture display
+struct texture_settings_structure {
+    bool use_texture;       // Switch the use of texture on/off
+    bool texture_inverse_v; // Reverse the texture in the v component (1-v)
+    bool two_sided;         // Display a two-sided illuminated surface (doesn't work on Mac)
+};
 
-void main()
-{
-    // Compute the normal
-    vec3 normal = normalize(fragment.normal);  // Accessible
-    // Compute the view direction
-    vec3 view_direction = normalize(camera_position - fragment.position);  // Accessible
-    // Compute the light direction
-    vec3 light_direction = normalize(light_position - fragment.position);  // Accessible
-    // Compute the color
-    vec3 color = compute_fragment_color(normal, view_direction, light_direction, light_color, material_color, material_shininess);  // All arguments accessible
+// Material of the mesh (using a Phong model)
+struct material_structure {
+    vec3 color;  // Uniform color of the object
+    float alpha; // alpha coefficient
 
-    FragColor = vec4(color, 1.0);
+    phong_structure phong;                       // Phong coefficients
+    texture_settings_structure texture_settings; // Additional settings for the texture
+};
+
+uniform material_structure material;
+
+void main() {
+	// Compute the position of the center of the camera
+    mat3 O = transpose(mat3(view));                   // get the orientation matrix
+    vec3 last_col = vec3(view * vec4(0.0, 0.0, 0.0, 1.0)); // get the last column
+    vec3 camera_position = -O * last_col;
+
+	// Renormalize normal
+    vec3 N = normalize(fragment.normal);
+
+	// Inverse the normal if it is viewed from its back (two-sided surface)
+	//  (note: gl_FrontFacing doesn't work on Mac)
+    if(material.texture_settings.two_sided && gl_FrontFacing == false) {
+        N = -N;
+    }
+
+	// Phong coefficient (diffuse, specular)
+	// *************************************** //
+
+	// Unit direction toward the light
+    vec3 L = normalize(light_position - fragment.position);
+
+	// Diffuse coefficient
+    float diffuse_component = max(dot(N, L), 0.0);
+
+	// Specular coefficient
+    float specular_component = 0.0;
+    if(diffuse_component > 0.0) {
+        vec3 R = reflect(-L, N); // reflection of light vector relative to the normal.
+        vec3 V = normalize(camera_position - fragment.position);
+        specular_component = pow(max(dot(R, V), 0.0), material.phong.specular_exponent);
+    }
+
+	// Texture
+	// *************************************** //
+
+	// Current uv coordinates
+    vec2 uv_image = vec2(fragment.uv.x, fragment.uv.y);
+    if(material.texture_settings.texture_inverse_v) {
+        uv_image.y = 1.0 - uv_image.y;
+    }
+
+	// Get the current texture color
+    vec4 color_image_texture = texture(image_texture, uv_image);
+    if(material.texture_settings.use_texture == false) {
+        color_image_texture = vec4(1.0, 1.0, 1.0, 1.0);
+    }
+
+	// Compute Shading
+	// *************************************** //
+
+	// Compute the base color of the object based on: vertex color, uniform color, and texture
+    vec3 color_object = fragment.color * material.color * color_image_texture.rgb;
+
+	// Compute the final shaded color using Phong model
+    float Ka = material.phong.ambient;
+    float Kd = material.phong.diffuse;
+    float Ks = material.phong.specular;
+    vec3 color_shading = (Ka + Kd * diffuse_component) * color_object + Ks * specular_component * vec3(1.0, 1.0, 1.0);
+
+	// Output color, with the alpha component
+    FragColor = vec4(color_shading, material.alpha * color_image_texture.a);
 }
