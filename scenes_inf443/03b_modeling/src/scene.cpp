@@ -20,6 +20,22 @@ void scene_structure::initialize()
 
 	global_frame.initialize_data_on_gpu(mesh_primitive_frame());
 
+	// Load skybox
+	// ***************************************** //
+	image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
+	std::vector<image_structure> image_grid = image_split_grid(image_skybox_template, 4, 3);
+	skybox.initialize_data_on_gpu();
+	skybox.texture.initialize_cubemap_on_gpu(
+		image_grid[1].mirror_vertical().rotate_90_degrees_counterclockwise(),
+		image_grid[7].mirror_vertical().rotate_90_degrees_clockwise(),
+		image_grid[10].mirror_horizontal(),
+		image_grid[4].mirror_vertical(),
+		image_grid[5].mirror_horizontal(),
+		image_grid[3].mirror_vertical());
+	skybox.shader.load(
+		project::path + "shaders/skybox/skybox.vert.glsl",
+		project::path + "shaders/skybox/skybox.frag.glsl");
+
 	// Sphere used to display the position of a light
 	sphere_light.initialize_data_on_gpu(mesh_primitive_sphere(0.2f));
 	sphere_light.material.phong.ambient = 1;
@@ -54,6 +70,10 @@ void scene_structure::display_frame()
 
 	if (gui.display_frame)
 		draw(global_frame, environment);
+
+	glDepthMask(GL_FALSE); // disable depth-buffer writing
+	draw(skybox, environment);
+	glDepthMask(GL_TRUE); // re-activate depth-buffer write
 
 	draw(water, environment);
 	draw(sphere_light, environment);

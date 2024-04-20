@@ -111,23 +111,27 @@ float pnoise(vec3 P, vec3 rep) {
 }
 
 void main() {
-    float pnoise = pnoise(vertex_position + time, vec3(10.0, 10.0, 10.0));
-    vec3 new_position = vertex_position + vertex_normal * pnoise;
+    float pnoise_value = pnoise(vertex_position + time, vec3(5.0, 5.0, 5.0));
+    vec3 new_position = vertex_position + vertex_normal * pnoise_value / 5.0;
     vec4 position = model * vec4(new_position, 1.0);
 
-	// The normal of the vertex in the world space
-    mat4 modelNormal = transpose(inverse(model));
-    vec4 normal = modelNormal * vec4(vertex_normal, 0.0);
+    // Compute the normal for the new position with Perlin noise
+    float pnoise_offset = pnoise(vertex_position + time + 0.1, vec3(5.0, 5.0, 5.0));
+    vec3 new_normal = normalize(vertex_normal + vec3(0.0, pnoise_offset, 0.0));
 
-	// The projected position of the vertex in the normalized device coordinates:
+    // The normal of the vertex in the world space
+    mat4 modelNormal = transpose(inverse(model));
+    vec4 normal = normalize(modelNormal * vec4(new_normal, 0.0));
+
+    // The projected position of the vertex in the normalized device coordinates:
     vec4 position_projected = projection * view * position;
 
-	// Fill the parameters sent to the fragment shader
+    // Fill the parameters sent to the fragment shader
     fragment.position = position.xyz;
     fragment.normal = normal.xyz;
     fragment.color = vertex_color;
     fragment.uv = vertex_uv;
 
-	// gl_Position is a built-in variable which is the expected output of the vertex shader
+    // gl_Position is a built-in variable which is the expected output of the vertex shader
     gl_Position = position_projected; // gl_Position is the projected vertex position (in normalized device coordinates)
 }

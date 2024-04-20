@@ -30,8 +30,12 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	mesh_drawable global_frame;		   // The standard global frame
 	environment_structure environment; // Standard environment controler
+	cgp::skybox_drawable skybox;
+
+
 	input_devices inputs;			   // Storage for inputs status (mouse, keyboard, window dimension)
 	gui_parameters gui;				   // Standard GUI element storage
+
 
 	// ****************************** //
 	// Elements and shapes of the scene
