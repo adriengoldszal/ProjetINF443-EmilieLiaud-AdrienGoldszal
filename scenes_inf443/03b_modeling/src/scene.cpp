@@ -55,6 +55,15 @@ void scene_structure::initialize()
 	water.material.color = {0.0f, 0.5f, 1.0f}; // blue color for water
 	water.material.phong.specular = 0.0f;	   // non-specular terrain material
 											   // water.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/texture_grass.jpg", GL_REPEAT, GL_REPEAT);
+
+	// Sending the skybox texture to the water shader as a uniform
+	glUseProgram(water.shader.id);
+	opengl_check;
+	glActiveTexture(GL_TEXTURE1);
+	opengl_check;
+	skybox.texture.bind();
+	opengl_uniform(water.shader, "image_skybox", 1);
+	opengl_check;
 }
 
 void scene_structure::display_frame()
@@ -62,6 +71,7 @@ void scene_structure::display_frame()
 	timer.update();
 	environment.uniform_generic.uniform_float["time"] = timer.t;
 	environment.uniform_generic.uniform_vec3["light_position"] = vec3{-2, 2, 2};
+
 	sphere_light.model.translation = vec3{-2, 2, 2};
 	sphere_light.material.color = vec3{1, 1, 1};
 
