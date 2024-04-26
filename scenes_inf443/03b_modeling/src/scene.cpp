@@ -6,6 +6,8 @@
 
 using namespace cgp;
 
+static void deform_terrain(mesh &m);
+
 void scene_structure::initialize()
 {
 	timer.start();
@@ -36,11 +38,13 @@ void scene_structure::initialize()
 		project::path + "shaders/skybox/skybox.vert.glsl",
 		project::path + "shaders/skybox/skybox.frag.glsl");
 
-	// Sphere used to display the position of a light
-	sphere_light.initialize_data_on_gpu(mesh_primitive_sphere(0.2f));
-	sphere_light.material.phong.ambient = 1;
-	sphere_light.material.phong.diffuse = 0;
-	sphere_light.material.phong.specular = 0;
+	// Creating an island
+	float L = 5.0f;
+	float elevation = 0.0f; // Adjust this value to set the elevation
+	mesh terrain_mesh = mesh_primitive_grid({-L, -L, elevation}, {L, -L, elevation}, {L, L, elevation}, {-L, L, elevation}, 100, 100);
+	deform_terrain(terrain_mesh);
+	terrain.initialize_data_on_gpu(terrain_mesh);
+	terrain.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg");
 
 	// Load water terrain
 	int N_terrain_samples = 100;
@@ -65,18 +69,30 @@ void scene_structure::initialize()
 	opengl_uniform(water.shader, "image_skybox", 1);
 	opengl_check;
 }
+// deform terrain function for island
+static void deform_terrain(mesh &m)
+{
+	// Set the terrain to have a gaussian shape
+	for (int k = 0; k < m.position.size(); ++k)
+	{
+		vec3 &p = m.position[k];
+		float d2 = p.x * p.x + p.y * p.y;
+		float z = exp(-d2 / 4) - 1;
+
+		z = z + 0.05f * noise_perlin({p.x, p.y});
+
+		p = {p.x, p.y, z};
+	}
+
+	m.normal_update();
+}
 
 void scene_structure::display_frame()
 {
 	timer.update();
 	environment.uniform_generic.uniform_float["time"] = timer.t;
-	environment.uniform_generic.uniform_vec3["light_position"] = vec3{-2, 2, 2};
 
-	sphere_light.model.translation = vec3{-2, 2, 2};
-	sphere_light.material.color = vec3{1, 1, 1};
-
-	// Set the light to the current position of the camera
-	// environment.light = camera_control.camera_model.position();
+	environment.light_position = camera_control.camera_model.position();
 
 	if (gui.display_frame)
 		draw(global_frame, environment);
@@ -86,7 +102,8 @@ void scene_structure::display_frame()
 	glDepthMask(GL_TRUE); // re-activate depth-buffer write
 
 	draw(water, environment);
-	draw(sphere_light, environment);
+	draw(terrain, environment);
+	// draw(sphere_light, environment);
 }
 
 void scene_structure::display_gui()

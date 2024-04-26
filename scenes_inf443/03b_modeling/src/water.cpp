@@ -29,7 +29,7 @@ mesh create_water_mesh(int N, float terrain_length)
 			// float z = evaluate_terrain_height(x, y);
 
 			// Store vertex coordinates
-			terrain.position[kv + N * ku] = {x, y, 0.0f};
+			terrain.position[kv + N * ku] = {x, y, -0.7f}; // Setting height to -10 to
 			terrain.uv[kv + N * ku] = {u * N / 30, v * N / 30};
 		}
 	}
