@@ -30,6 +30,8 @@ struct environment_structure : environment_generic_structure
 	// This function will be called in the draw() call of a drawable element.
 	//  The function is expected to send the uniform variables to the shader (e.g. camera, light)
 	void send_opengl_uniform(opengl_shader_structure const &shader, bool expected = true) const override;
+
+	cgp::vec3 environment_structure::get_camera_position() const;
 };
 
 // Global variables storing general information on your project
