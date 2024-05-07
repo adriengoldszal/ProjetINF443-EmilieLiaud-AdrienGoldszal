@@ -30,25 +30,29 @@ void main() {
     vec3 last_col = vec3(view * vec4(0.0, 0.0, 0.0, 1.0)); // get the last column
     vec3 camera_position = -O * last_col;
 
+    float distance_to_water = length(fragment.position - camera_position);
+    vec3 I = (fragment.position - camera_position) / distance_to_water;
+
     // Normalize the normal
     vec3 normal = normalize(fragment.normal);
 
     // Calculate reflection and refraction vectors
-    vec3 reflected = reflect(normalize(fragment.position - camera_position), normal);
-    vec3 refracted = refract(normalize(fragment.position - camera_position), normal, 1.0 / 1.33);
+    vec3 reflected = reflect(I, normal);
+    vec3 refracted = refract(I, normal, 1.0 / 1.33);
 
     // reflected skybox color
-    vec3 skyColor = texture(image_skybox, reflected).rgb;
+    vec3 reflectedColor = texture(image_skybox, reflected).rgb;
+    vec3 refractedColor = texture(image_skybox, refracted).rgb;
 
-    //refracted skybox color 
-    //A FAIRE
+    // Partial reflection - Water reflects at normal angles and refracts more at steep angles
+            // Reflectiveness also corresponds to the angle steepness
+            // Fresnel effect. Source: https://www.youtube.com/watch?v=vTMEdHcKgM4&t=874s
+    float transparency = min(0.2, pow(max(0, dot(normal, -I)), 2));
 
-    // Calculate fresnel effect (transparency of the water  )
-    float fresnel = 0.1 + 0.9 * pow(1.0 - dot(normalize(fragment.position - camera_position), normal), 3.0);
-    fresnel = clamp(fresnel, 0.0, 1.0);
+    //current_color = mix(reflexion_texture, refraction_texture, transparency); // Blend reflection and refraction
 
     //Blend colors
-    vec3 color = mix(water_color, skyColor, fresnel);
+    vec3 color = mix(reflectedColor, refractedColor, transparency);
 
-    FragColor = vec4(color, 1.0);
+    FragColor = vec4(color, 0.9); //Alpha value for transparent water
 }
