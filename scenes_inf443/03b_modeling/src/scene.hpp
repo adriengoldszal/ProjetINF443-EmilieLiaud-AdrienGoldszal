@@ -2,6 +2,7 @@
 
 #include "cgp/cgp.hpp"
 #include "environment.hpp"
+#include "key_positions_structure.hpp"
 
 // This definitions allow to use the structures: mesh, mesh_drawable, etc. without mentionning explicitly cgp::
 using cgp::mesh;
@@ -24,8 +25,8 @@ struct scene_structure : cgp::scene_inputs_generic
 	// ****************************** //
 	// Elements and shapes of the scene
 	// ****************************** //
-	// camera_controller_orbit_euler camera_control; // Camera controller figé
-	camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
+	camera_controller_orbit_euler camera_control; // Camera controller figé
+	// camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
 	camera_projection_perspective camera_projection;
 	window_structure window;
 
@@ -50,9 +51,19 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	cgp::hierarchy_mesh_drawable hierarchy;
 
+	// Boat elements
+	/************************************/
 	mesh_drawable boat2;
 
-	cgp::rotation_transform initial_position_rotation;
+	cgp::rotation_transform initial_position_rotation; // Boat position for rotations
+
+	// Fishes
+	/****************************************/
+	// A helper structure used to store and display the key positions/time
+	keyframe_structure keyframe;
+
+	// Timer used for the interpolation of the position
+	cgp::timer_interval timer_interpolation;
 
 	// ****************************** //
 	// Functions

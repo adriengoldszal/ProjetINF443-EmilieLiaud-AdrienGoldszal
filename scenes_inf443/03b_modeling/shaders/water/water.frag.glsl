@@ -52,7 +52,7 @@ void main() {
     //current_color = mix(reflexion_texture, refraction_texture, transparency); // Blend reflection and refraction
 
     //Blend colors
-    vec3 color = mix(reflectedColor, refractedColor, transparency);
+    vec3 color = mix(reflectedColor, refractedColor, water_color * transparency);
 
     FragColor = vec4(color, 0.9); //Alpha value for transparent water
 }
