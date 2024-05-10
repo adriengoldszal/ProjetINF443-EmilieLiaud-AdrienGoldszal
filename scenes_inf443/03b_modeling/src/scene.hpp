@@ -25,8 +25,8 @@ struct scene_structure : cgp::scene_inputs_generic
 	// ****************************** //
 	// Elements and shapes of the scene
 	// ****************************** //
-	camera_controller_orbit_euler camera_control; // Camera controller figé
-	// camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
+	// camera_controller_orbit_euler camera_control; // Camera controller figé
+	camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
 	camera_projection_perspective camera_projection;
 	window_structure window;
 
@@ -49,7 +49,7 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	cgp::mesh_drawable terrain;
 
-	cgp::hierarchy_mesh_drawable hierarchy;
+	cgp::mesh_drawable fish;
 
 	// Boat elements
 	/************************************/
@@ -64,6 +64,7 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	// Timer used for the interpolation of the position
 	cgp::timer_interval timer_interpolation;
+	float interpolation_update;
 
 	// ****************************** //
 	// Functions

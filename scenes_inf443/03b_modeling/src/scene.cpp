@@ -73,6 +73,7 @@ void scene_structure::initialize()
 	opengl_check;
 
 	// Load boat
+	// Open source file https://sketchfab.com/3d-models/chinese-junk-ship-35b340bce9fb4e0680bc0116cebc35c9
 	mesh boat_mesh = mesh_load_file_obj(project::path + "assets/junk_low.obj");
 	boat2.initialize_data_on_gpu(boat_mesh);
 	boat2.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/boat.png");
@@ -84,19 +85,25 @@ void scene_structure::initialize()
 	boat2.model.translation = {-0.0f, 0.0f, 0.0f};
 	initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
 	boat2.model.rotation = initial_position_rotation;
+
 	// Load fish
-	initialize_fish(hierarchy);
+	mesh fish_mesh = mesh_load_file_obj(project::path + "assets/fish/20230116_Tobiuo.obj");
+	fish.initialize_data_on_gpu(fish_mesh);
+	fish.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Body_Normal.png");
+	fish.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Winf3_Normal.png");
+	fish.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Wing_Normal.png");
+	fish.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
+	fish.model.scaling = 0.1f;
 
 	// Definition of the initial data
 	//--------------------------------------//
-
-	// Key 3D positions
-	numarray<vec3> key_positions =
-		{{-1, 1, 0}, {0, 1, 0}, {1, 1, 0}, {1, 2, 0}, {2, 2, 0}, {2, 2, 1}, {2, 0, 1.5}, {1.5, -1, 1}, {1.5, -1, 0}, {1, -1, 0}, {0, -0.5, 0}, {-1, -0.5, 0}};
+	numarray<vec3> key_positions = {{0, 0, 0}, {5, 0, 0}, {5, 5, 0}, {0, 5, 0}, {0, 0, 0}};
+	for (int i = 0; i < key_positions.size(); ++i)
+		key_positions[i] = boat2.model.rotation * key_positions[i] + boat2.model.translation;
 
 	// Key times (time at which the position must pass in the corresponding position)
 	numarray<float> key_times =
-		{0.0f, 1.0f, 2.0f, 2.5f, 3.0f, 3.5f, 3.75f, 4.5f, 5.0f, 6.0f, 7.0f, 8.0f};
+		{0.0f, 2.0f, 4.0f, 6.0f, 8.0f};
 
 	// Initialize the helping structure to display/interact with these positions
 	keyframe.initialize(key_positions, key_times);
@@ -108,6 +115,8 @@ void scene_structure::initialize()
 	timer_interpolation.t_min = key_times[1];
 	timer_interpolation.t_max = key_times[N - 2];
 	timer_interpolation.t = timer_interpolation.t_min;
+
+	interpolation_update = timer.update();
 }
 // deform terrain function for island
 static void deform_terrain(mesh &m)
@@ -132,10 +141,14 @@ void scene_structure::display_frame()
 	timer.update();
 	timer_interpolation.update();
 
-	vec3 camera_position = environment.get_camera_position();
+	if (timer.update() - interpolation_update > 5.0f)
+	{
+		interpolation_update = timer.update();
+		for (int i = 0; i < keyframe.key_positions.size(); ++i)
+			keyframe.key_positions[i] = boat2.model.rotation * keyframe.key_positions[i] + boat2.model.translation;
+	}
 
-	// Update the camera position to be on the boat ! (TEST)
-	// camera_control.look_at({boat2.model.translation.x, boat2.model.translation.y, boat2.model.translation.z}, {boat2.model.translation.x + 10.0f, boat2.model.translation.y + 10.0f, boat2.model.translation.z});
+	vec3 camera_position = environment.get_camera_position();
 
 	environment.uniform_generic.uniform_float["time"] = timer.t;
 
@@ -175,6 +188,9 @@ void scene_structure::display_frame()
 
 	// Display the interpolated position (and its trajectory)
 	keyframe.display_current_position(p, environment);
+
+	fish.model.translation = p;
+	draw(fish, environment);
 }
 
 void scene_structure::display_semiTransparent()
@@ -214,28 +230,44 @@ void scene_structure::mouse_click_event()
 }
 void scene_structure::keyboard_event()
 {
+	// Fixing camera to move with the boat if wanted
+	vec3 camera_position_on_boat = {5.0f, 10.0f, 15.0f};
+	vec3 camera_position_world = boat2.model.rotation * camera_position_on_boat + boat2.model.translation;
+	// camera_control.camera_model.position_camera = camera_position_world;
+	camera_control.camera_model.look_at(camera_position_world, boat2.model.translation);
+
 	camera_control.action_keyboard(environment.camera_view);
 	if (inputs.keyboard.is_pressed(GLFW_KEY_A))
 	{
+		vec3 translation_in_boat_coords = {-0.2f, 0.0f, 0.0f};
+		// Changing to world coordinates by multiplying by the rotation matrix
+		vec3 translation = initial_position_rotation * translation_in_boat_coords;
+		boat2.model.translation = {boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z};
 		initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi / 100.0) * initial_position_rotation;
-		boat2.model.translation = {boat2.model.translation.x + 0.2f, boat2.model.translation.y, boat2.model.translation.z};
 	}
 	if (inputs.keyboard.is_pressed(GLFW_KEY_S))
 	{
-		boat2.model.translation = {boat2.model.translation.x, boat2.model.translation.y + 0.2f, boat2.model.translation.z};
+		vec3 translation_in_boat_coords = {0.0f, 0.0f, 0.2f};
+		vec3 translation = initial_position_rotation * translation_in_boat_coords;
+		boat2.model.translation = {boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z};
 	}
 	if (inputs.keyboard.is_pressed(GLFW_KEY_W))
 	{
-		boat2.model.translation = {boat2.model.translation.x, boat2.model.translation.y - 0.2f, boat2.model.translation.z};
+		vec3 translation_in_boat_coords = {0.0f, 0.0f, -0.2f};
+		vec3 translation = initial_position_rotation * translation_in_boat_coords;
+		boat2.model.translation = {boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z};
 	}
 	if (inputs.keyboard.is_pressed(GLFW_KEY_D))
 	{
-		boat2.model.translation = {boat2.model.translation.x - 0.2f, boat2.model.translation.y, boat2.model.translation.z};
+		vec3 translation_in_boat_coords = {0.2f, 0.0f, 0.0f};
+		vec3 translation = initial_position_rotation * translation_in_boat_coords;
+		boat2.model.translation = {boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z};
 		initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, -Pi / 100.0) * initial_position_rotation;
 	}
 }
 void scene_structure::idle_frame()
 {
+
 	camera_control.idle_frame(environment.camera_view);
 }
 

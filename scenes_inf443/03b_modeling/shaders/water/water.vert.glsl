@@ -111,12 +111,12 @@ float pnoise(vec3 P, vec3 rep) {
 }
 
 void main() {
-    float pnoise_value = pnoise(vertex_position + time, vec3(5.0, 5.0, 5.0));
+    float pnoise_value = pnoise(vertex_position * 0.5 + 0.6 * time, vec3(5.0, 5.0, 5.0));
     vec3 new_position = vertex_position + vertex_normal * pnoise_value / 5.0;
     vec4 position = model * vec4(new_position, 1.0);
 
     // Compute the normal for the new position with Perlin noise
-    float pnoise_offset = pnoise(vertex_position + time + 0.1, vec3(5.0, 5.0, 5.0));
+    float pnoise_offset = pnoise(vertex_position + 0.6 * time + 0.1, vec3(5.0, 5.0, 5.0));
     vec3 new_normal = normalize(vertex_normal + vec3(0.0, pnoise_offset, 0.0));
 
     // The normal of the vertex in the world space
