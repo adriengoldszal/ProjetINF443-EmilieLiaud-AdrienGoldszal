@@ -63,8 +63,11 @@ struct scene_structure : cgp::scene_inputs_generic
 	keyframe_structure keyframe;
 
 	// Timer used for the interpolation of the position
-	cgp::timer_interval timer_interpolation;
-	float interpolation_update;
+	float fish_timer;
+	cgp ::timer_interval fish_interval;
+	numarray<vec3> initial_fish_positions ;
+	numarray<vec3> fish_positions;
+	numarray<float> fish_times ;
 
 	// ****************************** //
 	// Functions

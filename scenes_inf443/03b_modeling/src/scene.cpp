@@ -97,26 +97,33 @@ void scene_structure::initialize()
 
 	// Definition of the initial data
 	//--------------------------------------//
-	numarray<vec3> key_positions = {{0, 0, 0}, {5, 0, 0}, {5, 5, 0}, {0, 5, 0}, {0, 0, 0}};
-	for (int i = 0; i < key_positions.size(); ++i)
-		key_positions[i] = boat2.model.rotation * key_positions[i] + boat2.model.translation;
+	fish_timer = 0.0f;
 
+	// Update the current time
+	// Key 3D positions
+	initial_fish_positions =
+		{{-1, 1, 0},  // Top left
+		 {0, 1, 0},	  // Top center
+		 {1, 1, 0},	  // Top right
+		 {2, 1, 0},	  // Top rightmost
+		 {2, 0, 0},	  // Right
+		 {2, -1, 0},  // Bottom rightmost
+		 {1, -1, 0},  // Bottom right
+		 {0, -1, 0},  // Bottom center
+		 {-1, -1, 0}, // Bottom left
+		 {-2, -1, 0}, // Bottom leftmost
+		 {-2, 0, 0},  // Left
+		 {-2, 1, 0}}; // Top leftmost
+
+	fish_positions = initial_fish_positions;
 	// Key times (time at which the position must pass in the corresponding position)
-	numarray<float> key_times =
-		{0.0f, 2.0f, 4.0f, 6.0f, 8.0f};
+	fish_times =
+		{0.0f, 1.0f, 2.0f, 2.5f, 3.0f, 3.5f, 3.75f, 4.5f, 5.0f, 6.0f, 7.0f, 8.0f};
 
-	// Initialize the helping structure to display/interact with these positions
-	keyframe.initialize(key_positions, key_times);
-
-	// Set timer bounds
-	// The timer must span a time interval on which the interpolation can be conducted
-	// By default, set the minimal time to be key_times[1], and the maximal time to be key_time[N-2] (enables cubic interpolation)
-	int N = key_times.size();
-	timer_interpolation.t_min = key_times[1];
-	timer_interpolation.t_max = key_times[N - 2];
-	timer_interpolation.t = timer_interpolation.t_min;
-
-	interpolation_update = timer.update();
+	int N = fish_positions.size();
+	fish_interval.t_min = fish_times[1];
+	fish_interval.t_max = fish_times[N - 2];
+	fish_interval.t = fish_interval.t_min;
 }
 // deform terrain function for island
 static void deform_terrain(mesh &m)
@@ -139,20 +146,11 @@ static void deform_terrain(mesh &m)
 void scene_structure::display_frame()
 {
 	timer.update();
-	timer_interpolation.update();
-
-	if (timer.update() - interpolation_update > 5.0f)
-	{
-		interpolation_update = timer.update();
-		for (int i = 0; i < keyframe.key_positions.size(); ++i)
-			keyframe.key_positions[i] = boat2.model.rotation * keyframe.key_positions[i] + boat2.model.translation;
-	}
+	std::cout << "Global time: " << timer.t << std::endl;
 
 	vec3 camera_position = environment.get_camera_position();
 
 	environment.uniform_generic.uniform_float["time"] = timer.t;
-
-	// environment.light_position = camera_control.camera_model.position();
 
 	if (gui.display_frame)
 		draw(global_frame, environment);
@@ -175,21 +173,34 @@ void scene_structure::display_frame()
 	boat2.model.scaling = 0.01f; // Ne marche plus correctement;
 	draw(boat2, environment);
 
-	// clear trajectory when the timer restart
-	if (timer_interpolation.t < timer_interpolation.t_min + 0.1f)
-		keyframe.trajectory.clear();
+	// Update the fish time
+	fish_interval.update();
+	float t = fish_interval.t;
 
-	// Display the key positions and lines b/w positions
-	keyframe.display_key_positions(environment);
+	float elapsed_time = timer.t - fish_timer;
+	std::cout << "Elapsed Time: " << elapsed_time << std::endl;
+
+	if (elapsed_time > 5.0f)
+	{
+		std::cout << "Updating fish positions" << std::endl;
+
+		for (int i = 0; i < fish_positions.size(); i++)
+		{
+			vec3 translation = {boat2.model.translation.x, boat2.model.translation.y + 3.0f, boat2.model.translation.z};
+			fish_positions[i] = boat2.model.rotation * (initial_fish_positions[i] + translation);
+		}
+
+		// Update fish_timer after updating positions
+		fish_timer = timer.t;
+		std::cout << "Fish Timer updated : " << fish_timer << std::endl;
+	}
 
 	// Compute the interpolated position
 	//  This is this function that you need to complete
-	vec3 p = interpolation(timer_interpolation.t, keyframe.key_positions, keyframe.key_times);
-
-	// Display the interpolated position (and its trajectory)
-	keyframe.display_current_position(p, environment);
+	vec3 p = interpolation(t, fish_positions, fish_times);
 
 	fish.model.translation = p;
+
 	draw(fish, environment);
 }
 
