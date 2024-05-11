@@ -3,6 +3,7 @@
 #include "cgp/cgp.hpp"
 #include "environment.hpp"
 #include "key_positions_structure.hpp"
+#include "rock.hpp"
 
 // This definitions allow to use the structures: mesh, mesh_drawable, etc. without mentionning explicitly cgp::
 using cgp::mesh;
@@ -56,6 +57,18 @@ struct scene_structure : cgp::scene_inputs_generic
 	mesh_drawable boat2;
 
 	cgp::rotation_transform initial_position_rotation; // Boat position for rotations
+
+	cgp::mesh rock_mesh;
+	cgp::mesh_drawable rock_drawable;
+	cgp::mesh rock_mesh2;
+	cgp::mesh_drawable rock_drawable2;
+	cgp::hierarchy_mesh_drawable hierarchy;
+
+	cgp::mesh_drawable rock;
+
+
+
+	perlin_noise_parameters parameters;
 
 	// Fishes
 	/****************************************/

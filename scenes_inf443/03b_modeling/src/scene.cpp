@@ -5,6 +5,7 @@
 #include "water.hpp"
 #include "fish.hpp"
 #include "interpolation.hpp"
+# include "rock.hpp"
 
 using namespace cgp;
 
@@ -12,13 +13,16 @@ static void deform_terrain(mesh &m);
 
 void scene_structure::initialize()
 {
-	timer.start();
-	timer.scale = 1.5f;
+	//timer.start();
+	//timer.scale = 1.5f;
 
-	camera_projection.depth_min = 0.0001f;
+	//camera_projection.depth_min = 0.0001f;
 	camera_control.initialize(inputs, window); // Give access to the inputs and window global state to the camera controler
 	camera_control.set_rotation_axis_z();
-	camera_control.look_at({15.0f, 6.0f, 6.0f}, {0, 0, 0}); // camera_control.look_at({1.0f, 0.0f, 0.0f}, {0, 0, 0}); pour le sol
+	//camera_control.look_at({15.0f, 6.0f, 6.0f}, {0, 0, 0}); 
+	//camera_control.look_at({1.0f, 0.0f, 0.0f}, {0, 0, 0}); pour le sol
+	camera_control.look_at({3.0f, 2.0f, 2.0f }, { 0,0,0 }, { 0,0,1 });
+
 
 	// General information
 	display_info();
@@ -27,7 +31,7 @@ void scene_structure::initialize()
 
 	// Load skybox
 	// ***************************************** //
-	image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
+	/*image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
 	std::vector<image_structure> image_grid = image_split_grid(image_skybox_template, 4, 3);
 	skybox.initialize_data_on_gpu();
 	skybox.texture.initialize_cubemap_on_gpu(
@@ -116,8 +120,36 @@ void scene_structure::initialize()
 	timer_interpolation.t_max = key_times[N - 2];
 	timer_interpolation.t = timer_interpolation.t_min;
 
-	interpolation_update = timer.update();
+	interpolation_update = timer.update();*/
+
+	/*rock_mesh = mesh_primitive_ellipsoid(vec3{3, 10, 15});
+	rock_drawable.initialize_data_on_gpu(rock_mesh);
+	update_rock(rock_mesh, rock_drawable, parameters);
+
+	rock_mesh2 = mesh_primitive_ellipsoid(vec3{3, 10, 15});
+	rock_drawable2.initialize_data_on_gpu(rock_mesh2);
+	update_rock2(rock_mesh2, rock_drawable2, parameters);*/
+
+	//rock_drawable2.material.color = vec3 { 0.8f, 0.5f, 0.7f };
+	//hierarchy.add(rock_drawable, "Rock1");
+	//hierarchy.add(rock_drawable2, "Rock2", "Rock1", { 0, -5, 0 });
+	
+	mesh rock_mesh = mesh_load_file_obj(project::path + "assets/rocks/rock.obj");
+	for (int k = 0; k < rock_mesh.position.size(); ++k) {
+		vec3& p = rock_mesh.position[k]; // Get a reference to the current vertex position
+
+		// Scale the Y-coordinate of the vertex position
+		p.y *= 0.5f;
+
+		// Update the position of the vertex in the mesh
+		rock_mesh.position[k] = p;
+	}
+	rock.initialize_data_on_gpu(rock_mesh);
+
+
+
 }
+
 // deform terrain function for island
 static void deform_terrain(mesh &m)
 {
@@ -138,7 +170,7 @@ static void deform_terrain(mesh &m)
 
 void scene_structure::display_frame()
 {
-	timer.update();
+	/*timer.update();
 	timer_interpolation.update();
 
 	if (timer.update() - interpolation_update > 5.0f)
@@ -150,20 +182,37 @@ void scene_structure::display_frame()
 
 	vec3 camera_position = environment.get_camera_position();
 
-	environment.uniform_generic.uniform_float["time"] = timer.t;
+	environment.uniform_generic.uniform_float["time"] = timer.t;*/
 
-	// environment.light_position = camera_control.camera_model.position();
+	environment.light_position = camera_control.camera_model.position();
 
-	if (gui.display_frame)
+
+	if (gui.display_frame) {
 		draw(global_frame, environment);
+		draw(rock, environment);
+	}
 
-	glDepthMask(GL_FALSE); // disable depth-buffer writing
+	if (gui.display_wireframe) {
+		draw_wireframe(rock, environment);
+	}
+
+
+
+	
+	//draw(rock_drawable, environment);
+	//draw(rock_drawable2, environment);
+	//draw(hierarchy, environment);
+
+	//if (gui.display_wireframe)
+		//draw_wireframe(rock_drawable, environment);
+
+	/*glDepthMask(GL_FALSE); // disable depth-buffer writing
 	draw(skybox, environment);
-	glDepthMask(GL_TRUE); // re-activate depth-buffer write
+	glDepthMask(GL_TRUE); // re-activate depth-buffer write*/
 
-	draw(terrain, environment);
+	//draw(terrain, environment);
 
-	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
+	//display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
 
 	// draw(water, environment);
 	// draw(terrain, environment);
@@ -171,12 +220,12 @@ void scene_structure::display_frame()
 	// Draw fish
 	// draw(hierarchy, environment);
 	// boat2.model.translation = {camera_position.x, camera_position.y - 10.0f, camera_position.z - 10.0f};
-	boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.2f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
+	/*/boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.2f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
 	boat2.model.scaling = 0.01f; // Ne marche plus correctement;
-	draw(boat2, environment);
+	draw(boat2, environment);*/
 
 	// clear trajectory when the timer restart
-	if (timer_interpolation.t < timer_interpolation.t_min + 0.1f)
+	/*if (timer_interpolation.t < timer_interpolation.t_min + 0.1f)
 		keyframe.trajectory.clear();
 
 	// Display the key positions and lines b/w positions
@@ -190,7 +239,10 @@ void scene_structure::display_frame()
 	keyframe.display_current_position(p, environment);
 
 	fish.model.translation = p;
-	draw(fish, environment);
+	draw(fish, environment);*/
+
+	
+
 }
 
 void scene_structure::display_semiTransparent()
@@ -206,7 +258,7 @@ void scene_structure::display_semiTransparent()
 	//  - They are supposed to be display from furest to nearest elements
 	glDepthMask(false);
 
-	draw(water, environment);
+	//draw(water, environment);
 
 	// Don't forget to re-activate the depth-buffer write
 	glDepthMask(true);
@@ -217,6 +269,18 @@ void scene_structure::display_gui()
 {
 	ImGui::Checkbox("Frame", &gui.display_frame);
 	ImGui::Checkbox("Wireframe", &gui.display_wireframe);
+
+
+	/*bool update = false;
+	update |= ImGui::SliderFloat("Persistance", &parameters.persistency, 0.1f, 0.6f);
+	update |= ImGui::SliderFloat("Frequency gain", &parameters.frequency_gain, 0.5f, 1.5f);
+	update |= ImGui::SliderInt("Octave", &parameters.octave, 1, 8);
+	update |= ImGui::SliderFloat("Height", &parameters.terrain_height, 0.1f, 1.5f);
+
+	if (update) {// if any slider has been changed - then update the terrain
+		update_rock(rock_mesh, rock_drawable, parameters);
+		update_rock2(rock_mesh2, rock_drawable2, parameters);
+	}*/
 }
 
 void scene_structure::mouse_move_event()
@@ -231,7 +295,7 @@ void scene_structure::mouse_click_event()
 void scene_structure::keyboard_event()
 {
 	// Fixing camera to move with the boat if wanted
-	vec3 camera_position_on_boat = {5.0f, 10.0f, 15.0f};
+	/*vec3 camera_position_on_boat = {5.0f, 10.0f, 15.0f};
 	vec3 camera_position_world = boat2.model.rotation * camera_position_on_boat + boat2.model.translation;
 	// camera_control.camera_model.position_camera = camera_position_world;
 	camera_control.camera_model.look_at(camera_position_world, boat2.model.translation);
@@ -263,8 +327,12 @@ void scene_structure::keyboard_event()
 		vec3 translation = initial_position_rotation * translation_in_boat_coords;
 		boat2.model.translation = {boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z};
 		initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, -Pi / 100.0) * initial_position_rotation;
-	}
+	}*/
+
+	camera_control.action_keyboard(environment.camera_view);
+
 }
+
 void scene_structure::idle_frame()
 {
 
