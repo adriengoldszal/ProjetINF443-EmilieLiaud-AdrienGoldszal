@@ -5,7 +5,7 @@
 
 struct perlin_noise_parameters
 {
-	float persistency = 0.443;
+	float persistency = 0.443f;
 	float frequency_gain = 1.237f;
 	int octave = 8;
 	float terrain_height = 1.413f;

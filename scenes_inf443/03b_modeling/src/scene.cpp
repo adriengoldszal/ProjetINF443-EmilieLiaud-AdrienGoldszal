@@ -13,10 +13,10 @@ static void deform_terrain(mesh &m);
 
 void scene_structure::initialize()
 {
-	//timer.start();
-	//timer.scale = 1.5f;
+	timer.start();
+	timer.scale = 1.5f;
 
-	//camera_projection.depth_min = 0.0001f;
+	camera_projection.depth_min = 0.0001f;
 	camera_control.initialize(inputs, window); // Give access to the inputs and window global state to the camera controler
 	camera_control.set_rotation_axis_z();
 	//camera_control.look_at({15.0f, 6.0f, 6.0f}, {0, 0, 0}); 
@@ -31,7 +31,7 @@ void scene_structure::initialize()
 
 	// Load skybox
 	// ***************************************** //
-	/*image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
+	image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
 	std::vector<image_structure> image_grid = image_split_grid(image_skybox_template, 4, 3);
 	skybox.initialize_data_on_gpu();
 	skybox.texture.initialize_cubemap_on_gpu(
@@ -67,6 +67,7 @@ void scene_structure::initialize()
 	water.material.color = {0.0f, 0.5f, 1.0f}; // blue color for water
 	water.material.phong.specular = 0.0f;	   // non-specular terrain material
 
+	
 	// Sending the skybox texture to the water shader as a uniform
 	glUseProgram(water.shader.id);
 	opengl_check;
@@ -76,6 +77,7 @@ void scene_structure::initialize()
 	opengl_uniform(water.shader, "image_skybox", 1);
 	opengl_check;
 
+	/*
 	// Load boat
 	// Open source file https://sketchfab.com/3d-models/chinese-junk-ship-35b340bce9fb4e0680bc0116cebc35c9
 	mesh boat_mesh = mesh_load_file_obj(project::path + "assets/junk_low.obj");
@@ -122,6 +124,7 @@ void scene_structure::initialize()
 
 	interpolation_update = timer.update();*/
 
+	// Load Rocks
 	/*rock_mesh = mesh_primitive_ellipsoid(vec3{3, 10, 15});
 	rock_drawable.initialize_data_on_gpu(rock_mesh);
 	update_rock(rock_mesh, rock_drawable, parameters);
@@ -134,7 +137,7 @@ void scene_structure::initialize()
 	//hierarchy.add(rock_drawable, "Rock1");
 	//hierarchy.add(rock_drawable2, "Rock2", "Rock1", { 0, -5, 0 });
 	
-	mesh rock_mesh = mesh_load_file_obj(project::path + "assets/rocks/rock.obj");
+	mesh rock_mesh = mesh_load_file_obj(project::path + "assets/rocks/rock1.obj");
 	for (int k = 0; k < rock_mesh.position.size(); ++k) {
 		vec3& p = rock_mesh.position[k]; // Get a reference to the current vertex position
 
@@ -145,9 +148,6 @@ void scene_structure::initialize()
 		rock_mesh.position[k] = p;
 	}
 	rock.initialize_data_on_gpu(rock_mesh);
-
-
-
 }
 
 // deform terrain function for island
@@ -170,8 +170,8 @@ static void deform_terrain(mesh &m)
 
 void scene_structure::display_frame()
 {
-	/*timer.update();
-	timer_interpolation.update();
+	timer.update();
+	/*timer_interpolation.update();
 
 	if (timer.update() - interpolation_update > 5.0f)
 	{
@@ -180,9 +180,9 @@ void scene_structure::display_frame()
 			keyframe.key_positions[i] = boat2.model.rotation * keyframe.key_positions[i] + boat2.model.translation;
 	}
 
-	vec3 camera_position = environment.get_camera_position();
+	vec3 camera_position = environment.get_camera_position();*/
 
-	environment.uniform_generic.uniform_float["time"] = timer.t;*/
+	environment.uniform_generic.uniform_float["time"] = timer.t;
 
 	environment.light_position = camera_control.camera_model.position();
 
@@ -196,9 +196,6 @@ void scene_structure::display_frame()
 		draw_wireframe(rock, environment);
 	}
 
-
-
-	
 	//draw(rock_drawable, environment);
 	//draw(rock_drawable2, environment);
 	//draw(hierarchy, environment);
@@ -206,16 +203,14 @@ void scene_structure::display_frame()
 	//if (gui.display_wireframe)
 		//draw_wireframe(rock_drawable, environment);
 
-	/*glDepthMask(GL_FALSE); // disable depth-buffer writing
+	glDepthMask(GL_FALSE); // disable depth-buffer writing
 	draw(skybox, environment);
-	glDepthMask(GL_TRUE); // re-activate depth-buffer write*/
+	glDepthMask(GL_TRUE); // re-activate depth-buffer write
 
-	//draw(terrain, environment);
+	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
 
-	//display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
-
-	// draw(water, environment);
-	// draw(terrain, environment);
+	draw(water, environment);
+	draw(terrain, environment);
 
 	// Draw fish
 	// draw(hierarchy, environment);
@@ -240,8 +235,6 @@ void scene_structure::display_frame()
 
 	fish.model.translation = p;
 	draw(fish, environment);*/
-
-	
 
 }
 

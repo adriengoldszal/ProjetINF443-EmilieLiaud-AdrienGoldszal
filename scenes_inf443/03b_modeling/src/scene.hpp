@@ -26,8 +26,8 @@ struct scene_structure : cgp::scene_inputs_generic
 	// ****************************** //
 	// Elements and shapes of the scene
 	// ****************************** //
-	// camera_controller_orbit_euler camera_control; // Camera controller figé
-	camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
+	camera_controller_orbit_euler camera_control; // Camera controller figé
+	//camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
 	camera_projection_perspective camera_projection;
 	window_structure window;
 
