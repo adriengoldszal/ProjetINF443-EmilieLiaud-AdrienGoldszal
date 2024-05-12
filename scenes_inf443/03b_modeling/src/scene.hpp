@@ -58,15 +58,24 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	cgp::rotation_transform initial_position_rotation; // Boat position for rotations
 
+	// Rock elements
 	cgp::mesh rock_mesh;
 	cgp::mesh_drawable rock_drawable;
 	cgp::mesh rock_mesh2;
 	cgp::mesh_drawable rock_drawable2;
 	cgp::hierarchy_mesh_drawable hierarchy;
 
-	cgp::mesh_drawable rock;
+	cgp::mesh rock_mesh1;
+	cgp::mesh_drawable rock1;
+	std::vector<vec3> rock1_position;
 
+	cgp::mesh_drawable rock2;
+	cgp::mesh_drawable rock3;
+	cgp::mesh_drawable rock4;
 
+	// Grass elements
+	cgp::mesh_drawable grass;
+	std::vector<cgp::vec3> grass_position;
 
 	perlin_noise_parameters parameters;
 
@@ -78,6 +87,8 @@ struct scene_structure : cgp::scene_inputs_generic
 	// Timer used for the interpolation of the position
 	cgp::timer_interval timer_interpolation;
 	float interpolation_update;
+
+
 
 	// ****************************** //
 	// Functions

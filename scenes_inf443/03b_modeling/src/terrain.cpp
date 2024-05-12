@@ -116,3 +116,20 @@ mesh create_terrain_mesh(int N, float terrain_length)
 
     return terrain;
 }
+
+
+std::vector<cgp::vec3> generate_grass_positions_on_terrain(int N, float terrain_length) {
+    std::vector<cgp::vec3> list_p;
+    float x = 0;
+    float y = 0;
+    int k = 0;
+    while (k < N) {
+        x = rand_uniform(-terrain_length / 2, terrain_length / 2);
+        y = rand_uniform(-terrain_length / 2, terrain_length / 2);
+        if (nocolision(list_p, 0.2f, vec3{ x, y, 0 }) == true) {
+            list_p.push_back({ x, y, evaluate_terrain_height(x, y) });
+            k++;
+        }
+    }
+    return list_p;
+}

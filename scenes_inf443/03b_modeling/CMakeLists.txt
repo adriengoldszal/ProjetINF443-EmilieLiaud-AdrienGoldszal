@@ -42,6 +42,10 @@ include_directories("src")
 # Add the lib directory
 include_directories(${ABS_PATH_TO_CGP})
 
+# ADDDDDDDDDDDDDDDDDDDDDDDDDDDD
+# include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external)
+
+
 # Include files from the CGP library (as well as external dependencies)
 message(STATUS "Include CGP lib and external dependencies files from relative path")
 include(${ABS_PATH_TO_CGP}/CMakeLists.txt)
@@ -63,6 +67,7 @@ add_definitions(-DCGP_OPENGL_3_3)   # for OpenGL 3.3
 #  @src_files_cgp: all files of the cgp library
 #  @src_files_third_party: all third party libraries compiled with the project
 add_executable(${executable_name} ${src_files_cgp} ${src_files_third_party} ${src_files})
+# add_executable(${executable_name} ${src_files_cgp} ${src_files_third_party} ${src_files} external/glad.c external/stb_image.h external/glad/glad.h external/KHR/khrplatform.h)
 
 
 # Set Compiler for Unix system

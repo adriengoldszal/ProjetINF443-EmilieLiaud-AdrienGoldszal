@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\build\CMakeFiles\d95b0942ac363c9566e8a723acb7d922\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{CF52689E-1D98-3414-9AEB-7055D8E03ACD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

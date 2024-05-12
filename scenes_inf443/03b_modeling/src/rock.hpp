@@ -17,3 +17,11 @@ void update_rock(cgp::mesh& rock, cgp::mesh_drawable& rock_visual, perlin_noise_
 
 void update_rock2(cgp::mesh& rock, cgp::mesh_drawable& rock_visual, perlin_noise_parameters const& parameters);
 
+void resize_rock1(cgp::mesh& rock, float facteur);
+
+
+void resize_rock2(cgp::mesh& rock, float facteur);
+
+void resize_rock3(cgp::mesh& rock, float facteur);
+
+void resize_rock4(cgp::mesh& rock, float facteur);

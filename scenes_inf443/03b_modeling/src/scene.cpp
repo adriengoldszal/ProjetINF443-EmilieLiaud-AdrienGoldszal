@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "scene.hpp"
 
 #include "terrain.hpp"
@@ -21,7 +22,7 @@ void scene_structure::initialize()
 	camera_control.set_rotation_axis_z();
 	//camera_control.look_at({15.0f, 6.0f, 6.0f}, {0, 0, 0}); 
 	//camera_control.look_at({1.0f, 0.0f, 0.0f}, {0, 0, 0}); pour le sol
-	camera_control.look_at({3.0f, 2.0f, 2.0f }, { 0,0,0 }, { 0,0,1 });
+	camera_control.look_at({0.0f, 30.0f, 2.0f }, { 0,0,0 }, { 0,0,1 });
 
 
 	// General information
@@ -31,7 +32,7 @@ void scene_structure::initialize()
 
 	// Load skybox
 	// ***************************************** //
-	image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
+	/*image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
 	std::vector<image_structure> image_grid = image_split_grid(image_skybox_template, 4, 3);
 	skybox.initialize_data_on_gpu();
 	skybox.texture.initialize_cubemap_on_gpu(
@@ -43,20 +44,21 @@ void scene_structure::initialize()
 		image_grid[3].mirror_vertical());
 	skybox.shader.load(
 		project::path + "shaders/skybox/skybox.vert.glsl",
-		project::path + "shaders/skybox/skybox.frag.glsl");
+		project::path + "shaders/skybox/skybox.frag.glsl");*/
 
 	// Creating an island for testing purposes
-	float L = 5.0f;
+	float L = 50.0f;
 	float elevation = -30.0f; // Adjust this value to set the elevation
 	mesh terrain_mesh = mesh_primitive_grid({-L, -L, elevation}, {L, -L, elevation}, {L, L, elevation}, {-L, L, elevation}, 100, 100);
+	//terrain_mesh.uv = { {0,0}, {1,0}, {1,1}, {0,1} }; // Associate Texture-Coordinates to the vertices of the quadrangle
 	deform_terrain(terrain_mesh);
 	terrain.initialize_data_on_gpu(terrain_mesh);
-	terrain.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg");
+	terrain.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg", GL_REPEAT, GL_REPEAT);
 	terrain.material.alpha = 0.3f;
 
 	// Load water terrain
 	int N_terrain_samples = 400;
-	float terrain_length = 50;
+	float terrain_length = 100;
 	mesh const water_mesh = create_water_mesh(N_terrain_samples, terrain_length);
 	water.initialize_data_on_gpu(water_mesh);
 	opengl_shader_structure water_shader;
@@ -64,7 +66,8 @@ void scene_structure::initialize()
 		project::path + "shaders/water/water.vert.glsl",
 		project::path + "shaders/water/water.frag.glsl");
 	water.shader = water_shader;
-	water.material.color = {0.0f, 0.5f, 1.0f}; // blue color for water
+	//water.material.color = {0.0f, 0.5f, 1.0f}; // blue color for water
+	//water.material.color = { 179 / 255, 229 / 255, 252 / 255 }; // blue color for water
 	water.material.phong.specular = 0.0f;	   // non-specular terrain material
 
 	
@@ -73,11 +76,11 @@ void scene_structure::initialize()
 	opengl_check;
 	glActiveTexture(GL_TEXTURE1);
 	opengl_check;
-	skybox.texture.bind();
+	/*skybox.texture.bind();
 	opengl_uniform(water.shader, "image_skybox", 1);
 	opengl_check;
 
-	/*
+	
 	// Load boat
 	// Open source file https://sketchfab.com/3d-models/chinese-junk-ship-35b340bce9fb4e0680bc0116cebc35c9
 	mesh boat_mesh = mesh_load_file_obj(project::path + "assets/junk_low.obj");
@@ -137,17 +140,72 @@ void scene_structure::initialize()
 	//hierarchy.add(rock_drawable, "Rock1");
 	//hierarchy.add(rock_drawable2, "Rock2", "Rock1", { 0, -5, 0 });
 	
-	mesh rock_mesh = mesh_load_file_obj(project::path + "assets/rocks/rock1.obj");
-	for (int k = 0; k < rock_mesh.position.size(); ++k) {
-		vec3& p = rock_mesh.position[k]; // Get a reference to the current vertex position
+	rock_mesh1 = mesh_load_file_obj(project::path + "assets/rocks/rock_2.obj");
+	resize_rock1(rock_mesh1, 0.5f);
+	//update_rock(rock_mesh1, rock1, parameters);
+	rock1.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
+	
+	rock1.initialize_data_on_gpu(rock_mesh1);
 
-		// Scale the Y-coordinate of the vertex position
-		p.y *= 0.5f;
+	//rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
+	rock1.model.scaling = 5.0f;
+	//rock1.model.translation = { 0, 15, 0 }; 
+	rock1.material.phong.specular = 0.0f;	   // non-specular rock material
+	//for (int i = 0; i < rock_mesh1.position.size(); i++) {
+	//	std::cout << "pos x:" << rock_mesh1.position[i].x << " pos y: " << rock_mesh1.position[i].y << " pos z: " << rock_mesh1.position[i].z << std::endl;
+	//}
 
-		// Update the position of the vertex in the mesh
-		rock_mesh.position[k] = p;
+	cgp::numarray<cgp::vec3>& originalVertices = rock_mesh1.position;
+
+	// Get the scaling factor applied to rock1
+	float scalingFactor = rock1.model.scaling;
+
+	// Create a vector to store the transformed vertices
+
+	// Apply the scaling transformation to each vertex position
+	for (const vec3& vertex : originalVertices) {
+		// Apply scaling transformation to each vertex position
+		vec3 transformedVertex = scalingFactor * vertex;
+		rock1_position.push_back(transformedVertex);
 	}
-	rock.initialize_data_on_gpu(rock_mesh);
+
+	// Print or use the transformed vertices
+	//for (const vec3& vertex : transformedVertices) {
+	//	std::cout << "Transformed vertex position: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ")" << std::endl;
+	//}
+
+	mesh rock_mesh2 = mesh_load_file_obj(project::path + "assets/rocks/rock2.obj");
+	resize_rock2(rock_mesh2, 0.5f);
+	rock2.initialize_data_on_gpu(rock_mesh2);
+
+	//rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
+	rock2.model.scaling = 5.0f;
+
+	mesh rock_mesh3 = mesh_load_file_obj(project::path + "assets/rocks/rock3.obj");
+	resize_rock3(rock_mesh3, 0.5f);
+	rock3.initialize_data_on_gpu(rock_mesh3);
+
+	//rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
+	rock3.model.scaling = 5.0f;
+	rock3.model.translation = { 0, -15, 0 }; // translations de la shpere
+
+	mesh rock_mesh4 = mesh_load_file_obj(project::path + "assets/rocks/rock4.obj");
+	resize_rock4(rock_mesh4, 0.5f);
+	rock4.initialize_data_on_gpu(rock_mesh4);
+
+	//rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
+	rock4.model.scaling = 5.0f;
+	rock4.model.translation = { 0, -30, 0 }; // translations de la shpere
+
+	// Load grass
+
+	//grass_position = generate_grass_positions_on_terrain(50, terrain_length);
+
+	mesh quad_mesh = mesh_primitive_quadrangle({ -0.25f,0,0 }, { 0.25f,0,0 }, { 0.25f,0,0.5f }, { -0.25f,0,0.5f });
+	grass.initialize_data_on_gpu(quad_mesh);
+	grass.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/grass.png");
+	grass.material.phong = { 0.4f, 0.6f,0,1 };
+
 }
 
 // deform terrain function for island
@@ -171,7 +229,7 @@ static void deform_terrain(mesh &m)
 void scene_structure::display_frame()
 {
 	timer.update();
-	/*timer_interpolation.update();
+	timer_interpolation.update();
 
 	if (timer.update() - interpolation_update > 5.0f)
 	{
@@ -180,7 +238,7 @@ void scene_structure::display_frame()
 			keyframe.key_positions[i] = boat2.model.rotation * keyframe.key_positions[i] + boat2.model.translation;
 	}
 
-	vec3 camera_position = environment.get_camera_position();*/
+	vec3 camera_position = environment.get_camera_position();
 
 	environment.uniform_generic.uniform_float["time"] = timer.t;
 
@@ -189,11 +247,14 @@ void scene_structure::display_frame()
 
 	if (gui.display_frame) {
 		draw(global_frame, environment);
-		draw(rock, environment);
+		draw(rock1, environment);
+		//draw(rock2, environment);
+		//draw(rock3, environment);
+		//draw(rock4, environment);
 	}
 
 	if (gui.display_wireframe) {
-		draw_wireframe(rock, environment);
+		draw_wireframe(rock1, environment);
 	}
 
 	//draw(rock_drawable, environment);
@@ -203,24 +264,24 @@ void scene_structure::display_frame()
 	//if (gui.display_wireframe)
 		//draw_wireframe(rock_drawable, environment);
 
-	glDepthMask(GL_FALSE); // disable depth-buffer writing
+	/*glDepthMask(GL_FALSE); // disable depth-buffer writing
 	draw(skybox, environment);
-	glDepthMask(GL_TRUE); // re-activate depth-buffer write
+	glDepthMask(GL_TRUE); // re-activate depth-buffer write*/
 
 	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
 
-	draw(water, environment);
-	draw(terrain, environment);
+	//draw(water, environment);
+	//draw(terrain, environment);
 
 	// Draw fish
 	// draw(hierarchy, environment);
 	// boat2.model.translation = {camera_position.x, camera_position.y - 10.0f, camera_position.z - 10.0f};
-	/*/boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.2f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
+	/*boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.2f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
 	boat2.model.scaling = 0.01f; // Ne marche plus correctement;
-	draw(boat2, environment);*/
+	draw(boat2, environment);
 
 	// clear trajectory when the timer restart
-	/*if (timer_interpolation.t < timer_interpolation.t_min + 0.1f)
+	if (timer_interpolation.t < timer_interpolation.t_min + 0.1f)
 		keyframe.trajectory.clear();
 
 	// Display the key positions and lines b/w positions
@@ -253,6 +314,40 @@ void scene_structure::display_semiTransparent()
 
 	//draw(water, environment);
 
+	glDepthMask(false);
+
+	auto const& camera = camera_control.camera_model;
+
+	// Re-orient the grass shape to always face the camera direction
+	vec3 const right = camera.right();
+	// Rotation such that the grass follows the right-vector of the camera, while pointing toward the z-direction
+	rotation_transform R = rotation_transform::from_frame_transform({ 1,0,0 }, { 0,0,1 }, right, { 0,0,1 });
+	grass.model.rotation = R;
+
+
+	// Sort transparent shapes by depth to camera
+	//   This step can be skipped, but it will be associated to visual artifacts
+
+	// Transform matrix (the same matrix which is applied in the vertices in the shader: T = Projection x View)
+	mat4 T = camera_projection.matrix() * camera.matrix_view();
+
+	srand(42);
+	// Create a vector to store the random integers
+	std::vector<int> randomNumbers;
+
+	// Generate 50 random integers between 0 and 500
+	for (int i = 0; i < 1000; ++i) {
+		int randomNumber = rand() % (rock1_position.size()+1); // Generates a number between 0 and 500
+		randomNumbers.push_back(randomNumber);
+	}
+
+	for (int val : randomNumbers) {
+			grass.model.scaling = 2;
+			grass.model.translation = rock1_position[val];
+			draw(grass, environment);
+	}
+	
+
 	// Don't forget to re-activate the depth-buffer write
 	glDepthMask(true);
 	glDisable(GL_BLEND);
@@ -264,16 +359,16 @@ void scene_structure::display_gui()
 	ImGui::Checkbox("Wireframe", &gui.display_wireframe);
 
 
-	/*bool update = false;
+	bool update = false;
 	update |= ImGui::SliderFloat("Persistance", &parameters.persistency, 0.1f, 0.6f);
 	update |= ImGui::SliderFloat("Frequency gain", &parameters.frequency_gain, 0.5f, 1.5f);
 	update |= ImGui::SliderInt("Octave", &parameters.octave, 1, 8);
 	update |= ImGui::SliderFloat("Height", &parameters.terrain_height, 0.1f, 1.5f);
 
 	if (update) {// if any slider has been changed - then update the terrain
-		update_rock(rock_mesh, rock_drawable, parameters);
-		update_rock2(rock_mesh2, rock_drawable2, parameters);
-	}*/
+		update_rock(rock_mesh1, rock1, parameters);
+		//update_rock2(rock_mesh2, rock_drawable2, parameters);
+	}
 }
 
 void scene_structure::mouse_move_event()

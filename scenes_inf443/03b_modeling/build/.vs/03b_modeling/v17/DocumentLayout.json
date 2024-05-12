@@ -1,0 +1,116 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{62CE41B6-DF60-3014-8B7D-2535009C38D9}|03b_modeling.vcxproj|D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62CE41B6-DF60-3014-8B7D-2535009C38D9}|03b_modeling.vcxproj|D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\scene.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62CE41B6-DF60-3014-8B7D-2535009C38D9}|03b_modeling.vcxproj|D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\rock.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62CE41B6-DF60-3014-8B7D-2535009C38D9}|03b_modeling.vcxproj|D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\terrain.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62CE41B6-DF60-3014-8B7D-2535009C38D9}|03b_modeling.vcxproj|D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\cgp\\library\\cgp\\13_opengl\\fbo\\fbo.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62CE41B6-DF60-3014-8B7D-2535009C38D9}|03b_modeling.vcxproj|D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\terrain.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "terrain.cpp",
+              "DocumentMoniker": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\terrain.cpp",
+              "RelativeDocumentMoniker": "..\\src\\terrain.cpp",
+              "ToolTip": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\terrain.cpp",
+              "RelativeToolTip": "..\\src\\terrain.cpp",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAACUAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-12T20:36:51.391Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "scene.cpp",
+              "DocumentMoniker": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\scene.cpp",
+              "RelativeDocumentMoniker": "..\\src\\scene.cpp",
+              "ToolTip": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\scene.cpp",
+              "RelativeToolTip": "..\\src\\scene.cpp",
+              "ViewState": "AQIAADsBAAAAAAAAAAAuwFIBAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-12T18:08:24.073Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "scene.hpp",
+              "DocumentMoniker": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\scene.hpp",
+              "RelativeDocumentMoniker": "..\\src\\scene.hpp",
+              "ToolTip": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\scene.hpp",
+              "RelativeToolTip": "..\\src\\scene.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEUAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-12T20:05:16.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "rock.cpp",
+              "DocumentMoniker": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\rock.cpp",
+              "RelativeDocumentMoniker": "..\\src\\rock.cpp",
+              "ToolTip": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\rock.cpp",
+              "RelativeToolTip": "..\\src\\rock.cpp",
+              "ViewState": "AQIAAEUAAAAAAAAAAAAAAFUAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-12T19:49:03.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "terrain.hpp",
+              "DocumentMoniker": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\terrain.hpp",
+              "RelativeDocumentMoniker": "..\\src\\terrain.hpp",
+              "ToolTip": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\src\\terrain.hpp",
+              "RelativeToolTip": "..\\src\\terrain.hpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-12T20:36:46.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "fbo.hpp",
+              "DocumentMoniker": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\cgp\\library\\cgp\\13_opengl\\fbo\\fbo.hpp",
+              "RelativeDocumentMoniker": "..\\..\\..\\cgp\\library\\cgp\\13_opengl\\fbo\\fbo.hpp",
+              "ToolTip": "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\cgp\\library\\cgp\\13_opengl\\fbo\\fbo.hpp",
+              "RelativeToolTip": "..\\..\\..\\cgp\\library\\cgp\\13_opengl\\fbo\\fbo.hpp",
+              "ViewState": "AQIAABgAAAAAAAAAAAAmwCYAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-12T19:56:38.624Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

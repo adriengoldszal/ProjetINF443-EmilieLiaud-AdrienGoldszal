@@ -1,0 +1,1307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\01_base\basic_types\basic_types.cpp">
+      <Filter>cgp\01_base\basic_types</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\01_base\error\error.cpp">
+      <Filter>cgp\01_base\error</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\01_base\string\string.cpp">
+      <Filter>cgp\01_base\string</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray\test\test_numarray.cpp">
+      <Filter>cgp\02_numarray\numarray\test</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\special_types\special_types.cpp">
+      <Filter>cgp\02_numarray\numarray_stack\special_types</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.cpp">
+      <Filter>cgp\02_numarray\numarray_stack\test</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\03_files\files.cpp">
+      <Filter>cgp\03_files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid\test\test_grid.cpp">
+      <Filter>cgp\04_grid_container\grid\test</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid_stack\grid_stack_2D\test\test_grid_stack_2D.cpp">
+      <Filter>cgp\04_grid_container\grid_stack\grid_stack_2D\test</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\matrix_stack\special_types\definition\special_types.cpp">
+      <Filter>cgp\04_grid_container\matrix_stack\special_types\definition</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\offset_grid\offset_grid.cpp">
+      <Filter>cgp\04_grid_container\offset_grid</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\functions\mat_functions.cpp">
+      <Filter>cgp\06_mat\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\functions\test\test_vec_mat.cpp">
+      <Filter>cgp\06_mat\functions\test</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\mat2\mat2.cpp">
+      <Filter>cgp\06_mat\mat2</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\mat3\mat3.cpp">
+      <Filter>cgp\06_mat\mat3</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\mat4\mat4.cpp">
+      <Filter>cgp\06_mat\mat4</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\test\test_matrix_stack.cpp">
+      <Filter>cgp\06_mat\test</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\07_image\image.cpp">
+      <Filter>cgp\07_image</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\08_random_noise\noise\noise.cpp">
+      <Filter>cgp\08_random_noise\noise</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\08_random_noise\rand\rand.cpp">
+      <Filter>cgp\08_random_noise\rand</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\affine\affine\affine.cpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\affine\affine_rt\affine_rt.cpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine_rt</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\affine\affine_rts\affine_rts.cpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine_rts</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\frame\frame.cpp">
+      <Filter>cgp\09_geometric_transformation\frame</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\interpolation\interpolation.cpp">
+      <Filter>cgp\09_geometric_transformation\interpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\projection\projection.cpp">
+      <Filter>cgp\09_geometric_transformation\projection</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\quaternion\quaternion.cpp">
+      <Filter>cgp\09_geometric_transformation\quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\rotation_transform\rotation_transform.cpp">
+      <Filter>cgp\09_geometric_transformation\rotation_transform</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\rotation_transform\test\test_rotation.cpp">
+      <Filter>cgp\09_geometric_transformation\rotation_transform\test</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_first_person\camera_first_person.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_first_person</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_first_person_euler\camera_first_person_euler.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_first_person_euler</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_generic_base\camera_generic_base.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_generic_base</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_orbit\camera_orbit.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_orbit</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_orbit_euler\camera_orbit_euler.cpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_orbit_euler</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\common_functions\common_functions.cpp">
+      <Filter>cgp\10_camera_model\camera_model\common_functions</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_projection\camera_projection.cpp">
+      <Filter>cgp\10_camera_model\camera_projection</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\11_mesh\mesh\mesh.cpp">
+      <Filter>cgp\11_mesh\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\11_mesh\primitive\primitive.cpp">
+      <Filter>cgp\11_mesh\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\bounding_box\bounding_box.cpp">
+      <Filter>cgp\12_shape\bounding_box</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\curve\curve.cpp">
+      <Filter>cgp\12_shape\curve</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\implicit\marching_cube\helper\marching_cubes_lut.cpp">
+      <Filter>cgp\12_shape\implicit\marching_cube\helper</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\implicit\marching_cube\marching_cube.cpp">
+      <Filter>cgp\12_shape\implicit\marching_cube</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\intersection\intersection.cpp">
+      <Filter>cgp\12_shape\intersection</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\spatial_domain\spatial_domain_grid_3D\spatial_domain_grid_3D.cpp">
+      <Filter>cgp\12_shape\spatial_domain\spatial_domain_grid_3D</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\buffer\ebo\ebo.cpp">
+      <Filter>cgp\13_opengl\buffer\ebo</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\buffer\opengl_buffer\opengl_buffer.cpp">
+      <Filter>cgp\13_opengl\buffer\opengl_buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\buffer\vbo\vbo.cpp">
+      <Filter>cgp\13_opengl\buffer\vbo</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\debug\debug.cpp">
+      <Filter>cgp\13_opengl\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\emscripten\emscripten.cpp">
+      <Filter>cgp\13_opengl\emscripten</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\fbo\fbo.cpp">
+      <Filter>cgp\13_opengl\fbo</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\shaders\cache_uniform_location\cache_uniform_location.cpp">
+      <Filter>cgp\13_opengl\shaders\cache_uniform_location</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\shaders\shaders.cpp">
+      <Filter>cgp\13_opengl\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\texture\texture.cpp">
+      <Filter>cgp\13_opengl\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\uniform\uniform.cpp">
+      <Filter>cgp\13_opengl\uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\14_window\imgui\imgui.cpp">
+      <Filter>cgp\14_window\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\14_window\window\window.cpp">
+      <Filter>cgp\14_window\window</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\15_input_devices\input_devices.cpp">
+      <Filter>cgp\15_input_devices</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\curve_drawable\curve_drawable.cpp">
+      <Filter>cgp\16_drawable\curve_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\curve_drawable_dynamic_extend\curve_drawable_dynamic_extend.cpp">
+      <Filter>cgp\16_drawable\curve_drawable_dynamic_extend</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\environment\environment.cpp">
+      <Filter>cgp\16_drawable\environment</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable.cpp">
+      <Filter>cgp\16_drawable\hierarchy_mesh_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\material\material_mesh_drawable_phong\material_mesh_drawable_phong.cpp">
+      <Filter>cgp\16_drawable\material\material_mesh_drawable_phong</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\mesh_drawable\mesh_drawable.cpp">
+      <Filter>cgp\16_drawable\mesh_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\special_drawable\skybox_drawable\skybox_drawable.cpp">
+      <Filter>cgp\16_drawable\special_drawable\skybox_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\special_drawable\trajectory_drawable\trajectory_drawable.cpp">
+      <Filter>cgp\16_drawable\special_drawable\trajectory_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\triangles_drawable\triangles_drawable.cpp">
+      <Filter>cgp\16_drawable\triangles_drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\17_timer\timer_basic\timer_basic.cpp">
+      <Filter>cgp\17_timer\timer_basic</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\17_timer\timer_event_periodic\timer_event_periodic.cpp">
+      <Filter>cgp\17_timer\timer_event_periodic</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\17_timer\timer_fps\timer_fps.cpp">
+      <Filter>cgp\17_timer\timer_fps</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\17_timer\timer_interval\timer_interval.cpp">
+      <Filter>cgp\17_timer\timer_interval</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\picking\picking_plane\picking_plane.cpp">
+      <Filter>cgp\18_user_interactions\picking\picking_plane</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\picking\picking_spheres\picking_spheres.cpp">
+      <Filter>cgp\18_user_interactions\picking\picking_spheres</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\picking\picking_structure\picking_structure.cpp">
+      <Filter>cgp\18_user_interactions\picking\picking_structure</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\tracker\velocity_tracker\velocity_tracker.cpp">
+      <Filter>cgp\18_user_interactions\tracker\velocity_tracker</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_2d_displacement\camera_controller_2d_displacement.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_2d_displacement</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_first_person\camera_controller_first_person.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_first_person</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_first_person_euler\camera_controller_first_person_euler.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_first_person_euler</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_fly_mode\camera_controller_fly_mode.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_fly_mode</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_generic_base\camera_controller_generic_base.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_generic_base</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_orbit\camera_controller_orbit.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_orbit</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_orbit_euler\camera_controller_orbit_euler.cpp">
+      <Filter>cgp\19_camera_controller\camera_controller_orbit_euler</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\test\test_camera_controller.cpp">
+      <Filter>cgp\19_camera_controller\test</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\20_format_parser\mesh_loader\obj\obj.cpp">
+      <Filter>cgp\20_format_parser\mesh_loader\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\20_format_parser\mesh_loader\obj_advanced\obj_advanced.cpp">
+      <Filter>cgp\20_format_parser\mesh_loader\obj_advanced</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\21_scene_project_helper\path\path.cpp">
+      <Filter>cgp\21_scene_project_helper\path</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl33\glad.cpp">
+      <Filter>third_party\src\glad\opengl33</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl41\glad.cpp">
+      <Filter>third_party\src\glad\opengl41</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl43\glad.cpp">
+      <Filter>third_party\src\glad\opengl43</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl46\glad.cpp">
+      <Filter>third_party\src\glad\opengl46</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui_demo.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui_draw.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui_impl_glfw.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui_impl_opengl3.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui_widgets.cpp">
+      <Filter>third_party\src\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\jpeg\jpgd.cpp">
+      <Filter>third_party\src\jpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\jpeg\jpge.cpp">
+      <Filter>third_party\src\jpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\lodepng\lodepng.cpp">
+      <Filter>third_party\src\lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\simplexnoise\simplexnoise1234.cpp">
+      <Filter>third_party\src\simplexnoise</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\environment.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\fish.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\interpolation.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\key_positions_structure.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\rock.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\terrain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\texture.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\tree.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\water.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\01_base\base.hpp">
+      <Filter>cgp\01_base</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\01_base\basic_types\basic_types.hpp">
+      <Filter>cgp\01_base\basic_types</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\01_base\error\error.hpp">
+      <Filter>cgp\01_base\error</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\01_base\stl\stl.hpp">
+      <Filter>cgp\01_base\stl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\01_base\string\string.hpp">
+      <Filter>cgp\01_base\string</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\01_base\types\types.hpp">
+      <Filter>cgp\01_base\types</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray.hpp">
+      <Filter>cgp\02_numarray</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray\numarray.hpp">
+      <Filter>cgp\02_numarray\numarray</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray\test\test_numarray.hpp">
+      <Filter>cgp\02_numarray\numarray\test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\implementation\numarray_stack.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\implementation\numarray_stack2.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\implementation\numarray_stack3.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\implementation\numarray_stack4.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\numarray_stack.hpp">
+      <Filter>cgp\02_numarray\numarray_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\numarray_stack_fwd.hpp">
+      <Filter>cgp\02_numarray\numarray_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\special_types\special_types.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\special_types</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\02_numarray\numarray_stack\test\test_numarray_stack.hpp">
+      <Filter>cgp\02_numarray\numarray_stack\test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\03_files\files.hpp">
+      <Filter>cgp\03_files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid\grid.hpp">
+      <Filter>cgp\04_grid_container\grid</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid\grid_2D\grid_2D.hpp">
+      <Filter>cgp\04_grid_container\grid\grid_2D</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid\grid_3D\grid_3D.hpp">
+      <Filter>cgp\04_grid_container\grid\grid_3D</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid\test\test_grid.hpp">
+      <Filter>cgp\04_grid_container\grid\test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid_container.hpp">
+      <Filter>cgp\04_grid_container</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid_stack\grid_stack.hpp">
+      <Filter>cgp\04_grid_container\grid_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid_stack\grid_stack_2D\grid_stack_2D.hpp">
+      <Filter>cgp\04_grid_container\grid_stack\grid_stack_2D</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\grid_stack\grid_stack_2D\test\test_grid_stack_2D.hpp">
+      <Filter>cgp\04_grid_container\grid_stack\grid_stack_2D\test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\matrix_stack\matrix_stack.hpp">
+      <Filter>cgp\04_grid_container\matrix_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\matrix_stack\matrix_stack_fwd.hpp">
+      <Filter>cgp\04_grid_container\matrix_stack</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\matrix_stack\special_types\definition\special_types.hpp">
+      <Filter>cgp\04_grid_container\matrix_stack\special_types\definition</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\matrix_stack\special_types\special_types.hpp">
+      <Filter>cgp\04_grid_container\matrix_stack\special_types</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\04_grid_container\offset_grid\offset_grid.hpp">
+      <Filter>cgp\04_grid_container\offset_grid</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\05_vec\vec.hpp">
+      <Filter>cgp\05_vec</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\05_vec\vec2\vec2.hpp">
+      <Filter>cgp\05_vec\vec2</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\05_vec\vec3\vec3.hpp">
+      <Filter>cgp\05_vec\vec3</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\05_vec\vec4\vec4.hpp">
+      <Filter>cgp\05_vec\vec4</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\functions\mat_functions.hpp">
+      <Filter>cgp\06_mat\functions</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\functions\test\test_vec_mat.hpp">
+      <Filter>cgp\06_mat\functions\test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\mat.hpp">
+      <Filter>cgp\06_mat</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\mat2\mat2.hpp">
+      <Filter>cgp\06_mat\mat2</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\mat3\mat3.hpp">
+      <Filter>cgp\06_mat\mat3</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\mat4\mat4.hpp">
+      <Filter>cgp\06_mat\mat4</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\06_mat\test\test_matrix_stack.hpp">
+      <Filter>cgp\06_mat\test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\07_image\image.hpp">
+      <Filter>cgp\07_image</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\08_random_noise\noise\noise.hpp">
+      <Filter>cgp\08_random_noise\noise</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\08_random_noise\rand\rand.hpp">
+      <Filter>cgp\08_random_noise\rand</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\08_random_noise\random_noise.hpp">
+      <Filter>cgp\08_random_noise</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\affine\affine.hpp">
+      <Filter>cgp\09_geometric_transformation\affine</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\affine\affine\affine.hpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\affine\affine_rt\affine_rt.hpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine_rt</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\affine\affine_rts\affine_rts.hpp">
+      <Filter>cgp\09_geometric_transformation\affine\affine_rts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\frame\frame.hpp">
+      <Filter>cgp\09_geometric_transformation\frame</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\geometric_transformation.hpp">
+      <Filter>cgp\09_geometric_transformation</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\interpolation\interpolation.hpp">
+      <Filter>cgp\09_geometric_transformation\interpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\projection\projection.hpp">
+      <Filter>cgp\09_geometric_transformation\projection</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\quaternion\quaternion.hpp">
+      <Filter>cgp\09_geometric_transformation\quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\rotation_transform\rotation_transform.hpp">
+      <Filter>cgp\09_geometric_transformation\rotation_transform</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\09_geometric_transformation\rotation_transform\test\test_rotation.hpp">
+      <Filter>cgp\09_geometric_transformation\rotation_transform\test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model.hpp">
+      <Filter>cgp\10_camera_model</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_first_person\camera_first_person.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_first_person</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_first_person_euler\camera_first_person_euler.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_first_person_euler</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_generic_base\camera_generic_base.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_generic_base</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_model.hpp">
+      <Filter>cgp\10_camera_model\camera_model</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_orbit\camera_orbit.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_orbit</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\camera_orbit_euler\camera_orbit_euler.hpp">
+      <Filter>cgp\10_camera_model\camera_model\camera_orbit_euler</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_model\common_functions\common_functions.hpp">
+      <Filter>cgp\10_camera_model\camera_model\common_functions</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\10_camera_model\camera_projection\camera_projection.hpp">
+      <Filter>cgp\10_camera_model\camera_projection</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\11_mesh\mesh.hpp">
+      <Filter>cgp\11_mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\11_mesh\mesh\mesh.hpp">
+      <Filter>cgp\11_mesh\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\11_mesh\primitive\primitive.hpp">
+      <Filter>cgp\11_mesh\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\bounding_box\bounding_box.hpp">
+      <Filter>cgp\12_shape\bounding_box</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\curve\curve.hpp">
+      <Filter>cgp\12_shape\curve</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\implicit\implicit.hpp">
+      <Filter>cgp\12_shape\implicit</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\implicit\marching_cube\helper\marching_cubes_lut.hpp">
+      <Filter>cgp\12_shape\implicit\marching_cube\helper</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\implicit\marching_cube\marching_cube.hpp">
+      <Filter>cgp\12_shape\implicit\marching_cube</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\intersection\intersection.hpp">
+      <Filter>cgp\12_shape\intersection</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\shape.hpp">
+      <Filter>cgp\12_shape</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\spatial_domain\spatial_domain.hpp">
+      <Filter>cgp\12_shape\spatial_domain</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\12_shape\spatial_domain\spatial_domain_grid_3D\spatial_domain_grid_3D.hpp">
+      <Filter>cgp\12_shape\spatial_domain\spatial_domain_grid_3D</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\buffer\buffer.hpp">
+      <Filter>cgp\13_opengl\buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\buffer\ebo\ebo.hpp">
+      <Filter>cgp\13_opengl\buffer\ebo</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\buffer\opengl_buffer\opengl_buffer.hpp">
+      <Filter>cgp\13_opengl\buffer\opengl_buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\buffer\vbo\vbo.hpp">
+      <Filter>cgp\13_opengl\buffer\vbo</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\debug\debug.hpp">
+      <Filter>cgp\13_opengl\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\emscripten\emscripten.hpp">
+      <Filter>cgp\13_opengl\emscripten</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\fbo\fbo.hpp">
+      <Filter>cgp\13_opengl\fbo</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\opengl.hpp">
+      <Filter>cgp\13_opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\shaders\cache_uniform_location\cache_uniform_location.hpp">
+      <Filter>cgp\13_opengl\shaders\cache_uniform_location</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\shaders\shaders.hpp">
+      <Filter>cgp\13_opengl\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\texture\texture.hpp">
+      <Filter>cgp\13_opengl\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\13_opengl\uniform\uniform.hpp">
+      <Filter>cgp\13_opengl\uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\14_window\imgui\imgui.hpp">
+      <Filter>cgp\14_window\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\14_window\window.hpp">
+      <Filter>cgp\14_window</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\14_window\window\window.hpp">
+      <Filter>cgp\14_window\window</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\15_input_devices\input_devices.hpp">
+      <Filter>cgp\15_input_devices</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\curve_drawable\curve_drawable.hpp">
+      <Filter>cgp\16_drawable\curve_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\curve_drawable_dynamic_extend\curve_drawable_dynamic_extend.hpp">
+      <Filter>cgp\16_drawable\curve_drawable_dynamic_extend</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\drawable.hpp">
+      <Filter>cgp\16_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\environment\environment.hpp">
+      <Filter>cgp\16_drawable\environment</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\hierarchy_mesh_drawable\hierarchy_mesh_drawable.hpp">
+      <Filter>cgp\16_drawable\hierarchy_mesh_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\material\material.hpp">
+      <Filter>cgp\16_drawable\material</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\material\material_mesh_drawable_phong\material_mesh_drawable_phong.hpp">
+      <Filter>cgp\16_drawable\material\material_mesh_drawable_phong</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\mesh_drawable\mesh_drawable.hpp">
+      <Filter>cgp\16_drawable\mesh_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\special_drawable\skybox_drawable\skybox_drawable.hpp">
+      <Filter>cgp\16_drawable\special_drawable\skybox_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\special_drawable\special_drawable.hpp">
+      <Filter>cgp\16_drawable\special_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\special_drawable\trajectory_drawable\trajectory_drawable.hpp">
+      <Filter>cgp\16_drawable\special_drawable\trajectory_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\16_drawable\triangles_drawable\triangles_drawable.hpp">
+      <Filter>cgp\16_drawable\triangles_drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\17_timer\timer.hpp">
+      <Filter>cgp\17_timer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\17_timer\timer_basic\timer_basic.hpp">
+      <Filter>cgp\17_timer\timer_basic</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\17_timer\timer_event_periodic\timer_event_periodic.hpp">
+      <Filter>cgp\17_timer\timer_event_periodic</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\17_timer\timer_fps\timer_fps.hpp">
+      <Filter>cgp\17_timer\timer_fps</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\17_timer\timer_interval\timer_interval.hpp">
+      <Filter>cgp\17_timer\timer_interval</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\picking\picking.hpp">
+      <Filter>cgp\18_user_interactions\picking</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\picking\picking_plane\picking_plane.hpp">
+      <Filter>cgp\18_user_interactions\picking\picking_plane</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\picking\picking_spheres\picking_spheres.hpp">
+      <Filter>cgp\18_user_interactions\picking\picking_spheres</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\picking\picking_structure\picking_structure.hpp">
+      <Filter>cgp\18_user_interactions\picking\picking_structure</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\tracker\tracker.hpp">
+      <Filter>cgp\18_user_interactions\tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\tracker\velocity_tracker\velocity_tracker.hpp">
+      <Filter>cgp\18_user_interactions\tracker\velocity_tracker</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\18_user_interactions\user_interactions.hpp">
+      <Filter>cgp\18_user_interactions</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller.hpp">
+      <Filter>cgp\19_camera_controller</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_2d_displacement\camera_controller_2d_displacement.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_2d_displacement</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_first_person\camera_controller_first_person.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_first_person</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_first_person_euler\camera_controller_first_person_euler.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_first_person_euler</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_fly_mode\camera_controller_fly_mode.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_fly_mode</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_generic_base\camera_controller_generic_base.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_generic_base</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_orbit\camera_controller_orbit.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_orbit</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\camera_controller_orbit_euler\camera_controller_orbit_euler.hpp">
+      <Filter>cgp\19_camera_controller\camera_controller_orbit_euler</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\19_camera_controller\test\test_camera_controller.hpp">
+      <Filter>cgp\19_camera_controller\test</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\20_format_parser\format_parser.hpp">
+      <Filter>cgp\20_format_parser</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\20_format_parser\mesh_loader\mesh_loader.hpp">
+      <Filter>cgp\20_format_parser\mesh_loader</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\20_format_parser\mesh_loader\obj\obj.hpp">
+      <Filter>cgp\20_format_parser\mesh_loader\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\20_format_parser\mesh_loader\obj_advanced\obj_advanced.hpp">
+      <Filter>cgp\20_format_parser\mesh_loader\obj_advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\21_scene_project_helper\path\path.hpp">
+      <Filter>cgp\21_scene_project_helper\path</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\21_scene_project_helper\scene_project_helper.hpp">
+      <Filter>cgp\21_scene_project_helper</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\cgp.hpp">
+      <Filter>cgp</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\cgp_parameters.hpp">
+      <Filter>cgp</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\cgp\opengl_include.hpp">
+      <Filter>cgp</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl33\glad.hpp">
+      <Filter>third_party\src\glad\opengl33</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl33\khrplatform.hpp">
+      <Filter>third_party\src\glad\opengl33</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl41\glad.hpp">
+      <Filter>third_party\src\glad\opengl41</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl41\khrplatform.hpp">
+      <Filter>third_party\src\glad\opengl41</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl43\glad.hpp">
+      <Filter>third_party\src\glad\opengl43</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl43\khrplatform.hpp">
+      <Filter>third_party\src\glad\opengl43</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl46\glad.hpp">
+      <Filter>third_party\src\glad\opengl46</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\glad\opengl46\khrplatform.hpp">
+      <Filter>third_party\src\glad\opengl46</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imconfig.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui_impl_glfw.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui_impl_opengl3.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imgui_internal.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imstb_rectpack.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imstb_textedit.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\imgui\imstb_truetype.h">
+      <Filter>third_party\src\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\jpeg\jpgd.h">
+      <Filter>third_party\src\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\jpeg\jpge.h">
+      <Filter>third_party\src\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\lodepng\lodepng.h">
+      <Filter>third_party\src\lodepng</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\simplexnoise\simplexnoise1234.hpp">
+      <Filter>third_party\src\simplexnoise</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\cgp\library\third_party\src\tinyobj\tiny_obj_loader.hpp">
+      <Filter>third_party\src\tinyobj</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\environment.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\fish.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\interpolation.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\key_positions_structure.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\rock.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\terrain.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\tree.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\water.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\mesh\mesh.frag.glsl">
+      <Filter>shaders\mesh</Filter>
+    </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\mesh\mesh.vert.glsl">
+      <Filter>shaders\mesh</Filter>
+    </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\single_color\single_color.frag.glsl">
+      <Filter>shaders\single_color</Filter>
+    </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\single_color\single_color.vert.glsl">
+      <Filter>shaders\single_color</Filter>
+    </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\skybox\skybox.frag.glsl">
+      <Filter>shaders\skybox</Filter>
+    </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\skybox\skybox.vert.glsl">
+      <Filter>shaders\skybox</Filter>
+    </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\water\water.frag.glsl">
+      <Filter>shaders\water</Filter>
+    </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\water\water.vert.glsl">
+      <Filter>shaders\water</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="cgp">
+      <UniqueIdentifier>{8448F309-D4DD-3611-A181-FC7D3E90D868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base">
+      <UniqueIdentifier>{9E7A6462-E464-3243-9BC1-ED10D3267D52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\basic_types">
+      <UniqueIdentifier>{35E95470-004F-3E3C-B7C7-1D84F881BF37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\error">
+      <UniqueIdentifier>{AB9E0D5D-4D1A-305F-BF7D-DB86CCF7874B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\stl">
+      <UniqueIdentifier>{C8F091B2-4631-38FB-9E9F-D08FBF8C6421}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\string">
+      <UniqueIdentifier>{1CF516B5-5588-3FA0-85F9-08E67AF34119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\01_base\types">
+      <UniqueIdentifier>{52D9F862-DF2B-32AB-899F-3791D1CC8324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray">
+      <UniqueIdentifier>{FA664D6D-09D3-3465-B066-1AC2ABC3F8C9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray">
+      <UniqueIdentifier>{4FDDFD4C-99EF-3430-A40B-5DE37876A250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray\test">
+      <UniqueIdentifier>{CCF2DF3B-5C23-3A54-84F2-DA698FDC4B89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray_stack">
+      <UniqueIdentifier>{22E9C79F-BE34-35BC-84FA-1994379203DC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray_stack\implementation">
+      <UniqueIdentifier>{A00AB084-4AFD-34FC-97E6-5FBC4346CBBA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray_stack\special_types">
+      <UniqueIdentifier>{C1594A50-7ED0-308E-99E4-DB8D3D3CA28C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\02_numarray\numarray_stack\test">
+      <UniqueIdentifier>{25D9D43D-3839-346E-A097-3ABB721B59C5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\03_files">
+      <UniqueIdentifier>{18A407E8-F61F-3123-A078-6960099A6734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container">
+      <UniqueIdentifier>{1071B619-376B-3E68-80EA-26867D034403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid">
+      <UniqueIdentifier>{2052A1BF-26AA-35F0-858A-FC6AA7CF4CE1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid\grid_2D">
+      <UniqueIdentifier>{46111DB6-AFEC-3457-82F8-1EB0805717F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid\grid_3D">
+      <UniqueIdentifier>{C1841124-D991-35FB-9353-6CC136F95DBE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid\test">
+      <UniqueIdentifier>{1A1BFE26-2C20-3419-9EB9-9A88E9F5B1B7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid_stack">
+      <UniqueIdentifier>{2B11679E-B292-39DA-81A2-5BBD24654A12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid_stack\grid_stack_2D">
+      <UniqueIdentifier>{B04E1556-6C13-3903-B760-D54238052EAE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\grid_stack\grid_stack_2D\test">
+      <UniqueIdentifier>{BDC47352-4876-312A-BDBA-9B1CF04B6B45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\matrix_stack">
+      <UniqueIdentifier>{DA318DDD-D795-3862-AFF4-D6A705CEB2D1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\matrix_stack\special_types">
+      <UniqueIdentifier>{2C47FC25-53F9-316F-B49E-0CCB7F86FAA0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\matrix_stack\special_types\definition">
+      <UniqueIdentifier>{ED115DD9-1A43-3843-AAC4-8C2F5858F550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\04_grid_container\offset_grid">
+      <UniqueIdentifier>{5A229563-38F2-3109-9D46-E778C52BAECB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\05_vec">
+      <UniqueIdentifier>{AB9796D5-2F5A-3C4C-90E9-A5A13664EE42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\05_vec\vec2">
+      <UniqueIdentifier>{1BCE1527-F508-3D06-BD40-D2E153729F82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\05_vec\vec3">
+      <UniqueIdentifier>{282CC371-FC4B-37A7-8D7D-F6F662BF08F5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\05_vec\vec4">
+      <UniqueIdentifier>{CC12D7FC-4711-3D64-A029-6B03D3E768EB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat">
+      <UniqueIdentifier>{008B2D4A-9771-37F1-A6B2-414D19154C90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\functions">
+      <UniqueIdentifier>{C6ADE61D-4C28-36A9-9D04-68CA221FB606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\functions\test">
+      <UniqueIdentifier>{EA273BE9-3D67-35D4-9972-3FDABE8EE332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\mat2">
+      <UniqueIdentifier>{DE53CA8A-C461-34F8-B308-620D6A41902A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\mat3">
+      <UniqueIdentifier>{E95BDEEA-A6FD-36AC-9E40-6F6C6A9123E1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\mat4">
+      <UniqueIdentifier>{8AD72D39-A791-30D9-8016-3BA290873BC1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\06_mat\test">
+      <UniqueIdentifier>{79095AC1-FA50-3F1C-9020-45A9CEE36B24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\07_image">
+      <UniqueIdentifier>{27FDFC03-5F0F-3323-AF6E-EC27769F722D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\08_random_noise">
+      <UniqueIdentifier>{6104C2D9-9A81-3073-94D4-0BEDA325BE78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\08_random_noise\noise">
+      <UniqueIdentifier>{92A5EAA1-D383-3183-BC82-3D1C009A8EFD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\08_random_noise\rand">
+      <UniqueIdentifier>{6A17F55E-056C-3A20-BBDC-562DEF8DFA94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation">
+      <UniqueIdentifier>{3E19B936-A3BF-3E1E-90E4-A4D363169101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\affine">
+      <UniqueIdentifier>{FEAE9782-C5A4-3B2A-A03B-99919F62E1CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\affine\affine">
+      <UniqueIdentifier>{AC1B0877-E89D-38B2-BC47-D1F5A08EE088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\affine\affine_rt">
+      <UniqueIdentifier>{47874608-96B4-3EF4-AF55-9FA52BA10B14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\affine\affine_rts">
+      <UniqueIdentifier>{4728C702-4F1E-3501-BBF6-918973794816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\frame">
+      <UniqueIdentifier>{33B2A522-E13B-3E4C-9CCA-B0E223494C6C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\interpolation">
+      <UniqueIdentifier>{052E992B-2478-3F61-9452-639B61A2FF0B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\projection">
+      <UniqueIdentifier>{C42D7BB6-5ABF-3F28-86B3-58B5342A6C03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\quaternion">
+      <UniqueIdentifier>{089A2ED1-D520-397A-BAD1-61C337136DA4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\rotation_transform">
+      <UniqueIdentifier>{AB358727-7638-3730-B9FC-44873ACDE552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\09_geometric_transformation\rotation_transform\test">
+      <UniqueIdentifier>{95783A8B-CC46-3C51-9183-DE7CE77B7618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model">
+      <UniqueIdentifier>{0BB7843C-4931-31B5-B8DB-AD97F548ABE8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model">
+      <UniqueIdentifier>{8A6F9319-F022-3361-8A39-1339EDE650BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_first_person">
+      <UniqueIdentifier>{494BF998-3FD2-3927-B862-A3764876CA37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_first_person_euler">
+      <UniqueIdentifier>{C0D3DA2E-7E32-37D4-9AF4-E6256299A326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_generic_base">
+      <UniqueIdentifier>{46B4919D-5FD3-3B24-A627-3A7843A2EADF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_orbit">
+      <UniqueIdentifier>{A5A8DBF5-7F5D-3162-8E4C-1EB2202263AF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\camera_orbit_euler">
+      <UniqueIdentifier>{133C9FDC-999B-3588-954F-F303AAE25FEE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_model\common_functions">
+      <UniqueIdentifier>{BBE68BDD-65EC-3D92-A3FF-BF79AC8BE759}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\10_camera_model\camera_projection">
+      <UniqueIdentifier>{FD2E3D81-C315-3E8F-9393-57F33D4D95C3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\11_mesh">
+      <UniqueIdentifier>{A9E207E3-2A26-3534-9481-67FFFB0947B6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\11_mesh\mesh">
+      <UniqueIdentifier>{08D11A35-C1C1-3DC1-99A9-41D3CB9909BC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\11_mesh\primitive">
+      <UniqueIdentifier>{5048B7E1-7907-35EE-9D92-3FDAB9141CDE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape">
+      <UniqueIdentifier>{37211676-F944-320F-83AF-683EFBD22AF8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\bounding_box">
+      <UniqueIdentifier>{DF537B2C-BFEE-3815-9C41-2E0816D0964E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\curve">
+      <UniqueIdentifier>{616F1806-294D-3990-BDE0-1EEDAFE4A89D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\implicit">
+      <UniqueIdentifier>{275B06FA-34B6-3B3C-9105-78986D457004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\implicit\marching_cube">
+      <UniqueIdentifier>{4E45C17B-3E17-3B61-A5F4-463B11B5390D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\implicit\marching_cube\helper">
+      <UniqueIdentifier>{CAE1A742-2746-34BF-BD7E-3722A7A94AC0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\intersection">
+      <UniqueIdentifier>{52B7A370-72D9-3573-B22A-4ED057112CF8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\spatial_domain">
+      <UniqueIdentifier>{77536E15-0829-3A93-817D-AE69B7457839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\12_shape\spatial_domain\spatial_domain_grid_3D">
+      <UniqueIdentifier>{D1DBECA0-A656-37F7-AF5A-B5B50E028437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl">
+      <UniqueIdentifier>{CA0BAAEE-45E4-30B2-B5D5-053CA522FBA8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\buffer">
+      <UniqueIdentifier>{BDAE996B-1512-3BC1-BEEC-2E3CDAF7ADF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\buffer\ebo">
+      <UniqueIdentifier>{B0B1B8A8-5225-39CC-8EAC-24005DA8099D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\buffer\opengl_buffer">
+      <UniqueIdentifier>{E9B8B047-DBD3-38E3-9D1B-D5B32A7C6AFA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\buffer\vbo">
+      <UniqueIdentifier>{C5A81092-AAE5-306D-B787-A2223E3D5AC7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\debug">
+      <UniqueIdentifier>{67019954-EFFF-3691-A787-6DC70E430DBD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\emscripten">
+      <UniqueIdentifier>{30DF4207-4C55-3BE0-8941-9812A5929C12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\fbo">
+      <UniqueIdentifier>{6DD1BA1F-E7CA-3E22-A199-A27210912DA0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\shaders">
+      <UniqueIdentifier>{D6404CD8-31BD-36FE-8DBC-9178EF18AB01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\shaders\cache_uniform_location">
+      <UniqueIdentifier>{F1C9D6FA-2A4E-3664-B6A6-7A1DE0AD2CFA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\texture">
+      <UniqueIdentifier>{1CA89A92-4E1E-3E2E-93D9-C7CBCAFCC55C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\13_opengl\uniform">
+      <UniqueIdentifier>{97F52851-4E2F-38B0-B6B9-964D32161442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\14_window">
+      <UniqueIdentifier>{925BC610-BA03-3439-9489-AF57CE3ABDCD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\14_window\imgui">
+      <UniqueIdentifier>{4C4C2E03-5108-3EFF-9032-9822A97658C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\14_window\window">
+      <UniqueIdentifier>{E218B090-F260-3FFD-8CED-BD30F9D09126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\15_input_devices">
+      <UniqueIdentifier>{52EE6D18-C650-3B18-9651-1EC80D44F4BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable">
+      <UniqueIdentifier>{5FFAEDBC-C35E-30BC-9DD4-07390707D18E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\curve_drawable">
+      <UniqueIdentifier>{F7F9EB6C-5816-3BCD-BB12-4E46CB7FD4BB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\curve_drawable_dynamic_extend">
+      <UniqueIdentifier>{FCAD6B5C-5DD7-35F8-87B0-F88C07A61E0D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\environment">
+      <UniqueIdentifier>{CDD6D31E-D63A-3F97-95E8-EC1E178374B2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\hierarchy_mesh_drawable">
+      <UniqueIdentifier>{47AA88F0-E90A-3202-9249-D6C366707C3E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\material">
+      <UniqueIdentifier>{61A2AC37-EAC8-3A03-8896-FA0A358BBF6D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\material\material_mesh_drawable_phong">
+      <UniqueIdentifier>{34978317-8AB0-34AA-9A56-8F7195820F6A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\mesh_drawable">
+      <UniqueIdentifier>{B32C74A8-C7A6-3095-84F4-CB6BB1370187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\special_drawable">
+      <UniqueIdentifier>{88C53C66-F8E1-3E59-B91A-21106F70A860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\special_drawable\skybox_drawable">
+      <UniqueIdentifier>{D924E5E1-2F97-32A8-B06C-8289C5717458}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\special_drawable\trajectory_drawable">
+      <UniqueIdentifier>{06D04DF8-15FD-3A60-87DF-1122DBE567CA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\16_drawable\triangles_drawable">
+      <UniqueIdentifier>{8F844059-EC3A-3A6C-A580-1E062B67B5CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer">
+      <UniqueIdentifier>{696563A7-2F1C-3A7D-9EFF-242169AEB391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer\timer_basic">
+      <UniqueIdentifier>{09FD3739-3F0F-3A33-9920-D8B05DF70316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer\timer_event_periodic">
+      <UniqueIdentifier>{6A46561A-91B7-3EE3-9B80-4405D5B7DAFE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer\timer_fps">
+      <UniqueIdentifier>{F41541F1-3B0F-3CD9-ACDB-8438CED495AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\17_timer\timer_interval">
+      <UniqueIdentifier>{28BC4B9D-8BBD-3C6C-8A30-AE6A08390D7D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions">
+      <UniqueIdentifier>{36C21230-F540-365B-826C-461BAA5CF2D7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\picking">
+      <UniqueIdentifier>{A80B6E61-82BA-3A15-8066-76065A0EBE64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\picking\picking_plane">
+      <UniqueIdentifier>{7C033591-786D-3C1D-B4D1-0BAA25B56B45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\picking\picking_spheres">
+      <UniqueIdentifier>{1C186B46-7EDB-3546-B245-636C9A876BEB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\picking\picking_structure">
+      <UniqueIdentifier>{2FA42921-974A-33EE-A387-92CC586617A3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\tracker">
+      <UniqueIdentifier>{FBA7BB6A-F21E-39F1-898B-3ED6BBBD5BC7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\18_user_interactions\tracker\velocity_tracker">
+      <UniqueIdentifier>{6A0AC588-D22E-3562-9D55-4701DE2420A4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller">
+      <UniqueIdentifier>{2E891C11-D322-300F-B840-056C0F4047E1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_2d_displacement">
+      <UniqueIdentifier>{2020D6C2-180B-391D-B25B-9C795D77FC5F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_first_person">
+      <UniqueIdentifier>{A8F35A68-D7AF-38E7-9B8C-F83454784226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_first_person_euler">
+      <UniqueIdentifier>{5D97E89A-3642-38A9-8043-A094FCCB42F1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_fly_mode">
+      <UniqueIdentifier>{4C7DE2FB-C680-315D-A6BB-BCCC64C0EB82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_generic_base">
+      <UniqueIdentifier>{667791FF-3F6D-3BD7-BD7D-9ADD668ABD99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_orbit">
+      <UniqueIdentifier>{9184E6B0-82D9-39C1-84A3-BCDDB36906C4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\camera_controller_orbit_euler">
+      <UniqueIdentifier>{D7DEF9A9-4B37-34DB-A145-BD7E3C9FECC4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\19_camera_controller\test">
+      <UniqueIdentifier>{8B938C2D-3C88-3D50-B862-00E090BE1390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\20_format_parser">
+      <UniqueIdentifier>{E795DC46-1B72-3D3A-B0F3-E69AC1476A27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\20_format_parser\mesh_loader">
+      <UniqueIdentifier>{ECB9CF0A-A081-3CA3-B10D-934104ABCF81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\20_format_parser\mesh_loader\obj">
+      <UniqueIdentifier>{F4716A4A-67AE-3B6D-A667-CD6866A0ACFB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\20_format_parser\mesh_loader\obj_advanced">
+      <UniqueIdentifier>{BF58A06A-4D78-350E-8EAA-1F98454606BB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\21_scene_project_helper">
+      <UniqueIdentifier>{B1E3749E-CD08-3944-8A13-9B9FC5CB2781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cgp\21_scene_project_helper\path">
+      <UniqueIdentifier>{7A8B42B8-34B9-30C9-B5DB-60CCAC53F98F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{F9C914A4-CD45-3D15-88BF-EE335BAE9674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders\mesh">
+      <UniqueIdentifier>{0E63A6F7-D2FE-3DD8-9C9A-40F3FC9F9003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders\single_color">
+      <UniqueIdentifier>{A8867F0D-4C50-3076-8486-926ABFD159C7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders\skybox">
+      <UniqueIdentifier>{CA5F861F-BCE6-3DDF-A169-C348A1F5345A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders\water">
+      <UniqueIdentifier>{20BBB9BA-2539-3139-A918-CF73C831A11C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{0916CBF2-C91D-3493-BE68-5C775E7E6EAB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{68C9791E-FF4A-37DC-95CC-933766DB209F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src">
+      <UniqueIdentifier>{A062AB1F-F908-39C9-B8F1-3D12329E16DB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad">
+      <UniqueIdentifier>{8DBAC6D0-B426-3898-9A21-C43839D58FE3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\opengl33">
+      <UniqueIdentifier>{0F22B332-D594-30FE-BCF9-A4C48B08460F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\opengl41">
+      <UniqueIdentifier>{E8EE9AE5-0BC5-368F-8C62-A4CF8D328519}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\opengl43">
+      <UniqueIdentifier>{58AB8DE9-ABF5-3CA1-9200-8C220C7791D3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\glad\opengl46">
+      <UniqueIdentifier>{6A8817B6-3BB5-3260-8775-3871E4CB1F93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\imgui">
+      <UniqueIdentifier>{45DADF7A-0C1D-3188-804D-9F39E79BA5BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\jpeg">
+      <UniqueIdentifier>{28048805-3059-3E45-BC3B-67832AE9B74C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\lodepng">
+      <UniqueIdentifier>{E8E298AB-EBCB-365C-824C-3CC2C8D7CEEB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\simplexnoise">
+      <UniqueIdentifier>{55FA47BE-43A0-3649-AEE4-3619FF9C2177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\src\tinyobj">
+      <UniqueIdentifier>{354A28CF-E364-35F8-9058-FE4292AD62E0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
