@@ -95,30 +95,40 @@ void scene_structure::initialize()
 	fish.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
 	fish.model.scaling = 0.1f;
 
+	mesh fish_mesh2 = mesh_load_file_obj(project::path + "assets/fish/20230116_Tobiuo.obj");
+	fish2.initialize_data_on_gpu(fish_mesh2);
+	fish2.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Body_Normal.png");
+	fish2.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Winf3_Normal.png");
+	fish2.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Wing_Normal.png");
+	fish2.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
+	fish2.model.scaling = 0.1f;
+
 	// Definition of the initial data
 	//--------------------------------------//
 	fish_timer = 0.0f;
 
 	// Update the current time
-	// Key 3D positions
+	// Adjusted fish positions to the boat referential, is getting multiplied by rotation matrix later on for correction and updated positions
 	initial_fish_positions =
-		{{-1, 1, 0},  // Top left
-		 {0, 1, 0},	  // Top center
-		 {1, 1, 0},	  // Top right
-		 {2, 1, 0},	  // Top rightmost
-		 {2, 0, 0},	  // Right
-		 {2, -1, 0},  // Bottom rightmost
-		 {1, -1, 0},  // Bottom right
-		 {0, -1, 0},  // Bottom center
-		 {-1, -1, 0}, // Bottom left
-		 {-2, -1, 0}, // Bottom leftmost
-		 {-2, 0, 0},  // Left
-		 {-2, 1, 0}}; // Top leftmost
+		{{0, -2.0, 10.0},
+		 {0, -2.0, 5.0},
+		 {0, -2.0, 0.0},
+		 {0, -2.0, -5.0},
+		 {0, -2.0, -10.0},
+		 {0, -10.0, -10.0},
+		 {0, -10.0, -10.0}};
 
 	fish_positions = initial_fish_positions;
+	fish_positions2 = initial_fish_positions;
 	// Key times (time at which the position must pass in the corresponding position)
 	fish_times =
-		{0.0f, 1.0f, 2.0f, 2.5f, 3.0f, 3.5f, 3.75f, 4.5f, 5.0f, 6.0f, 7.0f, 8.0f};
+		{0.0f,
+		 0.6f,
+		 1.2f,
+		 1.8f,
+		 9.4f,
+		 9.6f,
+		 10.0f};
 
 	int N = fish_positions.size();
 	fish_interval.t_min = fish_times[1];
@@ -180,14 +190,19 @@ void scene_structure::display_frame()
 	float elapsed_time = timer.t - fish_timer;
 	std::cout << "Elapsed Time: " << elapsed_time << std::endl;
 
-	if (elapsed_time > 5.0f)
+	if (elapsed_time > 10.0f)
 	{
 		std::cout << "Updating fish positions" << std::endl;
 
 		for (int i = 0; i < fish_positions.size(); i++)
 		{
-			vec3 translation = {boat2.model.translation.x, boat2.model.translation.y + 3.0f, boat2.model.translation.z};
-			fish_positions[i] = boat2.model.rotation * (initial_fish_positions[i] + translation);
+			vec3 translation = {boat2.model.translation.x + 3.0f, boat2.model.translation.y, boat2.model.translation.z};
+			vec3 translation2 = {boat2.model.translation.x + 5.0f, boat2.model.translation.y, boat2.model.translation.z};
+			fish_positions[i] = boat2.model.rotation * initial_fish_positions[i] + translation;
+			fish_positions2[i] = boat2.model.rotation * initial_fish_positions[i] + translation2;
+
+			fish.model.rotation = boat2.model.rotation;
+			fish2.model.rotation = boat2.model.rotation;
 		}
 
 		// Update fish_timer after updating positions
@@ -198,10 +213,13 @@ void scene_structure::display_frame()
 	// Compute the interpolated position
 	//  This is this function that you need to complete
 	vec3 p = interpolation(t, fish_positions, fish_times);
+	vec3 p2 = interpolation(t, fish_positions2, fish_times);
 
 	fish.model.translation = p;
+	fish2.model.translation = p2;
 
 	draw(fish, environment);
+	draw(fish2, environment);
 }
 
 void scene_structure::display_semiTransparent()

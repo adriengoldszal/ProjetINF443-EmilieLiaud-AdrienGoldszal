@@ -51,6 +51,8 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	cgp::mesh_drawable fish;
 
+	cgp::mesh_drawable fish2;
+
 	// Boat elements
 	/************************************/
 	mesh_drawable boat2;
@@ -65,9 +67,10 @@ struct scene_structure : cgp::scene_inputs_generic
 	// Timer used for the interpolation of the position
 	float fish_timer;
 	cgp ::timer_interval fish_interval;
-	numarray<vec3> initial_fish_positions ;
+	numarray<vec3> initial_fish_positions;
 	numarray<vec3> fish_positions;
-	numarray<float> fish_times ;
+	numarray<vec3> fish_positions2;
+	numarray<float> fish_times;
 
 	// ****************************** //
 	// Functions
