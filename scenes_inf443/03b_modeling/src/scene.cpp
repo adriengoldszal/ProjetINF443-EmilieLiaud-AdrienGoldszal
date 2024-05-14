@@ -52,25 +52,36 @@ void scene_structure::initialize()
 
 	// Load water terrain
 	int N_terrain_samples = 400;
-	float terrain_length = 50;
-	mesh const water_mesh = create_water_mesh(N_terrain_samples, terrain_length);
-	water.initialize_data_on_gpu(water_mesh);
+	terrain_length = 50;
 	opengl_shader_structure water_shader;
 	water_shader.load(
 		project::path + "shaders/water/water.vert.glsl",
 		project::path + "shaders/water/water.frag.glsl");
-	water.shader = water_shader;
-	water.material.color = {0.0f, 0.5f, 1.0f}; // blue color for water
-	water.material.phong.specular = 0.0f;	   // non-specular terrain material
 
-	// Sending the skybox texture to the water shader as a uniform
-	glUseProgram(water.shader.id);
-	opengl_check;
-	glActiveTexture(GL_TEXTURE1);
-	opengl_check;
-	skybox.texture.bind();
-	opengl_uniform(water.shader, "image_skybox", 1);
-	opengl_check;
+	for (int i = 0; i < 9; i++)
+	{
+		water_array[i].initialize_data_on_gpu(create_water_mesh(N_terrain_samples, terrain_length));
+		water_array[i].shader = water_shader;
+		water_array[i].material.color = {0.0f, 0.5f, 1.0f}; // blue color for water
+		water_array[i].material.phong.specular = 0.0f;		// non-specular terrain material
+		// Sending the skybox texture to the water shader as a uniform
+		glUseProgram(water_array[i].shader.id);
+		opengl_check;
+		glActiveTexture(GL_TEXTURE1);
+		opengl_check;
+		skybox.texture.bind();
+		opengl_uniform(water_array[i].shader, "image_skybox", 1);
+		opengl_check;
+	}
+	center = 0;
+	water_array[1].model.translation = {terrain_length, terrain_length, 0.0f};
+	water_array[2].model.translation = {terrain_length, 0.0f, 0.0f};
+	water_array[3].model.translation = {terrain_length, -terrain_length, 0.0f};
+	water_array[4].model.translation = {0.0f, -terrain_length, 0.0f};
+	water_array[5].model.translation = {-terrain_length, -terrain_length, 0.0f};
+	water_array[6].model.translation = {-terrain_length, 0.0f, 0.0f};
+	water_array[7].model.translation = {-terrain_length, terrain_length, 0.0f};
+	water_array[8].model.translation = {0.0f, terrain_length, 0.0f};
 
 	// Load boat
 	// Open source file https://sketchfab.com/3d-models/chinese-junk-ship-35b340bce9fb4e0680bc0116cebc35c9
@@ -82,7 +93,7 @@ void scene_structure::initialize()
 		project::path + "shaders/mesh/mesh.vert.glsl",
 		project::path + "shaders/mesh/mesh.frag.glsl");
 	// boat2.model.scaling = 0.0001f;
-	boat2.model.translation = {-0.0f, 0.0f, 0.0f};
+	boat2.model.translation = {0.0f, 0.0f, 1.0f};
 	initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
 	boat2.model.rotation = initial_position_rotation;
 
@@ -170,7 +181,7 @@ void scene_structure::display_frame()
 	glDepthMask(GL_TRUE); // re-activate depth-buffer write
 
 	draw(terrain, environment);
-
+	draw(boat2, environment);
 	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
 
 	// draw(water, environment);
@@ -181,7 +192,6 @@ void scene_structure::display_frame()
 	// boat2.model.translation = {camera_position.x, camera_position.y - 10.0f, camera_position.z - 10.0f};
 	boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.2f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
 	boat2.model.scaling = 0.01f; // Ne marche plus correctement;
-	draw(boat2, environment);
 
 	// Update the fish time
 	fish_interval.update();
@@ -234,8 +244,39 @@ void scene_structure::display_semiTransparent()
 	//  - Transparent elements cannot use depth buffer
 	//  - They are supposed to be display from furest to nearest elements
 	glDepthMask(false);
-
-	draw(water, environment);
+	// Water adaptation considering the boat position
+	if (boat2.model.translation.x > water_array[center].model.translation.x + terrain_length / 2.0f)
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			water_array[i].model.translation.x += terrain_length;
+		}
+	}
+	if (boat2.model.translation.x < water_array[center].model.translation.x - terrain_length / 2.0f)
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			water_array[i].model.translation.x -= terrain_length;
+		}
+	}
+	if (boat2.model.translation.y > water_array[center].model.translation.y + terrain_length / 2.0f)
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			water_array[i].model.translation.y += terrain_length;
+		}
+	}
+	if (boat2.model.translation.y < water_array[center].model.translation.y - terrain_length / 2.0f)
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			water_array[i].model.translation.y -= terrain_length;
+		}
+	}
+	for (int i = 0; i < 9; i++)
+	{
+		draw(water_array[i], environment);
+	}
 
 	// Don't forget to re-activate the depth-buffer write
 	glDepthMask(true);

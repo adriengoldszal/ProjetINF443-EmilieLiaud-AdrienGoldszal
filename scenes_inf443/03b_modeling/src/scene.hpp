@@ -46,6 +46,17 @@ struct scene_structure : cgp::scene_inputs_generic
 	mesh_drawable sphere_light; // Light source
 
 	cgp::mesh_drawable water;
+	cgp::mesh_drawable water2;
+	cgp::mesh_drawable water3;
+	cgp::mesh_drawable water4;
+	cgp::mesh_drawable water5;
+	cgp::mesh_drawable water6;
+	cgp::mesh_drawable water7;
+	cgp::mesh_drawable water8;
+	cgp::mesh_drawable water9;
+	cgp::mesh_drawable water_array[9] = {water, water2, water3, water4, water5, water6, water7, water8, water9};
+	int center ;
+	float terrain_length;
 
 	cgp::mesh_drawable terrain;
 

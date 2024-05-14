@@ -32,6 +32,8 @@ void main() {
 
     float distance_to_water = length(fragment.position - camera_position);
     vec3 I = (fragment.position - camera_position) / distance_to_water;
+    vec3 minusI = I;
+    minusI.z = -I.z;
 
     // Normalize the normal
     vec3 normal = normalize(fragment.normal);
@@ -52,7 +54,7 @@ void main() {
     //current_color = mix(reflexion_texture, refraction_texture, transparency); // Blend reflection and refraction
 
     //Blend colors
-    vec3 color = mix(reflectedColor, water_color, 0.6);
+    vec3 color = mix(reflectedColor, water_color, 0.2);
     color = mix(color, refractedColor, transparency);
 
     FragColor = vec4(color, 0.8); //Alpha value for transparent water
