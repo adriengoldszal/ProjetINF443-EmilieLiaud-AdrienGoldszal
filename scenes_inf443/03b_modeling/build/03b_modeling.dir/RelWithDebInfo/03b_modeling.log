@@ -1,2 +1,8 @@
 ﻿  scene.cpp
+  terrain.cpp
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\terrain.cpp(31,32): warning C4100: 'N': unreferenced formal parameter
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.cpp(392,7): warning C4189: 'update': local variable is initialized but not referenced
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.cpp(428,83): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.cpp(447,84): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.cpp(224,13): warning C4505: 'deform_terrain': unreferenced function with internal linkage has been removed
   03b_modeling.vcxproj -> D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\03b_modeling.exe

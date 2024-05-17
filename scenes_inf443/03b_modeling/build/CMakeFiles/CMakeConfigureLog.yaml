@@ -24,7 +24,7 @@ events:
       The output was:
       0
       MSBuild version 17.9.5+33de0b227 for .NET Framework
-      Build started 2024-05-12 20:05:49.
+      Build started 2024-05-14 09:30:10.
       
       Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\3.29.0-rc2\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -53,7 +53,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:01.68
+      Time Elapsed 00:00:00.81
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -79,7 +79,7 @@ events:
       The output was:
       0
       MSBuild version 17.9.5+33de0b227 for .NET Framework
-      Build started 2024-05-12 20:05:51.
+      Build started 2024-05-14 09:30:11.
       
       Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\3.29.0-rc2\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -108,7 +108,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:01.40
+      Time Elapsed 00:00:00.67
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -127,8 +127,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-nei556"
-      binary: "D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-nei556"
+      source: "D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-pul872"
+      binary: "D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-pul872"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -137,40 +137,40 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-nei556'
+        Change Dir: 'D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-pul872'
         
-        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d9409.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_fd3ee.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.9.5+33de0b227 for .NET Framework
-        Build started 2024-05-12 20:05:53.
+        Build started 2024-05-14 09:30:12.
         
-        Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nei556\\cmTC_d9409.vcxproj" on node 1 (default targets).
+        Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pul872\\cmTC_fd3ee.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_d9409.dir\\Debug\\".
+          Creating directory "cmTC_fd3ee.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nei556\\Debug\\".
-          Creating directory "cmTC_d9409.dir\\Debug\\cmTC_d9409.tlog\\".
+          Creating directory "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pul872\\Debug\\".
+          Creating directory "cmTC_fd3ee.dir\\Debug\\cmTC_fd3ee.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_d9409.dir\\Debug\\cmTC_d9409.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_d9409.dir\\Debug\\cmTC_d9409.tlog\\unsuccessfulbuild".
+          Creating "cmTC_fd3ee.dir\\Debug\\cmTC_fd3ee.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_fd3ee.dir\\Debug\\cmTC_fd3ee.tlog\\unsuccessfulbuild".
         ClCompile:
-          D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d9409.dir\\Debug\\\\" /Fd"cmTC_d9409.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\_Softwares\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
+          D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_fd3ee.dir\\Debug\\\\" /Fd"cmTC_fd3ee.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\_Softwares\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.39.33521 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d9409.dir\\Debug\\\\" /Fd"cmTC_d9409.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\_Softwares\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_fd3ee.dir\\Debug\\\\" /Fd"cmTC_fd3ee.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\_Softwares\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nei556\\Debug\\cmTC_d9409.exe" /INCREMENTAL /ILK:"cmTC_d9409.dir\\Debug\\cmTC_d9409.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-nei556/Debug/cmTC_d9409.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-nei556/Debug/cmTC_d9409.lib" /MACHINE:X64  /machine:x64 cmTC_d9409.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_d9409.vcxproj -> D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nei556\\Debug\\cmTC_d9409.exe
+          D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pul872\\Debug\\cmTC_fd3ee.exe" /INCREMENTAL /ILK:"cmTC_fd3ee.dir\\Debug\\cmTC_fd3ee.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-pul872/Debug/cmTC_fd3ee.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-pul872/Debug/cmTC_fd3ee.lib" /MACHINE:X64  /machine:x64 cmTC_fd3ee.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_fd3ee.vcxproj -> D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pul872\\Debug\\cmTC_fd3ee.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_d9409.dir\\Debug\\cmTC_d9409.tlog\\unsuccessfulbuild".
-          Touching "cmTC_d9409.dir\\Debug\\cmTC_d9409.tlog\\cmTC_d9409.lastbuildstate".
-        Done Building Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-nei556\\cmTC_d9409.vcxproj" (default targets).
+          Deleting file "cmTC_fd3ee.dir\\Debug\\cmTC_fd3ee.tlog\\unsuccessfulbuild".
+          Touching "cmTC_fd3ee.dir\\Debug\\cmTC_fd3ee.tlog\\cmTC_fd3ee.lastbuildstate".
+        Done Building Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pul872\\cmTC_fd3ee.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:01.37
+        Time Elapsed 00:00:00.66
         
       exitCode: 0
   -
@@ -210,8 +210,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-42h8lr"
-      binary: "D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-42h8lr"
+      source: "D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-8bjtv7"
+      binary: "D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-8bjtv7"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -220,40 +220,40 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-42h8lr'
+        Change Dir: 'D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-8bjtv7'
         
-        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d1244.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "D:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_9292d.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.9.5+33de0b227 for .NET Framework
-        Build started 2024-05-12 20:05:55.
+        Build started 2024-05-14 09:30:13.
         
-        Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-42h8lr\\cmTC_d1244.vcxproj" on node 1 (default targets).
+        Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8bjtv7\\cmTC_9292d.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_d1244.dir\\Debug\\".
+          Creating directory "cmTC_9292d.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-42h8lr\\Debug\\".
-          Creating directory "cmTC_d1244.dir\\Debug\\cmTC_d1244.tlog\\".
+          Creating directory "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8bjtv7\\Debug\\".
+          Creating directory "cmTC_9292d.dir\\Debug\\cmTC_9292d.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_d1244.dir\\Debug\\cmTC_d1244.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_d1244.dir\\Debug\\cmTC_d1244.tlog\\unsuccessfulbuild".
+          Creating "cmTC_9292d.dir\\Debug\\cmTC_9292d.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_9292d.dir\\Debug\\cmTC_9292d.tlog\\unsuccessfulbuild".
         ClCompile:
-          D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_d1244.dir\\Debug\\\\" /Fd"cmTC_d1244.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\_Softwares\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
+          D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_9292d.dir\\Debug\\\\" /Fd"cmTC_9292d.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\_Softwares\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.39.33521 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_d1244.dir\\Debug\\\\" /Fd"cmTC_d1244.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\_Softwares\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_9292d.dir\\Debug\\\\" /Fd"cmTC_9292d.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\_Softwares\\share\\cmake-3.29\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-42h8lr\\Debug\\cmTC_d1244.exe" /INCREMENTAL /ILK:"cmTC_d1244.dir\\Debug\\cmTC_d1244.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-42h8lr/Debug/cmTC_d1244.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-42h8lr/Debug/cmTC_d1244.lib" /MACHINE:X64  /machine:x64 cmTC_d1244.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_d1244.vcxproj -> D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-42h8lr\\Debug\\cmTC_d1244.exe
+          D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8bjtv7\\Debug\\cmTC_9292d.exe" /INCREMENTAL /ILK:"cmTC_9292d.dir\\Debug\\cmTC_9292d.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-8bjtv7/Debug/cmTC_9292d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/GitHub/ProjetINF443-EmilieLiaud-AdrienGoldszal/scenes_inf443/03b_modeling/build/CMakeFiles/CMakeScratch/TryCompile-8bjtv7/Debug/cmTC_9292d.lib" /MACHINE:X64  /machine:x64 cmTC_9292d.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_9292d.vcxproj -> D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8bjtv7\\Debug\\cmTC_9292d.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_d1244.dir\\Debug\\cmTC_d1244.tlog\\unsuccessfulbuild".
-          Touching "cmTC_d1244.dir\\Debug\\cmTC_d1244.tlog\\cmTC_d1244.lastbuildstate".
-        Done Building Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-42h8lr\\cmTC_d1244.vcxproj" (default targets).
+          Deleting file "cmTC_9292d.dir\\Debug\\cmTC_9292d.tlog\\unsuccessfulbuild".
+          Touching "cmTC_9292d.dir\\Debug\\cmTC_9292d.tlog\\cmTC_9292d.lastbuildstate".
+        Done Building Project "D:\\GitHub\\ProjetINF443-EmilieLiaud-AdrienGoldszal\\scenes_inf443\\03b_modeling\\build\\CMakeFiles\\CMakeScratch\\TryCompile-8bjtv7\\cmTC_9292d.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:01.35
+        Time Elapsed 00:00:00.66
         
       exitCode: 0
   -

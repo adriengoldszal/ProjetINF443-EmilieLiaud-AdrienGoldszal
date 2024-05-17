@@ -1,6 +1,7 @@
 #include "rock.hpp"
 #include "environment.hpp"
-
+#include "scene.hpp"
+#include <random>
 
 using namespace cgp;
 
@@ -130,5 +131,16 @@ void resize_rock4(cgp::mesh& rock, float facteur) {
 
         // Update the position of the vertex in the mesh
         rock.position[k] = p;
+    }
+}
+
+void genrate_rocks_type(std::vector<int>& rocks_type) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 3); // Utilisez 0 et 3 pour choisir entre 4 options
+
+    for (int k=0; k < hollowCenters.size(); k++) {
+        int choice = dis(gen);
+        rocks_type.push_back(choice);
     }
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cgp/cgp.hpp"
+#include "scene.hpp"
 
 
 struct perlin_noise_parameters
@@ -25,3 +26,5 @@ void resize_rock2(cgp::mesh& rock, float facteur);
 void resize_rock3(cgp::mesh& rock, float facteur);
 
 void resize_rock4(cgp::mesh& rock, float facteur);
+
+void genrate_rocks_type(std::vector<int>& rocks_type);

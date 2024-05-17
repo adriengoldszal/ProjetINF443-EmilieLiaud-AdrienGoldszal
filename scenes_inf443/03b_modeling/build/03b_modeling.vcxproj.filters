@@ -842,6 +842,12 @@
     <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\mesh\mesh.vert.glsl">
       <Filter>shaders\mesh</Filter>
     </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\mesh_multi_texture\mesh_multi_texture.frag.glsl">
+      <Filter>shaders\mesh_multi_texture</Filter>
+    </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\mesh_multi_texture\mesh_multi_texture.vert.glsl">
+      <Filter>shaders\mesh_multi_texture</Filter>
+    </None>
     <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\single_color\single_color.frag.glsl">
       <Filter>shaders\single_color</Filter>
     </None>
@@ -1254,6 +1260,9 @@
     </Filter>
     <Filter Include="shaders\mesh">
       <UniqueIdentifier>{0E63A6F7-D2FE-3DD8-9C9A-40F3FC9F9003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders\mesh_multi_texture">
+      <UniqueIdentifier>{51725CBE-6940-30A9-88DD-1FCFD7C25DF0}</UniqueIdentifier>
     </Filter>
     <Filter Include="shaders\single_color">
       <UniqueIdentifier>{A8867F0D-4C50-3076-8486-926ABFD159C7}</UniqueIdentifier>

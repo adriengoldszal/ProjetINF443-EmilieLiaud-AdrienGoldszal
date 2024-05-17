@@ -1,4 +1,6 @@
 #include <cstdlib>
+#include <random>
+
 #include "scene.hpp"
 
 #include "terrain.hpp"
@@ -10,7 +12,7 @@
 
 using namespace cgp;
 
-static void deform_terrain(mesh &m);
+static void deform_terrain(mesh& m);
 
 void scene_structure::initialize()
 {
@@ -21,9 +23,8 @@ void scene_structure::initialize()
 	camera_control.initialize(inputs, window); // Give access to the inputs and window global state to the camera controler
 	camera_control.set_rotation_axis_z();
 	//camera_control.look_at({15.0f, 6.0f, 6.0f}, {0, 0, 0}); 
-	//camera_control.look_at({1.0f, 0.0f, 0.0f}, {0, 0, 0}); pour le sol
-	camera_control.look_at({0.0f, 30.0f, 2.0f }, { 0,0,0 }, { 0,0,1 });
-
+	//camera_control.look_at({1.0f, 0.0f, 0.0f}, {0, 0, 0}); //pour le sol
+	camera_control.look_at({ 0.0f, 30.0f, 2.0f }, { 0,0,0 }, { 0,0,1 });
 
 	// General information
 	display_info();
@@ -32,7 +33,7 @@ void scene_structure::initialize()
 
 	// Load skybox
 	// ***************************************** //
-	/*image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
+	image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
 	std::vector<image_structure> image_grid = image_split_grid(image_skybox_template, 4, 3);
 	skybox.initialize_data_on_gpu();
 	skybox.texture.initialize_cubemap_on_gpu(
@@ -44,21 +45,30 @@ void scene_structure::initialize()
 		image_grid[3].mirror_vertical());
 	skybox.shader.load(
 		project::path + "shaders/skybox/skybox.vert.glsl",
-		project::path + "shaders/skybox/skybox.frag.glsl");*/
+		project::path + "shaders/skybox/skybox.frag.glsl");
 
-	// Creating an island for testing purposes
-	float L = 50.0f;
-	float elevation = -30.0f; // Adjust this value to set the elevation
+	// Load Terrain
+	int N_terrain_samples = 500;
+	float terrain_length = 300;
+
+	terrain_mesh = create_terrain_mesh(N_terrain_samples, terrain_length);
+	terrain.initialize_data_on_gpu(terrain_mesh);
+	terrain.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg", GL_REPEAT, GL_REPEAT);
+
+	for (int i = 0; i < hollowCenters.size(); i++) {
+		std::cout << "x:" << hollowCenters[i].x << " y:" << hollowCenters[i].y;
+	}
+
+	/*float L = 500.0f;
+	float elevation = -0.1f; // Adjust this value to set the elevation
 	mesh terrain_mesh = mesh_primitive_grid({-L, -L, elevation}, {L, -L, elevation}, {L, L, elevation}, {-L, L, elevation}, 100, 100);
 	//terrain_mesh.uv = { {0,0}, {1,0}, {1,1}, {0,1} }; // Associate Texture-Coordinates to the vertices of the quadrangle
 	deform_terrain(terrain_mesh);
 	terrain.initialize_data_on_gpu(terrain_mesh);
 	terrain.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg", GL_REPEAT, GL_REPEAT);
-	terrain.material.alpha = 0.3f;
+	terrain.material.alpha = 0.3f;*/
 
 	// Load water terrain
-	int N_terrain_samples = 400;
-	float terrain_length = 100;
 	mesh const water_mesh = create_water_mesh(N_terrain_samples, terrain_length);
 	water.initialize_data_on_gpu(water_mesh);
 	opengl_shader_structure water_shader;
@@ -70,17 +80,17 @@ void scene_structure::initialize()
 	//water.material.color = { 179 / 255, 229 / 255, 252 / 255 }; // blue color for water
 	water.material.phong.specular = 0.0f;	   // non-specular terrain material
 
-	
+
 	// Sending the skybox texture to the water shader as a uniform
 	glUseProgram(water.shader.id);
 	opengl_check;
 	glActiveTexture(GL_TEXTURE1);
 	opengl_check;
-	/*skybox.texture.bind();
+	skybox.texture.bind();
 	opengl_uniform(water.shader, "image_skybox", 1);
 	opengl_check;
 
-	
+
 	// Load boat
 	// Open source file https://sketchfab.com/3d-models/chinese-junk-ship-35b340bce9fb4e0680bc0116cebc35c9
 	mesh boat_mesh = mesh_load_file_obj(project::path + "assets/junk_low.obj");
@@ -91,8 +101,8 @@ void scene_structure::initialize()
 		project::path + "shaders/mesh/mesh.vert.glsl",
 		project::path + "shaders/mesh/mesh.frag.glsl");
 	// boat2.model.scaling = 0.0001f;
-	boat2.model.translation = {-0.0f, 0.0f, 0.0f};
-	initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
+	boat2.model.translation = { -0.0f, 0.0f, 0.0f };
+	initial_position_rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, Pi) * rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi / 2);
 	boat2.model.rotation = initial_position_rotation;
 
 	// Load fish
@@ -101,18 +111,18 @@ void scene_structure::initialize()
 	fish.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Body_Normal.png");
 	fish.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Winf3_Normal.png");
 	fish.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Wing_Normal.png");
-	fish.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
+	fish.model.rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, Pi) * rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi / 2);
 	fish.model.scaling = 0.1f;
 
 	// Definition of the initial data
 	//--------------------------------------//
-	numarray<vec3> key_positions = {{0, 0, 0}, {5, 0, 0}, {5, 5, 0}, {0, 5, 0}, {0, 0, 0}};
+	numarray<vec3> key_positions = { {0, 0, 0}, {5, 0, 0}, {5, 5, 0}, {0, 5, 0}, {0, 0, 0} };
 	for (int i = 0; i < key_positions.size(); ++i)
 		key_positions[i] = boat2.model.rotation * key_positions[i] + boat2.model.translation;
 
 	// Key times (time at which the position must pass in the corresponding position)
 	numarray<float> key_times =
-		{0.0f, 2.0f, 4.0f, 6.0f, 8.0f};
+	{ 0.0f, 2.0f, 4.0f, 6.0f, 8.0f };
 
 	// Initialize the helping structure to display/interact with these positions
 	keyframe.initialize(key_positions, key_times);
@@ -125,7 +135,7 @@ void scene_structure::initialize()
 	timer_interpolation.t_max = key_times[N - 2];
 	timer_interpolation.t = timer_interpolation.t_min;
 
-	interpolation_update = timer.update();*/
+	interpolation_update = timer.update();
 
 	// Load Rocks
 	/*rock_mesh = mesh_primitive_ellipsoid(vec3{3, 10, 15});
@@ -139,12 +149,13 @@ void scene_structure::initialize()
 	//rock_drawable2.material.color = vec3 { 0.8f, 0.5f, 0.7f };
 	//hierarchy.add(rock_drawable, "Rock1");
 	//hierarchy.add(rock_drawable2, "Rock2", "Rock1", { 0, -5, 0 });
-	
-	rock_mesh1 = mesh_load_file_obj(project::path + "assets/rocks/rock_2.obj");
+
+	rock_mesh1 = mesh_load_file_obj(project::path + "assets/rocks/rock_newl.obj");
 	resize_rock1(rock_mesh1, 0.5f);
 	//update_rock(rock_mesh1, rock1, parameters);
+	//rock1.shader.load(project::path + "shaders/mesh_multi_texture/mesh_multi_texture.vert.glsl", project::path + "shaders/mesh_multi_texture/mesh_multi_texture.frag.glsl");
 	rock1.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
-	
+	//rock1.supplementary_texture["image_texture_2"].load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/moss.jpeg");
 	rock1.initialize_data_on_gpu(rock_mesh1);
 
 	//rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
@@ -154,6 +165,31 @@ void scene_structure::initialize()
 	//for (int i = 0; i < rock_mesh1.position.size(); i++) {
 	//	std::cout << "pos x:" << rock_mesh1.position[i].x << " pos y: " << rock_mesh1.position[i].y << " pos z: " << rock_mesh1.position[i].z << std::endl;
 	//}
+
+	rock_mesh2 = mesh_load_file_obj(project::path + "assets/rocks/rock2_2.obj");
+	resize_rock2(rock_mesh2, 0.5f);
+	rock2.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
+	rock2.initialize_data_on_gpu(rock_mesh2);
+	rock2.model.scaling = 5.0f;
+	rock2.material.phong.specular = 0.0f;	   // non-specular rock material
+
+
+	rock_mesh3 = mesh_load_file_obj(project::path + "assets/rocks/rock3_2.obj");
+	resize_rock3(rock_mesh3, 0.5f);
+	rock3.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
+	rock3.initialize_data_on_gpu(rock_mesh3);
+	rock3.model.scaling = 5.0f;
+	rock3.material.phong.specular = 0.0f;
+	//rock3.model.translation = { 0, -15, 0 }; // translations de la shpere
+
+	rock_mesh4 = mesh_load_file_obj(project::path + "assets/rocks/rock4_2.obj");
+	resize_rock4(rock_mesh4, 0.5f);
+	rock4.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
+	rock4.initialize_data_on_gpu(rock_mesh4);
+	rock4.model.scaling = 5.0f;
+	rock4.material.phong.specular = 0.0f;
+
+	genrate_rocks_type(rocks_type);
 
 	cgp::numarray<cgp::vec3>& originalVertices = rock_mesh1.position;
 
@@ -174,31 +210,7 @@ void scene_structure::initialize()
 	//	std::cout << "Transformed vertex position: (" << vertex.x << ", " << vertex.y << ", " << vertex.z << ")" << std::endl;
 	//}
 
-	mesh rock_mesh2 = mesh_load_file_obj(project::path + "assets/rocks/rock2.obj");
-	resize_rock2(rock_mesh2, 0.5f);
-	rock2.initialize_data_on_gpu(rock_mesh2);
-
-	//rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
-	rock2.model.scaling = 5.0f;
-
-	mesh rock_mesh3 = mesh_load_file_obj(project::path + "assets/rocks/rock3.obj");
-	resize_rock3(rock_mesh3, 0.5f);
-	rock3.initialize_data_on_gpu(rock_mesh3);
-
-	//rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
-	rock3.model.scaling = 5.0f;
-	rock3.model.translation = { 0, -15, 0 }; // translations de la shpere
-
-	mesh rock_mesh4 = mesh_load_file_obj(project::path + "assets/rocks/rock4.obj");
-	resize_rock4(rock_mesh4, 0.5f);
-	rock4.initialize_data_on_gpu(rock_mesh4);
-
-	//rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
-	rock4.model.scaling = 5.0f;
-	rock4.model.translation = { 0, -30, 0 }; // translations de la shpere
-
 	// Load grass
-
 	//grass_position = generate_grass_positions_on_terrain(50, terrain_length);
 
 	mesh quad_mesh = mesh_primitive_quadrangle({ -0.25f,0,0 }, { 0.25f,0,0 }, { 0.25f,0,0.5f }, { -0.25f,0,0.5f });
@@ -209,18 +221,18 @@ void scene_structure::initialize()
 }
 
 // deform terrain function for island
-static void deform_terrain(mesh &m)
+static void deform_terrain(mesh& m)
 {
 	// Set the terrain to have a gaussian shape
 	for (int k = 0; k < m.position.size(); ++k)
 	{
-		vec3 &p = m.position[k];
+		vec3& p = m.position[k];
 		float d2 = p.x * p.x + p.y * p.y;
 		float z = exp(-d2 / 4) - 1;
 
-		z = z + 0.05f * noise_perlin({p.x, p.y});
+		z = z + 0.05f * noise_perlin({ p.x, p.y });
 
-		p = {p.x, p.y, z};
+		p = { p.x, p.y, z };
 	}
 
 	m.normal_update();
@@ -247,14 +259,32 @@ void scene_structure::display_frame()
 
 	if (gui.display_frame) {
 		draw(global_frame, environment);
-		draw(rock1, environment);
-		//draw(rock2, environment);
-		//draw(rock3, environment);
-		//draw(rock4, environment);
+		draw(terrain, environment);
+		for (int i = 0; i < rocks_type.size(); i++) {
+			if (rocks_type[i] == 0) {
+				rock1.model.translation = vec3{ hollowCenters[i].x, hollowCenters[i].y, -2.0f };
+				draw(rock1, environment);
+			}
+			else if (rocks_type[i] == 1) {
+				rock2.model.translation = vec3{ hollowCenters[i].x, hollowCenters[i].y, -2.0f };
+				draw(rock2, environment);
+			}
+			else if (rocks_type[i] == 2) {
+				rock3.model.translation = vec3{ hollowCenters[i].x, hollowCenters[i].y, -2.0f };
+				draw(rock3, environment);
+			}
+			else {
+				rock4.model.translation = vec3{ hollowCenters[i].x, hollowCenters[i].y, -2.0f };
+				draw(rock4, environment);
+			}
+		}
+
+
 	}
 
 	if (gui.display_wireframe) {
-		draw_wireframe(rock1, environment);
+		draw_wireframe(terrain, environment);
+
 	}
 
 	//draw(rock_drawable, environment);
@@ -264,19 +294,19 @@ void scene_structure::display_frame()
 	//if (gui.display_wireframe)
 		//draw_wireframe(rock_drawable, environment);
 
-	/*glDepthMask(GL_FALSE); // disable depth-buffer writing
+	
+	glDepthMask(GL_FALSE); // disable depth-buffer writing
 	draw(skybox, environment);
-	glDepthMask(GL_TRUE); // re-activate depth-buffer write*/
+	glDepthMask(GL_TRUE); // re-activate depth-buffer write
 
 	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
 
 	//draw(water, environment);
-	//draw(terrain, environment);
 
 	// Draw fish
 	// draw(hierarchy, environment);
 	// boat2.model.translation = {camera_position.x, camera_position.y - 10.0f, camera_position.z - 10.0f};
-	/*boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.2f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
+	boat2.model.rotation = rotation_transform::from_axis_angle({ 0, 1, 0 }, 0.2f * sin(timer.t)) * rotation_transform::from_axis_angle({ 1, 0, 0 }, 0.2f * sin(timer.t)) * initial_position_rotation;
 	boat2.model.scaling = 0.01f; // Ne marche plus correctement;
 	draw(boat2, environment);
 
@@ -295,7 +325,7 @@ void scene_structure::display_frame()
 	keyframe.display_current_position(p, environment);
 
 	fish.model.translation = p;
-	draw(fish, environment);*/
+	draw(fish, environment);
 
 }
 
@@ -312,7 +342,7 @@ void scene_structure::display_semiTransparent()
 	//  - They are supposed to be display from furest to nearest elements
 	glDepthMask(false);
 
-	//draw(water, environment);
+	draw(water, environment);
 
 	glDepthMask(false);
 
@@ -336,17 +366,17 @@ void scene_structure::display_semiTransparent()
 	std::vector<int> randomNumbers;
 
 	// Generate 50 random integers between 0 and 500
-	for (int i = 0; i < 1000; ++i) {
-		int randomNumber = rand() % (rock1_position.size()+1); // Generates a number between 0 and 500
+	for (int i = 0; i < 1500; ++i) {
+		int randomNumber = rand() % (rock1_position.size() + 1); // Generates a number between 0 and 500
 		randomNumbers.push_back(randomNumber);
 	}
 
 	for (int val : randomNumbers) {
-			grass.model.scaling = 2;
-			grass.model.translation = rock1_position[val];
-			draw(grass, environment);
+		grass.model.scaling = 2;
+		grass.model.translation = rock1_position[val];
+		//draw(grass, environment);
 	}
-	
+
 
 	// Don't forget to re-activate the depth-buffer write
 	glDepthMask(true);
@@ -360,15 +390,15 @@ void scene_structure::display_gui()
 
 
 	bool update = false;
-	update |= ImGui::SliderFloat("Persistance", &parameters.persistency, 0.1f, 0.6f);
+	/*update |= ImGui::SliderFloat("Persistance", &parameters.persistency, 0.1f, 0.6f);
 	update |= ImGui::SliderFloat("Frequency gain", &parameters.frequency_gain, 0.5f, 1.5f);
 	update |= ImGui::SliderInt("Octave", &parameters.octave, 1, 8);
 	update |= ImGui::SliderFloat("Height", &parameters.terrain_height, 0.1f, 1.5f);
 
 	if (update) {// if any slider has been changed - then update the terrain
-		update_rock(rock_mesh1, rock1, parameters);
+		//update_rock(rock_mesh1, rock1, parameters);
 		//update_rock2(rock_mesh2, rock_drawable2, parameters);
-	}
+	*/
 }
 
 void scene_structure::mouse_move_event()
@@ -383,7 +413,7 @@ void scene_structure::mouse_click_event()
 void scene_structure::keyboard_event()
 {
 	// Fixing camera to move with the boat if wanted
-	/*vec3 camera_position_on_boat = {5.0f, 10.0f, 15.0f};
+	vec3 camera_position_on_boat = { 5.0f, 10.0f, 15.0f };
 	vec3 camera_position_world = boat2.model.rotation * camera_position_on_boat + boat2.model.translation;
 	// camera_control.camera_model.position_camera = camera_position_world;
 	camera_control.camera_model.look_at(camera_position_world, boat2.model.translation);
@@ -391,31 +421,31 @@ void scene_structure::keyboard_event()
 	camera_control.action_keyboard(environment.camera_view);
 	if (inputs.keyboard.is_pressed(GLFW_KEY_A))
 	{
-		vec3 translation_in_boat_coords = {-0.2f, 0.0f, 0.0f};
+		vec3 translation_in_boat_coords = { -0.2f, 0.0f, 0.0f };
 		// Changing to world coordinates by multiplying by the rotation matrix
 		vec3 translation = initial_position_rotation * translation_in_boat_coords;
-		boat2.model.translation = {boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z};
-		initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi / 100.0) * initial_position_rotation;
+		boat2.model.translation = { boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z };
+		initial_position_rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, Pi / 100.0) * initial_position_rotation;
 	}
 	if (inputs.keyboard.is_pressed(GLFW_KEY_S))
 	{
-		vec3 translation_in_boat_coords = {0.0f, 0.0f, 0.2f};
+		vec3 translation_in_boat_coords = { 0.0f, 0.0f, 0.2f };
 		vec3 translation = initial_position_rotation * translation_in_boat_coords;
-		boat2.model.translation = {boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z};
+		boat2.model.translation = { boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z };
 	}
 	if (inputs.keyboard.is_pressed(GLFW_KEY_W))
 	{
-		vec3 translation_in_boat_coords = {0.0f, 0.0f, -0.2f};
+		vec3 translation_in_boat_coords = { 0.0f, 0.0f, -0.2f };
 		vec3 translation = initial_position_rotation * translation_in_boat_coords;
-		boat2.model.translation = {boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z};
+		boat2.model.translation = { boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z };
 	}
 	if (inputs.keyboard.is_pressed(GLFW_KEY_D))
 	{
-		vec3 translation_in_boat_coords = {0.2f, 0.0f, 0.0f};
+		vec3 translation_in_boat_coords = { 0.2f, 0.0f, 0.0f };
 		vec3 translation = initial_position_rotation * translation_in_boat_coords;
-		boat2.model.translation = {boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z};
-		initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, -Pi / 100.0) * initial_position_rotation;
-	}*/
+		boat2.model.translation = { boat2.model.translation.x + translation.x, boat2.model.translation.y + translation.y, boat2.model.translation.z + translation.z };
+		initial_position_rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, -Pi / 100.0) * initial_position_rotation;
+	}
 
 	camera_control.action_keyboard(environment.camera_view);
 
@@ -433,5 +463,5 @@ void scene_structure::display_info()
 	std::cout << "-----------------------------------------------" << std::endl;
 	std::cout << camera_control.doc_usage() << std::endl;
 	std::cout << "-----------------------------------------------\n"
-			  << std::endl;
+		<< std::endl;
 }

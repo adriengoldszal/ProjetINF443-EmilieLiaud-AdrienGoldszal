@@ -1,73 +1,65 @@
 
+#include "scene.hpp"
+
 #include "terrain.hpp"
 #include <list>
 #include <random>
+#include <iostream>
 
 using namespace cgp;
 
-// Evaluate 3D position of the terrain for any (x,y)
-float evaluate_terrain_height(float x, float y)
-{
-    /*vec2 p_0 = {0, 0};
-    float h_0 = 2.0f;
-    float sigma_0 = 3.0f;
+std::vector<cgp::vec2> hollowCenters;
+std::vector<cgp::vec3> hollowPos;
 
-    float d = norm(vec2(x, y) - p_0) / sigma_0;
 
-    float z = h_0 * std::exp(-d * d);*/
-
-    // vec2 p_i[4] = { {-10,-10}, {5,5}, {-3,4}, {6,4} };
-    // float h_i[4] = { 3.0f, -1.5f, 1.0f, 2.0f };
-    // float sigma_i[4] = { 10.0f, 3.0f, 4.0f, 4.0f };
-
-    std::array<vec2, 4> p_i = {vec2{-10, -10}, vec2{5, 5}, vec2{-3, 4}, vec2{6, 4}};
-    std::array<float, 4> h_i = {3.0f, -1.5f, 1.0f, 2.0f};
-    std::array<float, 4> sigma_i = {10.0f, 3.0f, 4.0f, 4.0f};
-
-    float z = 0.0f;
-
-    for (int k = 0; k < p_i.size(); k++)
-    {
-        float d = norm(vec2(x, y) - p_i[k]) / sigma_i[k];
-        z += h_i[k] * std::exp(-d * d);
-    }
-
-    return z;
+//sigma: width of hollow
+float gaussian(float x, float y, float a, float b, float sigma) {
+    float dx = x - a;
+    float dy = y - b;
+    return -exp(-((dx * dx) + (dy * dy)) / (2 * sigma * sigma));
 }
 
-bool nocolision(std::vector<cgp::vec3> tree_position, float taille, cgp::vec3 new_pos)
-{
-    for (cgp::vec3 pos : tree_position)
-    {
-        if ((std::abs(pos.x - new_pos.x) <= taille) || (std::abs(pos.y - new_pos.y) <= taille))
-        {
+float terrainFunction(float x, float y) {
+    float result = 0.0f;
+    for (vec2 center : hollowCenters) {
+        result += gaussian(x, y, center.x, center.y, 2);
+    }
+    //std::cout << result << std::endl;
+    return result-1;
+}
+
+void generateRandomCenters(int N, int terrain_length) {
+    std::srand(static_cast<unsigned int>(std::time(0)));  // Seed for randomness
+    int nb = 0;
+    while (nb < 50) {
+        vec2 center;
+        center.x = (std::rand() % (terrain_length)) - terrain_length / 2;  // Random x within terrain bounds
+        center.y = (std::rand() % (terrain_length)) - terrain_length / 2;  // Random y within terrain bounds
+
+        if (nocolision(hollowCenters, 2.5, center)) {
+            hollowCenters.push_back(center);
+            nb++;
+        }
+    }
+}
+
+bool nocolision(std::vector<cgp::vec2> center, float taille, cgp::vec2 new_pos) {
+    for (cgp::vec2 pos : center) {
+        if ((std::abs(pos.x - new_pos.x) <= taille) || (std::abs(pos.y - new_pos.y) <= taille)) {
             return false;
         }
     }
     return true;
 }
 
-std::vector<cgp::vec3> generate_positions_on_terrain(int N, float terrain_length)
-{
-    std::vector<cgp::vec3> list_p;
-    float x = 0;
-    float y = 0;
-    int k = 0;
-    while (k < N)
-    {
-        x = rand_uniform(-terrain_length / 2, terrain_length / 2);
-        y = rand_uniform(-terrain_length / 2, terrain_length / 2);
-        if (nocolision(list_p, 0.2f, vec3{x, y, 0}) == true)
-        {
-            list_p.push_back({x, y, evaluate_terrain_height(x, y)});
-            k++;
-        }
-    }
-    return list_p;
-}
+cgp::mesh create_terrain_mesh(int N, int terrain_length){
+    std::cout << "start" << std::endl;
 
-mesh create_terrain_mesh(int N, float terrain_length)
-{
+    generateRandomCenters(N, terrain_length);
+
+    for (int i = 0; i < hollowCenters.size(); i++) {
+        std::cout << "x:" << hollowCenters[i].x << " y:" << hollowCenters[i].y;
+    }
 
     mesh terrain; // temporary terrain storage (CPU only)
     terrain.position.resize(N * N);
@@ -87,11 +79,11 @@ mesh create_terrain_mesh(int N, float terrain_length)
             float y = (v - 0.5f) * terrain_length;
 
             // Compute the surface height function at the given sampled coordinate
-            float z = evaluate_terrain_height(x, y);
+            float z = terrainFunction(x, y);
 
             // Store vertex coordinates
-            terrain.position[kv + N * ku] = {x, y, z};
-            terrain.uv[kv + N * ku] = {u * N / 30, v * N / 30};
+            terrain.position[kv + N * ku] = { x,y,z };
+            terrain.uv[kv + N * ku] = { u * N / 30, v * N / 30 };
         }
     }
 
@@ -103,8 +95,8 @@ mesh create_terrain_mesh(int N, float terrain_length)
         {
             unsigned int idx = kv + N * ku; // current vertex offset
 
-            uint3 triangle_1 = {idx, idx + 1 + N, idx + 1};
-            uint3 triangle_2 = {idx, idx + N, idx + 1 + N};
+            uint3 triangle_1 = { idx, idx + 1 + N, idx + 1 };
+            uint3 triangle_2 = { idx, idx + N, idx + 1 + N };
 
             terrain.connectivity.push_back(triangle_1);
             terrain.connectivity.push_back(triangle_2);
@@ -115,21 +107,4 @@ mesh create_terrain_mesh(int N, float terrain_length)
     terrain.fill_empty_field();
 
     return terrain;
-}
-
-
-std::vector<cgp::vec3> generate_grass_positions_on_terrain(int N, float terrain_length) {
-    std::vector<cgp::vec3> list_p;
-    float x = 0;
-    float y = 0;
-    int k = 0;
-    while (k < N) {
-        x = rand_uniform(-terrain_length / 2, terrain_length / 2);
-        y = rand_uniform(-terrain_length / 2, terrain_length / 2);
-        if (nocolision(list_p, 0.2f, vec3{ x, y, 0 }) == true) {
-            list_p.push_back({ x, y, evaluate_terrain_height(x, y) });
-            k++;
-        }
-    }
-    return list_p;
 }

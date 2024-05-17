@@ -387,6 +387,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </None>
     <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\mesh\mesh.vert.glsl">
     </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\mesh_multi_texture\mesh_multi_texture.frag.glsl">
+    </None>
+    <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\mesh_multi_texture\mesh_multi_texture.vert.glsl">
+    </None>
     <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\single_color\single_color.frag.glsl">
     </None>
     <None Include="D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\shaders\single_color\single_color.vert.glsl">
