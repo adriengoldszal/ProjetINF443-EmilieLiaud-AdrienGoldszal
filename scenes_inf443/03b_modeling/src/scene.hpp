@@ -2,7 +2,11 @@
 
 #include "cgp/cgp.hpp"
 #include "environment.hpp"
+
 #include "key_positions_structure.hpp"
+#include "rock.hpp"
+#include "terrain.hpp"
+
 
 // This definitions allow to use the structures: mesh, mesh_drawable, etc. without mentionning explicitly cgp::
 using cgp::mesh;
@@ -25,8 +29,8 @@ struct scene_structure : cgp::scene_inputs_generic
 	// ****************************** //
 	// Elements and shapes of the scene
 	// ****************************** //
-	// camera_controller_orbit_euler camera_control; // Camera controller figé
-	camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
+	camera_controller_orbit_euler camera_control; // Camera controller figé
+	//camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
 	camera_projection_perspective camera_projection;
 	window_structure window;
 
@@ -58,8 +62,6 @@ struct scene_structure : cgp::scene_inputs_generic
 	int center ;
 	float terrain_length;
 
-	cgp::mesh_drawable terrain;
-
 	cgp::mesh_drawable fish;
 
 	cgp::mesh_drawable fish2;
@@ -69,6 +71,38 @@ struct scene_structure : cgp::scene_inputs_generic
 	mesh_drawable boat2;
 
 	cgp::rotation_transform initial_position_rotation; // Boat position for rotations
+
+	// Rock elements
+	/************************************/
+	cgp::mesh rock_mesh;
+	cgp::mesh_drawable rock_drawable;
+	cgp::mesh_drawable rock_drawable2;
+	cgp::hierarchy_mesh_drawable hierarchy;
+
+	cgp::mesh rock_mesh1;
+	cgp::mesh_drawable rock1;
+	std::vector<vec3> rock1_position;
+
+	cgp::mesh rock_mesh2;
+	cgp::mesh_drawable rock2;
+	cgp::mesh rock_mesh3;
+	cgp::mesh_drawable rock3;
+	cgp::mesh rock_mesh4;
+	cgp::mesh_drawable rock4;
+
+	std::vector<int> rocks_type;
+
+
+	// Grass elements
+	/************************************/
+	cgp::mesh_drawable grass;
+	std::vector<cgp::vec3> grass_position;
+	//perlin_noise_parameters parameters;
+
+	//Terrain elements
+	/************************************/
+	cgp::mesh terrain_mesh;
+	cgp::mesh_drawable terrain;
 
 	// Fishes
 	/****************************************/
@@ -83,11 +117,13 @@ struct scene_structure : cgp::scene_inputs_generic
 	numarray<vec3> fish_positions2;
 	numarray<float> fish_times;
 
+
+
 	// ****************************** //
 	// Functions
 	// ****************************** //
 	void
-	initialize();		  // Standard initialization to be called before the animation loop
+		initialize();		  // Standard initialization to be called before the animation loop
 	void display_frame(); // The frame display to be called within the animation loop
 	void display_gui();	  // The display of the GUI, also called within the animation loop
 	void scene_structure::display_semiTransparent();

@@ -2,15 +2,12 @@
 
 #include "cgp/cgp.hpp"
 
+extern std::vector<cgp::vec2> hollowCenters;
+extern std::vector<cgp::vec3> hollowPos;
 
-float evaluate_terrain_height(float x, float y);
+cgp::mesh create_terrain_mesh(int N, int terrain_length);
 
-/** Compute a terrain mesh 
-	The (x,y) coordinates of the terrain are set in [-length/2, length/2].
-	The z coordinates of the vertices are computed using evaluate_terrain_height(x,y).
-	The vertices are sampled along a regular grid structure in (x,y) directions. 
-	The total number of vertices is N*N (N along each direction x/y) 	*/
-cgp::mesh create_terrain_mesh(int N, float length);
-std::vector<cgp::vec3> generate_positions_on_terrain(int N, float terrain_length);
-
-
+float gaussian(float x, float y, float a, float b, float sigma);
+float terrainFunction(float x, float y);
+void generateRandomCenters(int N, int terrain_length);
+bool nocolision(std::vector<cgp::vec2> center, float taille, cgp::vec2 new_pos);

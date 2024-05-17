@@ -24,7 +24,9 @@ uniform mat4 view;       // View matrix (rigid transform) of the camera - to com
 void main() {
 
     //  Base water color
-    vec3 water_color = vec3(0.0, 0.3, 0.5);
+    //vec3 water_color = vec3(0.0, 0.3, 0.5);
+    vec3 water_color = vec3(0.50, 0.87, 0.92);
+
     // Compute the position of the center of the camera
     mat3 O = transpose(mat3(view));                   // get the orientation matrix
     vec3 last_col = vec3(view * vec4(0.0, 0.0, 0.0, 1.0)); // get the last column
@@ -58,4 +60,5 @@ void main() {
     color = mix(color, refractedColor, transparency);
 
     FragColor = vec4(color, 0.8); //Alpha value for transparent water
+
 }
