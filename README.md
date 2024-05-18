@@ -2,6 +2,7 @@
 - [ ] Déplacement problématique des rochers à chaque changement de mesh
 - [ ] Rochers choisis de manière aléatoire (pour l'instant rock2)
 - [ ] Problèmes de texture du fond marin
+- [ ] COLLISIONS
 - [ ] La lumière est actuellement fixée sur le bateau -> Ombres bizarres
 - [ ] Bateau qui tangue trop
 
