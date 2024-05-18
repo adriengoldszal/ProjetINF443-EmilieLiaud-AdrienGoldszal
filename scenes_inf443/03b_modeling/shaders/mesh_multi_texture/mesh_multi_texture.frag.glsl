@@ -29,7 +29,7 @@ layout(location=0) out vec4 FragColor;
 // ***************************************************** //
 
 uniform sampler2D image_texture;   // Texture image identifiant
-uniform sampler2D image_texture_2; //Texture de l'image supplementaire
+uniform sampler2D image_texture_2;
 
 uniform mat4 view;       // View matrix (rigid transform) of the camera - to compute the camera position
 
@@ -114,21 +114,24 @@ void main()
 	}
 
 
-	
-		// Blending of color
+
+
+	// Blending of color
 	// ******************************************  //
 
 	// Get the second texture color
 	vec4 color_image_texture_2 = texture(image_texture_2, uv_image);
 
-	// Blend the crack texture with a white image along the y direction
+	// Blend the second texture with a white image along the y direction
 	float blending_parameter = fragment.uv.y;
 	color_image_texture_2 = blending_parameter * vec4(1, 1, 1, 1) + (1 - blending_parameter) * color_image_texture_2;
 
 	// Finally multiply the color of the two textures
 	color_image_texture = color_image_texture * color_image_texture_2;
+
+
 	
-	
+
 	// Compute Shading
 	// *************************************** //
 
