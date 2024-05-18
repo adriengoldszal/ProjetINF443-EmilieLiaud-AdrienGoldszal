@@ -1,9 +1,10 @@
 # ProjetINF443-EmilieLiaud-AdrienGoldszal
-Emilie
-- [ ] Faire un fond marin (bruit de perlin un peu ?) petits tas de sable / Voir comment relier avec les rochers pour faire beau
-- [ ] Rochers avec herbe etc
+- [ ] Déplacement problématique des rochers à chaque changement de mesh
+- [ ] Rochers choisis de manière aléatoire (pour l'instant rock2)
+- [ ] Problèmes de texture du fond marin
+- [ ] La lumière est actuellement fixée sur le bateau -> Ombres bizarres
+- [ ] Bateau qui tangue trop
 
-Adrien
-- [ ] Faire des poissons volants qui se déplacent avec le bateau (en cours)
-- [ ] Rendre eau plus belle
-- [X] Bateau qui se déplace correctement : touches WASD déplacent dans le référentiel du bateau
+# Bonus 
+- [ ] Utiliser cette idée de lumière pour faire un cycle jour nuit
+- [ ] Plus de choses sur l'eau :  maisons ? 
