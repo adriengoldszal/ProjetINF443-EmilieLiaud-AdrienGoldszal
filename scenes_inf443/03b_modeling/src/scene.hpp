@@ -7,7 +7,6 @@
 #include "rock.hpp"
 #include "terrain.hpp"
 
-
 // This definitions allow to use the structures: mesh, mesh_drawable, etc. without mentionning explicitly cgp::
 using cgp::mesh;
 using cgp::mesh_drawable;
@@ -30,7 +29,7 @@ struct scene_structure : cgp::scene_inputs_generic
 	// Elements and shapes of the scene
 	// ****************************** //
 	camera_controller_orbit_euler camera_control; // Camera controller figé
-	//camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
+	// camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
 	camera_projection_perspective camera_projection;
 	window_structure window;
 
@@ -46,6 +45,7 @@ struct scene_structure : cgp::scene_inputs_generic
 	// ****************************** //
 
 	timer_basic timer;
+	struct keyframe_structure keyframe;
 
 	mesh_drawable sphere_light; // Light source
 
@@ -59,8 +59,9 @@ struct scene_structure : cgp::scene_inputs_generic
 	cgp::mesh_drawable water8;
 	cgp::mesh_drawable water9;
 	cgp::mesh_drawable water_array[9] = {water, water2, water3, water4, water5, water6, water7, water8, water9};
-	int center ;
-	float terrain_length;
+	int center;
+	float water_length;
+	int N_water_samples;
 
 	cgp::mesh_drawable fish;
 
@@ -92,22 +93,27 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	std::vector<int> rocks_type;
 
-
 	// Grass elements
 	/************************************/
 	cgp::mesh_drawable grass;
 	std::vector<cgp::vec3> grass_position;
-	//perlin_noise_parameters parameters;
+	// perlin_noise_parameters parameters;
 
-	//Terrain elements
+	// Terrain elements
 	/************************************/
-	cgp::mesh terrain_mesh;
-	cgp::mesh_drawable terrain;
+	TerrainData terrain;
+	TerrainData terrain2;
+	TerrainData terrain3;
+	TerrainData terrain4;
+	TerrainData terrain5;
+	TerrainData terrain6;
+	TerrainData terrain7;
+	TerrainData terrain8;
+	TerrainData terrain9;
+	TerrainData terrain_array[9] = {terrain, terrain2, terrain3, terrain4, terrain5, terrain6, terrain7, terrain8, terrain9};
 
 	// Fishes
 	/****************************************/
-	// A helper structure used to store and display the key positions/time
-	keyframe_structure keyframe;
 
 	// Timer used for the interpolation of the position
 	float fish_timer;
@@ -117,13 +123,11 @@ struct scene_structure : cgp::scene_inputs_generic
 	numarray<vec3> fish_positions2;
 	numarray<float> fish_times;
 
-
-
 	// ****************************** //
 	// Functions
 	// ****************************** //
 	void
-		initialize();		  // Standard initialization to be called before the animation loop
+	initialize();		  // Standard initialization to be called before the animation loop
 	void display_frame(); // The frame display to be called within the animation loop
 	void display_gui();	  // The display of the GUI, also called within the animation loop
 	void scene_structure::display_semiTransparent();

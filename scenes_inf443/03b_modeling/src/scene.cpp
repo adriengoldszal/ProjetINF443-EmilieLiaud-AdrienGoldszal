@@ -12,8 +12,6 @@
 
 using namespace cgp;
 
-static void deform_terrain(mesh &m);
-
 void scene_structure::initialize()
 {
 	timer.start();
@@ -22,8 +20,6 @@ void scene_structure::initialize()
 	camera_projection.depth_min = 0.0001f;
 	camera_control.initialize(inputs, window); // Give access to the inputs and window global state to the camera controler
 	camera_control.set_rotation_axis_z();
-	// camera_control.look_at({15.0f, 6.0f, 6.0f}, {0, 0, 0});
-	// camera_control.look_at({1.0f, 0.0f, 0.0f}, {0, 0, 0}); //pour le sol
 	camera_control.look_at({0.0f, 30.0f, 2.0f}, {0, 0, 0}, {0, 0, 1});
 
 	// General information
@@ -48,16 +44,60 @@ void scene_structure::initialize()
 		project::path + "shaders/skybox/skybox.frag.glsl");
 
 	// Load Terrain
-	int N_terrain_samples = 500;
-	float terrain_length = 300;
+	N_water_samples = 400;
+	water_length = 50;
 
-	terrain_mesh = create_terrain_mesh(N_terrain_samples, terrain_length);
-	terrain.initialize_data_on_gpu(terrain_mesh);
-	terrain.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg", GL_REPEAT, GL_REPEAT);
+	opengl_shader_structure terrain_shader;
+	terrain_shader.load(
+		project::path + "shaders/mesh/mesh.vert.glsl",
+		project::path + "shaders/mesh/mesh.frag.glsl");
 
-	for (int i = 0; i < hollowCenters.size(); i++)
+	for (int i = 0; i < 9; i++)
 	{
-		std::cout << "x:" << hollowCenters[i].x << " y:" << hollowCenters[i].y;
+		terrain_array[i].create_terrain_mesh(N_water_samples, water_length);
+		terrain_array[i].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg", GL_REPEAT, GL_REPEAT);
+		terrain_array[i].mesh.shader = terrain_shader;
+	}
+
+	terrain_array[1].mesh.model.translation = {water_length, water_length, 0.0f};
+	for (int j = 0; j < terrain_array[1].hollowCenters.size(); j++)
+	{
+		terrain_array[1].hollowCenters[j] += {water_length, water_length};
+	}
+	terrain_array[2].mesh.model.translation = {water_length, 0.0f, 0.0f};
+	for (int j = 0; j < terrain_array[2].hollowCenters.size(); j++)
+	{
+		terrain_array[2].hollowCenters[j] += {water_length, 0.0f};
+	}
+	terrain_array[3].mesh.model.translation = {water_length, -water_length, 0.0f};
+	for (int j = 0; j < terrain_array[3].hollowCenters.size(); j++)
+	{
+		terrain_array[3].hollowCenters[j] += {water_length, -water_length};
+	}
+	terrain_array[4].mesh.model.translation = {0.0f, -water_length, 0.0f};
+	for (int j = 0; j < terrain_array[4].hollowCenters.size(); j++)
+	{
+		terrain_array[4].hollowCenters[j] += {0.0f, -water_length};
+	}
+	terrain_array[5].mesh.model.translation = {-water_length, -water_length, 0.0f};
+	for (int j = 0; j < terrain_array[5].hollowCenters.size(); j++)
+	{
+		terrain_array[5].hollowCenters[j] += {-water_length, -water_length};
+	}
+	terrain_array[6].mesh.model.translation = {-water_length, 0.0f, 0.0f};
+	for (int j = 0; j < terrain_array[6].hollowCenters.size(); j++)
+	{
+		terrain_array[6].hollowCenters[j] += {-water_length, 0.0f};
+	}
+	terrain_array[7].mesh.model.translation = {-water_length, water_length, 0.0f};
+	for (int j = 0; j < terrain_array[7].hollowCenters.size(); j++)
+	{
+		terrain_array[7].hollowCenters[j] += {-water_length, water_length};
+	}
+	terrain_array[8].mesh.model.translation = {0.0f, water_length, 0.0f};
+	for (int j = 0; j < terrain_array[8].hollowCenters.size(); j++)
+	{
+		terrain_array[8].hollowCenters[j] += {0.0f, water_length};
 	}
 
 	/*float L = 500.0f;
@@ -70,10 +110,7 @@ void scene_structure::initialize()
 	terrain.material.alpha = 0.3f;*/
 
 	// Load water terrain
-	int N_terrain_samples = 400;
-	terrain_length = 50;
-	mesh const water_mesh = create_water_mesh(N_terrain_samples, terrain_length);
-	water.initialize_data_on_gpu(water_mesh);
+
 	opengl_shader_structure water_shader;
 	water_shader.load(
 		project::path + "shaders/water/water.vert.glsl",
@@ -81,10 +118,11 @@ void scene_structure::initialize()
 
 	for (int i = 0; i < 9; i++)
 	{
-		water_array[i].initialize_data_on_gpu(create_water_mesh(N_terrain_samples, terrain_length));
+		water_array[i].initialize_data_on_gpu(create_water_mesh(N_water_samples, water_length));
 		water_array[i].shader = water_shader;
 		water_array[i].material.color = {0.0f, 0.5f, 1.0f}; // blue color for water
 		water_array[i].material.phong.specular = 0.0f;		// non-specular terrain material
+
 		// Sending the skybox texture to the water shader as a uniform
 		glUseProgram(water_array[i].shader.id);
 		opengl_check;
@@ -95,27 +133,17 @@ void scene_structure::initialize()
 		opengl_check;
 	}
 	center = 0;
-	water_array[1].model.translation = {terrain_length, terrain_length, 0.0f};
-	water_array[2].model.translation = {terrain_length, 0.0f, 0.0f};
-	water_array[3].model.translation = {terrain_length, -terrain_length, 0.0f};
-	water_array[4].model.translation = {0.0f, -terrain_length, 0.0f};
-	water_array[5].model.translation = {-terrain_length, -terrain_length, 0.0f};
-	water_array[6].model.translation = {-terrain_length, 0.0f, 0.0f};
-	water_array[7].model.translation = {-terrain_length, terrain_length, 0.0f};
-	water_array[8].model.translation = {0.0f, terrain_length, 0.0f};
-	water.shader = water_shader;
+	water_array[1].model.translation = {water_length, water_length, 0.0f};
+	water_array[2].model.translation = {water_length, 0.0f, 0.0f};
+	water_array[3].model.translation = {water_length, -water_length, 0.0f};
+	water_array[4].model.translation = {0.0f, -water_length, 0.0f};
+	water_array[5].model.translation = {-water_length, -water_length, 0.0f};
+	water_array[6].model.translation = {-water_length, 0.0f, 0.0f};
+	water_array[7].model.translation = {-water_length, water_length, 0.0f};
+	water_array[8].model.translation = {0.0f, water_length, 0.0f};
 	// water.material.color = {0.0f, 0.5f, 1.0f}; // blue color for water
 	// water.material.color = { 179 / 255, 229 / 255, 252 / 255 }; // blue color for water
 	water.material.phong.specular = 0.0f; // non-specular terrain material
-
-	// Sending the skybox texture to the water shader as a uniform
-	glUseProgram(water.shader.id);
-	opengl_check;
-	glActiveTexture(GL_TEXTURE1);
-	opengl_check;
-	skybox.texture.bind();
-	opengl_uniform(water.shader, "image_skybox", 1);
-	opengl_check;
 
 	// Load boat
 	// Open source file https://sketchfab.com/3d-models/chinese-junk-ship-35b340bce9fb4e0680bc0116cebc35c9
@@ -179,8 +207,6 @@ void scene_structure::initialize()
 	fish_interval.t_min = fish_times[1];
 	fish_interval.t_max = fish_times[N - 2];
 	fish_interval.t = fish_interval.t_min;
-	numarray<float> key_times =
-		{0.0f, 2.0f, 4.0f, 6.0f, 8.0f};
 
 	// Load Rocks
 	/*rock_mesh = mesh_primitive_ellipsoid(vec3{3, 10, 15});
@@ -197,12 +223,11 @@ void scene_structure::initialize()
 
 	rock_mesh1 = mesh_load_file_obj(project::path + "assets/rocks/rock_newl.obj");
 	resize_rock1(rock_mesh1, 0.5f);
+	rock1.initialize_data_on_gpu(rock_mesh1);
 	// update_rock(rock_mesh1, rock1, parameters);
 	// rock1.shader.load(project::path + "shaders/mesh_multi_texture/mesh_multi_texture.vert.glsl", project::path + "shaders/mesh_multi_texture/mesh_multi_texture.frag.glsl");
 	rock1.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
 	// rock1.supplementary_texture["image_texture_2"].load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/moss.jpeg");
-	rock1.initialize_data_on_gpu(rock_mesh1);
-
 	// rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
 	rock1.model.scaling = 5.0f;
 	// rock1.model.translation = { 0, 15, 0 };
@@ -233,7 +258,7 @@ void scene_structure::initialize()
 	rock4.model.scaling = 5.0f;
 	rock4.material.phong.specular = 0.0f;
 
-	genrate_rocks_type(rocks_type);
+	// genrate_rocks_type(rocks_type);
 
 	cgp::numarray<cgp::vec3> &originalVertices = rock_mesh1.position;
 
@@ -264,24 +289,6 @@ void scene_structure::initialize()
 	grass.material.phong = {0.4f, 0.6f, 0, 1};
 }
 
-// deform terrain function for island
-static void deform_terrain(mesh &m)
-{
-	// Set the terrain to have a gaussian shape
-	for (int k = 0; k < m.position.size(); ++k)
-	{
-		vec3 &p = m.position[k];
-		float d2 = p.x * p.x + p.y * p.y;
-		float z = exp(-d2 / 4) - 1;
-
-		z = z + 0.05f * noise_perlin({p.x, p.y});
-
-		p = {p.x, p.y, z};
-	}
-
-	m.normal_update();
-}
-
 void scene_structure::display_frame()
 {
 	timer.update();
@@ -289,42 +296,51 @@ void scene_structure::display_frame()
 
 	vec3 camera_position = environment.get_camera_position();
 
+	glDepthMask(GL_FALSE); // disable depth-buffer writing
+	draw(skybox, environment);
+	glDepthMask(GL_TRUE); // re-activate depth-buffer write
+
 	environment.uniform_generic.uniform_float["time"] = timer.t;
 
 	environment.light_position = camera_control.camera_model.position();
 
-	if (gui.display_frame)
+	draw(global_frame, environment);
+	for (int i = 0; i < 9; i++)
 	{
-		draw(global_frame, environment);
-		draw(terrain, environment);
-		for (int i = 0; i < rocks_type.size(); i++)
+		draw(terrain_array[i].mesh, environment);
+		for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
 		{
-			if (rocks_type[i] == 0)
+			std::cout << "Hollow Center: " << terrain_array[i].hollowCenters[j].x << " " << terrain_array[i].hollowCenters[j].y << std::endl;
+			/*
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_int_distribution<> dis(0, 3); // Utilisez 0 et 3 pour choisir entre 4 options
+			int choice = dis(gen);
+			if (choice == 0)
 			{
-				rock1.model.translation = vec3{hollowCenters[i].x, hollowCenters[i].y, -2.0f};
+				rock1.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
 				draw(rock1, environment);
 			}
-			else if (rocks_type[i] == 1)
+			else if (choice == 1)
 			{
-				rock2.model.translation = vec3{hollowCenters[i].x, hollowCenters[i].y, -2.0f};
+				rock2.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
 				draw(rock2, environment);
 			}
-			else if (rocks_type[i] == 2)
+			else if (choice == 2)
 			{
-				rock3.model.translation = vec3{hollowCenters[i].x, hollowCenters[i].y, -2.0f};
+				rock3.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
 				draw(rock3, environment);
 			}
 			else
 			{
-				rock4.model.translation = vec3{hollowCenters[i].x, hollowCenters[i].y, -2.0f};
+				rock4.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
 				draw(rock4, environment);
 			}
+			std::cout << "Hollow Center: " << terrain_array[i].hollowCenters[j].x << " " << terrain_array[i].hollowCenters[j].y << std::endl;
+			*/
+			rock2.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
+			draw(rock2, environment);
 		}
-	}
-
-	if (gui.display_wireframe)
-	{
-		draw_wireframe(terrain, environment);
 	}
 
 	// draw(rock_drawable, environment);
@@ -334,19 +350,9 @@ void scene_structure::display_frame()
 	// if (gui.display_wireframe)
 	// draw_wireframe(rock_drawable, environment);
 
-	glDepthMask(GL_FALSE); // disable depth-buffer writing
-	draw(skybox, environment);
-	glDepthMask(GL_TRUE); // re-activate depth-buffer write
-
-	draw(terrain, environment);
 	draw(boat2, environment);
 	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
 
-	// draw(water, environment);
-
-	// Draw fish
-	// draw(hierarchy, environment);
-	// boat2.model.translation = {camera_position.x, camera_position.y - 10.0f, camera_position.z - 10.0f};
 	boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.2f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
 	boat2.model.scaling = 0.01f; // Ne marche plus correctement;
 
@@ -402,37 +408,63 @@ void scene_structure::display_semiTransparent()
 	//  - They are supposed to be display from furest to nearest elements
 	glDepthMask(false);
 	// Water adaptation considering the boat position
-	if (boat2.model.translation.x > water_array[center].model.translation.x + terrain_length / 2.0f)
+	if (boat2.model.translation.x > water_array[center].model.translation.x + water_length / 2.0f)
 	{
 		for (int i = 0; i < 9; i++)
 		{
-			water_array[i].model.translation.x += terrain_length;
+			water_array[i].model.translation.x += water_length;
+			terrain_array[i].mesh.model.translation.x += water_length;
+			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
+			{
+				terrain_array[i].hollowCenters[j].x += water_length;
+			}
 		}
 	}
-	if (boat2.model.translation.x < water_array[center].model.translation.x - terrain_length / 2.0f)
+	if (boat2.model.translation.x < water_array[center].model.translation.x - water_length / 2.0f)
 	{
 		for (int i = 0; i < 9; i++)
 		{
-			water_array[i].model.translation.x -= terrain_length;
+			water_array[i].model.translation.x -= water_length;
+			terrain_array[i].mesh.model.translation.x -= water_length;
+			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
+			{
+				terrain_array[i].hollowCenters[j].x -= water_length;
+			}
 		}
 	}
-	if (boat2.model.translation.y > water_array[center].model.translation.y + terrain_length / 2.0f)
+	if (boat2.model.translation.y > water_array[center].model.translation.y + water_length / 2.0f)
 	{
 		for (int i = 0; i < 9; i++)
 		{
-			water_array[i].model.translation.y += terrain_length;
+			water_array[i].model.translation.y += water_length;
+			terrain_array[i].mesh.model.translation.y += water_length;
+			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
+			{
+				terrain_array[i].hollowCenters[j].y += water_length;
+			}
 		}
 	}
-	if (boat2.model.translation.y < water_array[center].model.translation.y - terrain_length / 2.0f)
+	if (boat2.model.translation.y < water_array[center].model.translation.y - water_length / 2.0f)
 	{
 		for (int i = 0; i < 9; i++)
 		{
-			water_array[i].model.translation.y -= terrain_length;
+			water_array[i].model.translation.y -= water_length;
+			terrain_array[i].mesh.model.translation.y -= water_length;
+			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
+			{
+				terrain_array[i].hollowCenters[j].y -= water_length;
+			}
 		}
 	}
 	for (int i = 0; i < 9; i++)
 	{
 		draw(water_array[i], environment);
+		draw(terrain_array[i].mesh, environment);
+		for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
+		{
+			// A modifier pour changer
+			draw(rock2, environment);
+		}
 	}
 
 	glDepthMask(false);
@@ -503,10 +535,12 @@ void scene_structure::mouse_click_event()
 void scene_structure::keyboard_event()
 {
 	// Fixing camera to move with the boat if wanted
-	vec3 camera_position_on_boat = {5.0f, 10.0f, 15.0f};
+	// Attention {y, z, x}
+	vec3 camera_position_on_boat = {0.0f, 5.0f, 20.0f};
 	vec3 camera_position_world = boat2.model.rotation * camera_position_on_boat + boat2.model.translation;
 	// camera_control.camera_model.position_camera = camera_position_world;
-	camera_control.camera_model.look_at(camera_position_world, boat2.model.translation);
+	vec3 point_to_see = {boat2.model.translation.x, boat2.model.translation.y, boat2.model.translation.z + 5.0f};
+	camera_control.camera_model.look_at(camera_position_world, point_to_see);
 
 	camera_control.action_keyboard(environment.camera_view);
 	if (inputs.keyboard.is_pressed(GLFW_KEY_A))
