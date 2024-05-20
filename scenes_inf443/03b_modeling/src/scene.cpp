@@ -43,6 +43,10 @@ void scene_structure::initialize()
 		project::path + "shaders/skybox/skybox.vert.glsl",
 		project::path + "shaders/skybox/skybox.frag.glsl");
 
+	// Load light source
+	sphere_light.initialize_data_on_gpu(mesh_primitive_sphere(0.1f));
+	sphere_light.model.translation = {0, 0, 2};
+
 	// Load Terrain
 	N_water_samples = 400;
 	water_length = 50;
@@ -58,43 +62,45 @@ void scene_structure::initialize()
 		terrain_array[i].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg", GL_REPEAT, GL_REPEAT);
 		terrain_array[i].mesh.shader = terrain_shader;
 	}
+	float depth = -10.0f;
+	terrain_array[0].mesh.model.translation = {0.0f, 0.0f, depth};
 
-	terrain_array[1].mesh.model.translation = {water_length, water_length, 0.0f};
+	terrain_array[1].mesh.model.translation = {water_length, water_length, depth};
 	for (int j = 0; j < terrain_array[1].hollowCenters.size(); j++)
 	{
 		terrain_array[1].hollowCenters[j] += {water_length, water_length};
 	}
-	terrain_array[2].mesh.model.translation = {water_length, 0.0f, 0.0f};
+	terrain_array[2].mesh.model.translation = {water_length, 0.0f, depth};
 	for (int j = 0; j < terrain_array[2].hollowCenters.size(); j++)
 	{
 		terrain_array[2].hollowCenters[j] += {water_length, 0.0f};
 	}
-	terrain_array[3].mesh.model.translation = {water_length, -water_length, 0.0f};
+	terrain_array[3].mesh.model.translation = {water_length, -water_length, depth};
 	for (int j = 0; j < terrain_array[3].hollowCenters.size(); j++)
 	{
 		terrain_array[3].hollowCenters[j] += {water_length, -water_length};
 	}
-	terrain_array[4].mesh.model.translation = {0.0f, -water_length, 0.0f};
+	terrain_array[4].mesh.model.translation = {0.0f, -water_length, depth};
 	for (int j = 0; j < terrain_array[4].hollowCenters.size(); j++)
 	{
 		terrain_array[4].hollowCenters[j] += {0.0f, -water_length};
 	}
-	terrain_array[5].mesh.model.translation = {-water_length, -water_length, 0.0f};
+	terrain_array[5].mesh.model.translation = {-water_length, -water_length, depth};
 	for (int j = 0; j < terrain_array[5].hollowCenters.size(); j++)
 	{
 		terrain_array[5].hollowCenters[j] += {-water_length, -water_length};
 	}
-	terrain_array[6].mesh.model.translation = {-water_length, 0.0f, 0.0f};
+	terrain_array[6].mesh.model.translation = {-water_length, 0.0f, depth};
 	for (int j = 0; j < terrain_array[6].hollowCenters.size(); j++)
 	{
 		terrain_array[6].hollowCenters[j] += {-water_length, 0.0f};
 	}
-	terrain_array[7].mesh.model.translation = {-water_length, water_length, 0.0f};
+	terrain_array[7].mesh.model.translation = {-water_length, water_length, depth};
 	for (int j = 0; j < terrain_array[7].hollowCenters.size(); j++)
 	{
 		terrain_array[7].hollowCenters[j] += {-water_length, water_length};
 	}
-	terrain_array[8].mesh.model.translation = {0.0f, water_length, 0.0f};
+	terrain_array[8].mesh.model.translation = {0.0f, water_length, depth};
 	for (int j = 0; j < terrain_array[8].hollowCenters.size(); j++)
 	{
 		terrain_array[8].hollowCenters[j] += {0.0f, water_length};
@@ -183,25 +189,25 @@ void scene_structure::initialize()
 	// Update the current time
 	// Adjusted fish positions to the boat referential, is getting multiplied by rotation matrix later on for correction and updated positions
 	initial_fish_positions =
-		{{0, -2.0, 10.0},
-		 {0, -2.0, 5.0},
+		{{0, -2.0, 2.0},
+		 {0, -2.0, 1.0},
 		 {0, -2.0, 0.0},
-		 {0, -2.0, -5.0},
-		 {0, -2.0, -10.0},
-		 {0, -10.0, -10.0},
-		 {0, -10.0, -10.0}};
+		 {0, -2.0, -2.0},
+		 {0, -2.0, -1.0},
+		 {0, -10.0, -3.0},
+		 {0, -10.0, -4.0}};
 
 	fish_positions = initial_fish_positions;
 	fish_positions2 = initial_fish_positions;
 	// Key times (time at which the position must pass in the corresponding position)
 	fish_times =
 		{0.0f,
-		 0.6f,
-		 1.2f,
-		 1.8f,
-		 9.4f,
-		 9.6f,
-		 10.0f};
+		 8.0f,
+		 16.0f,
+		 24.0f,
+		 30.0f,
+		 35.0f,
+		 40.0f};
 
 	int N = fish_positions.size();
 	fish_interval.t_min = fish_times[1];
@@ -292,7 +298,7 @@ void scene_structure::initialize()
 void scene_structure::display_frame()
 {
 	timer.update();
-	std::cout << "Global time: " << timer.t << std::endl;
+	// std::cout << "Global time: " << timer.t << std::endl;
 
 	vec3 camera_position = environment.get_camera_position();
 
@@ -302,7 +308,11 @@ void scene_structure::display_frame()
 
 	environment.uniform_generic.uniform_float["time"] = timer.t;
 
-	environment.light_position = camera_control.camera_model.position();
+	// Update light position & fog
+	sphere_light.model.translation = {10 * std::cos(timer.t), 10 * std::sin(timer.t), 2};
+	environment.light_position = sphere_light.model.translation;
+	draw(sphere_light, environment);
+	// environment.background_color = background_color;
 
 	draw(global_frame, environment);
 	for (int i = 0; i < 9; i++)
@@ -310,7 +320,7 @@ void scene_structure::display_frame()
 		draw(terrain_array[i].mesh, environment);
 		for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
 		{
-			std::cout << "Hollow Center: " << terrain_array[i].hollowCenters[j].x << " " << terrain_array[i].hollowCenters[j].y << std::endl;
+			// std::cout << "Hollow Center: " << terrain_array[i].hollowCenters[j].x << " " << terrain_array[i].hollowCenters[j].y << std::endl;
 			/*
 			std::random_device rd;
 			std::mt19937 gen(rd());
@@ -353,7 +363,7 @@ void scene_structure::display_frame()
 	draw(boat2, environment);
 	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
 
-	boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.2f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
+	boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.08f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
 	boat2.model.scaling = 0.01f; // Ne marche plus correctement;
 
 	// Update the fish time
@@ -393,6 +403,55 @@ void scene_structure::display_frame()
 
 	draw(fish, environment);
 	draw(fish2, environment);
+
+		// Detect collisions
+	const float collisionThreshold = 5.0f;
+	const float moveback = 1.0f;
+
+	for (int j = 0; j < 9; j++)
+	{
+		for (int i = 0; i < terrain_array[j].hollowCenters.size(); i++)
+		{
+			float rockX = terrain_array[j].hollowCenters[i].x;
+			float rockY = terrain_array[j].hollowCenters[i].y;
+
+			// std::cout << "Boat Position: X" << boat2.model.translation.x << " Y: " << boat2.model.translation.y << " Z: " << boat2.model.translation.z << std::endl;
+
+			// Calculate the distance between the boat and the rock
+			float distX = boat2.model.translation.x - rockX;
+			float distY = boat2.model.translation.y - rockY;
+			float distanceSquared = distX * distX + distY * distY;
+
+			if (distanceSquared < collisionThreshold * collisionThreshold)
+			{
+				// std::cout << "Collision detected" << std::endl;
+
+				// Apply a simple correction by moving the boat away from the rock
+				if (std::abs(distX) > std::abs(distY))
+				{
+					if (distX > 0)
+					{
+						boat2.model.translation.x += moveback;
+					}
+					else
+					{
+						boat2.model.translation.x -= moveback;
+					}
+				}
+				else
+				{
+					if (distY > 0)
+					{
+						boat2.model.translation.y += moveback;
+					}
+					else
+					{
+						boat2.model.translation.y -= moveback;
+					}
+				}
+			}
+		}
+	}
 }
 
 void scene_structure::display_semiTransparent()
@@ -545,6 +604,7 @@ void scene_structure::keyboard_event()
 	camera_control.action_keyboard(environment.camera_view);
 	if (inputs.keyboard.is_pressed(GLFW_KEY_A))
 	{
+
 		vec3 translation_in_boat_coords = {-0.2f, 0.0f, 0.0f};
 		// Changing to world coordinates by multiplying by the rotation matrix
 		vec3 translation = initial_position_rotation * translation_in_boat_coords;

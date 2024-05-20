@@ -48,6 +48,7 @@ struct scene_structure : cgp::scene_inputs_generic
 	struct keyframe_structure keyframe;
 
 	mesh_drawable sphere_light; // Light source
+	vec3 background_color;		// Background color
 
 	cgp::mesh_drawable water;
 	cgp::mesh_drawable water2;
