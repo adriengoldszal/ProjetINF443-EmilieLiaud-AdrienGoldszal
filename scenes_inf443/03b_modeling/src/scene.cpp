@@ -351,25 +351,25 @@ void scene_structure::display_frame()
 			if (choice == 0)
 			{
 				rock1.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				//rock1.model.rotation = rotation_transform::from_axis_angle({ 0,0,1 }, terrain_array[i].rock_rotation[j]);
+				rock1.model.rotation = rotation_transform::from_axis_angle({ 0,0,1 }, terrain_array[i].rock_rotation[j]);
 				draw(rock1, environment);
 			}
 			else if (choice == 1)
 			{
 				rock2.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				//rock2.model.rotation = rotation_transform::from_axis_angle({ 0,0,1 }, terrain_array[i].rock_rotation[j]);
+				rock2.model.rotation = rotation_transform::from_axis_angle({ 0,0,1 }, terrain_array[i].rock_rotation[j]);
 				draw(rock2, environment);
 			}
 			else if (choice == 2)
 			{
 				rock3.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				//rock3.model.rotation = rotation_transform::from_axis_angle({ 0,0,1 }, terrain_array[i].rock_rotation[j]);
+				rock3.model.rotation = rotation_transform::from_axis_angle({ 0,0,1 }, terrain_array[i].rock_rotation[j]);
 				draw(rock3, environment);
 			}
 			else
 			{
 				rock4.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				//rock4.model.rotation = rotation_transform::from_axis_angle({ 0,0,1 }, terrain_array[i].rock_rotation[j]);
+				rock4.model.rotation = rotation_transform::from_axis_angle({ 0,0,1 }, terrain_array[i].rock_rotation[j]);
 				draw(rock4, environment);
 			}
 			
