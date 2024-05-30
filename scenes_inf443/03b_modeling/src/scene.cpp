@@ -44,8 +44,9 @@ void scene_structure::initialize()
 		project::path + "shaders/skybox/skybox.frag.glsl");
 
 	// Load light source
-	sphere_light.initialize_data_on_gpu(mesh_primitive_sphere(0.1f));
+	sphere_light.initialize_data_on_gpu(mesh_primitive_sphere(0.2f));
 	sphere_light.model.translation = {0, 0, 2};
+	environment.background_color = {0.0f, 1.0f, 1.0f};
 
 	// Load Terrain
 	N_water_samples = 400;
@@ -164,6 +165,8 @@ void scene_structure::initialize()
 	boat2.model.translation = {0.0f, 0.0f, 1.0f};
 	initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
 	boat2.model.rotation = initial_position_rotation;
+	boat2.shader = boat_shader;
+	boat2.material.phong.diffuse = 5.0f;
 
 	// Load fish
 	mesh fish_mesh = mesh_load_file_obj(project::path + "assets/fish/20230116_Tobiuo.obj");
@@ -189,25 +192,25 @@ void scene_structure::initialize()
 	// Update the current time
 	// Adjusted fish positions to the boat referential, is getting multiplied by rotation matrix later on for correction and updated positions
 	initial_fish_positions =
-		{{0, -2.0, 2.0},
-		 {0, -2.0, 1.0},
-		 {0, -2.0, 0.0},
-		 {0, -2.0, -2.0},
-		 {0, -2.0, -1.0},
-		 {0, -10.0, -3.0},
-		 {0, -10.0, -4.0}};
+		{{0, 1.0, 10.0},
+		 {0, 1.0, 5.0},
+		 {0, 1.0, 0.0},
+		 {0, 1.0, -5.0},
+		 {0, 1.0, -10.0},
+		 {0, -10.0, -15.0},
+		 {0, -10.0, -20.0}};
 
 	fish_positions = initial_fish_positions;
 	fish_positions2 = initial_fish_positions;
 	// Key times (time at which the position must pass in the corresponding position)
 	fish_times =
 		{0.0f,
-		 8.0f,
-		 16.0f,
-		 24.0f,
-		 30.0f,
-		 35.0f,
-		 40.0f};
+		 1.0f,
+		 2.0f,
+		 3.0f,
+		 4.0f,
+		 5.0f,
+		 8.0f};
 
 	int N = fish_positions.size();
 	fish_interval.t_min = fish_times[1];
@@ -238,6 +241,7 @@ void scene_structure::initialize()
 	rock1.model.scaling = 5.0f;
 	// rock1.model.translation = { 0, 15, 0 };
 	rock1.material.phong.specular = 0.0f; // non-specular rock material
+	rock1.shader = terrain_shader;
 	// for (int i = 0; i < rock_mesh1.position.size(); i++) {
 	//	std::cout << "pos x:" << rock_mesh1.position[i].x << " pos y: " << rock_mesh1.position[i].y << " pos z: " << rock_mesh1.position[i].z << std::endl;
 	// }
@@ -248,6 +252,7 @@ void scene_structure::initialize()
 	rock2.initialize_data_on_gpu(rock_mesh2);
 	rock2.model.scaling = 5.0f;
 	rock2.material.phong.specular = 0.0f; // non-specular rock material
+	rock2.shader = terrain_shader;
 
 	rock_mesh3 = mesh_load_file_obj(project::path + "assets/rocks/rock3_2.obj");
 	resize_rock3(rock_mesh3, 0.5f);
@@ -255,6 +260,7 @@ void scene_structure::initialize()
 	rock3.initialize_data_on_gpu(rock_mesh3);
 	rock3.model.scaling = 5.0f;
 	rock3.material.phong.specular = 0.0f;
+	rock3.shader = terrain_shader;
 	// rock3.model.translation = { 0, -15, 0 }; // translations de la shpere
 
 	rock_mesh4 = mesh_load_file_obj(project::path + "assets/rocks/rock4_2.obj");
@@ -263,6 +269,7 @@ void scene_structure::initialize()
 	rock4.initialize_data_on_gpu(rock_mesh4);
 	rock4.model.scaling = 5.0f;
 	rock4.material.phong.specular = 0.0f;
+	rock4.shader = terrain_shader;
 
 	// genrate_rocks_type(rocks_type);
 
@@ -299,6 +306,7 @@ void scene_structure::display_frame()
 {
 	timer.update();
 	// std::cout << "Global time: " << timer.t << std::endl;
+	skybox.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, 0.01f * timer.t);
 
 	vec3 camera_position = environment.get_camera_position();
 
@@ -307,10 +315,19 @@ void scene_structure::display_frame()
 	glDepthMask(GL_TRUE); // re-activate depth-buffer write
 
 	environment.uniform_generic.uniform_float["time"] = timer.t;
+	environment.uniform_generic.uniform_float["water_length"] = water_length;
 
 	// Update light position & fog
-	sphere_light.model.translation = {10 * std::cos(timer.t), 10 * std::sin(timer.t), 2};
+	// sphere_light_central_position = terrain_array[0].mesh.model.translation;
+	sphere_light.model.translation = boat2.model.translation;
+	sphere_light.model.translation.z = 10.0f;
 	environment.light_position = sphere_light.model.translation;
+	vec3 morning_sunlight = vec3(1.0, 0.8, 0.6);
+	float beta = (0.5 * sin(timer.t / 10.0 + 3.1415) + 0.5);
+	vec3 white = vec3(1.0f, 1.0f, 1.0f);
+	sphere_light.material.color = beta * morning_sunlight + (1 - beta) * white;
+	sphere_light.material.texture_settings.two_sided = true;
+
 	draw(sphere_light, environment);
 	// environment.background_color = background_color;
 
@@ -404,7 +421,7 @@ void scene_structure::display_frame()
 	draw(fish, environment);
 	draw(fish2, environment);
 
-		// Detect collisions
+	// Detect collisions
 	const float collisionThreshold = 5.0f;
 	const float moveback = 1.0f;
 
@@ -473,6 +490,7 @@ void scene_structure::display_semiTransparent()
 		{
 			water_array[i].model.translation.x += water_length;
 			terrain_array[i].mesh.model.translation.x += water_length;
+			// sphere_light_central_position.x += water_length / 2.0f;
 			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
 			{
 				terrain_array[i].hollowCenters[j].x += water_length;
@@ -485,6 +503,7 @@ void scene_structure::display_semiTransparent()
 		{
 			water_array[i].model.translation.x -= water_length;
 			terrain_array[i].mesh.model.translation.x -= water_length;
+			// sphere_light_central_position.x -= water_length / 2.0f;
 			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
 			{
 				terrain_array[i].hollowCenters[j].x -= water_length;
@@ -497,6 +516,7 @@ void scene_structure::display_semiTransparent()
 		{
 			water_array[i].model.translation.y += water_length;
 			terrain_array[i].mesh.model.translation.y += water_length;
+			// sphere_light_central_position.y += water_length / 2.0f;
 			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
 			{
 				terrain_array[i].hollowCenters[j].y += water_length;
@@ -509,6 +529,7 @@ void scene_structure::display_semiTransparent()
 		{
 			water_array[i].model.translation.y -= water_length;
 			terrain_array[i].mesh.model.translation.y -= water_length;
+			// sphere_light_central_position.y -= water_length / 2.0f;
 			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
 			{
 				terrain_array[i].hollowCenters[j].y -= water_length;
