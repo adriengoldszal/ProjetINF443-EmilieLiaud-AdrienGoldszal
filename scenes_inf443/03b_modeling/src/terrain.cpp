@@ -40,12 +40,12 @@ bool TerrainData::nocolision(std::vector<cgp::vec2> center, float taille, cgp::v
     return true;
 }
 
-std::vector<cgp::vec2> TerrainData::generateRandomCenters(int N, int terrain_length)
+std::vector<cgp::vec2> TerrainData::generateRandomCenters(int N, int terrain_length, int nb_hollow)
 {
     std::srand(static_cast<unsigned int>(std::time(0))); // Seed for randomness
     std::vector<cgp::vec2> centers;
     int nb = 0;
-    while (nb < 4)
+    while (nb < nb_hollow)
     {
         vec2 center;
         center.x = (std::rand() % (terrain_length)) - terrain_length / 2; // Random x within terrain bounds
@@ -60,11 +60,11 @@ std::vector<cgp::vec2> TerrainData::generateRandomCenters(int N, int terrain_len
     return centers;
 }
 
-void TerrainData::create_terrain_mesh(int N, int terrain_length)
+void TerrainData::create_terrain_mesh(int N, int terrain_length, int nb_hollow)
 {
     std::cout << "start" << std::endl;
 
-    hollowCenters = generateRandomCenters(N, terrain_length);
+    hollowCenters = generateRandomCenters(N, terrain_length, nb_hollow);
 
     for (int i = 0; i < hollowCenters.size(); i++)
     {
@@ -93,7 +93,7 @@ void TerrainData::create_terrain_mesh(int N, int terrain_length)
 
             // Store vertex coordinates
             terrain.position[kv + N * ku] = {x, y, z};
-            terrain.uv[kv + N * ku] = {u * N / 30, v * N / 30};
+            terrain.uv[kv + N * ku] = {u * 2.0f, v * 2.0f};
         }
     }
 
@@ -117,4 +117,35 @@ void TerrainData::create_terrain_mesh(int N, int terrain_length)
     terrain.fill_empty_field();
 
     mesh.initialize_data_on_gpu(terrain);
+}
+
+void TerrainData::generate_type_rock(int nb_hollow) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 3);
+
+    type_rock.clear();  // Ensure the vector is empty before filling it with new values
+
+    for (int i = 0; i < nb_hollow; ++i)
+    {
+        int random_value = dis(gen);
+        type_rock.push_back(random_value);
+    }
+}
+
+void TerrainData::generate_rock_rotation(int nb_hollow) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 100);
+
+
+    rock_rotation.clear();  // Ensure the vector is empty before filling it with new values
+
+    for (int i = 0; i < nb_hollow; ++i)
+    {
+        int random_value = dis(gen);
+        int random_value2 = dis(gen);
+        std::cout << 2*(float)random_value / 100 << std::endl;
+        rock_rotation.push_back(2* (float) random_value/100);
+    }
 }

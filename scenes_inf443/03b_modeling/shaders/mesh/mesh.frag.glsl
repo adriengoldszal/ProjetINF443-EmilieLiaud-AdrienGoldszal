@@ -68,6 +68,7 @@ void main() {
 
 	// Renormalize normal
 	vec3 N = normalize(fragment.normal);
+	//vec3 N = vec3 (0,0,1);
 
 	// Inverse the normal if it is viewed from its back (two-sided surface)
 	//  (note: gl_FrontFacing doesn't work on Mac)
@@ -103,6 +104,7 @@ void main() {
 
 	// Get the current texture color
 	vec4 color_image_texture = texture(image_texture, uv_image);
+	//vec4 color_image_texture = vec4 (1.0,1.0,1.0,1.0);
 	if(material.texture_settings.use_texture == false) {
 		color_image_texture = vec4(1.0, 1.0, 1.0, 1.0);
 	}
@@ -111,7 +113,9 @@ void main() {
 	// ******************************************  //
 
 	// Get the second texture color
-	vec4 color_image_texture_2 = texture(image_texture_2, uv_image);
+	//vec4 color_image_texture_2 = texture(image_texture_2, uv_image);
+	vec4 color_image_texture_2 = vec4 (1.0,1.0,1.0,1.0);
+
 
 	// Blend the crack texture with a white image along the y direction
 	float blending_parameter = fragment.uv.y;
@@ -124,7 +128,8 @@ void main() {
 	// *************************************** //
 
 	// Compute the base color of the object based on: vertex color, uniform color, and texture
-	vec3 color_object = fragment.color * material.color * color_image_texture.rgb;
+	vec3 color_object = fragment.color * material.color *  color_image_texture.rgb;
+	//vec3 color_object = vec3 (1, 1, 1);
 
 	// Compute the final shaded color using Phong model
 	float Ka = material.phong.ambient;
