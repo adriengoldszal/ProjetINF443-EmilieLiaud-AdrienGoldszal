@@ -22,7 +22,7 @@ void main() {
     vec3 morning_sunlight = vec3(1.0, 0.8, 0.6);
     vec3 red = vec3(1.0, 0.0, 0.0);
     float alpha = min(0.5 * sin(time / 10.0) + 0.5, 0.7);
-    float beta = min(0.5 * sin(time / 10.0 + 3.1415 / 2.0) + 0.5, 0.4);
+    float beta = min(0.5 * sin(time / 10.0 + 3.1415 / 2.0) + 0.5, 0.2);
     //float gamma = min(0.5 * sin(time / 10.0 - 3.1415 / 2.0) + 0.5, 0.7);
     current_color = (current_color * (1.0 - alpha)) + (fogcolor * alpha);
     current_color = current_color * (1.0 - beta) + (morning_sunlight * beta);

@@ -117,8 +117,7 @@ void main() {
 
 	// Get the second texture color
 	//vec4 color_image_texture_2 = texture(image_texture_2, uv_image);
-	vec4 color_image_texture_2 = vec4 (1.0,1.0,1.0,1.0);
-
+	vec4 color_image_texture_2 = vec4(1.0, 1.0, 1.0, 1.0);
 
 	// Blend the crack texture with a white image along the y direction
 	float blending_parameter = fragment.uv.y;
@@ -131,7 +130,7 @@ void main() {
 	// *************************************** //
 
 	// Compute the base color of the object based on: vertex color, uniform color, and texture
-	vec3 color_object = fragment.color * material.color *  color_image_texture.rgb;
+	vec3 color_object = fragment.color * material.color * color_image_texture.rgb;
 	//vec3 color_object = vec3 (1, 1, 1);
 
 	// Compute the final shaded color using Phong model
@@ -149,7 +148,7 @@ void main() {
 	vec3 morning_sunlight = vec3(1.0, 0.8, 0.6);
 
 	float alpha = min(0.5 * sin(time / 10.0) + 0.5, 0.8);
-	float beta = min(0.5 * sin(time / 10.0 + 3.1415 / 2.0) + 0.5, 0.4);
+	float beta = min(0.5 * sin(time / 10.0 + 3.1415 / 2.0) + 0.5, 0.2);
 
 	backgroundcolor = (backgroundcolor * (1.0 - alpha)) + (fogcolor * alpha);
 	backgroundcolor = backgroundcolor * (1.0 - beta) + (morning_sunlight * beta);
