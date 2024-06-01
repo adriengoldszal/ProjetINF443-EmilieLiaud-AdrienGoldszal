@@ -6,7 +6,6 @@
 #include "terrain.hpp"
 #include "tree.hpp"
 #include "water.hpp"
-#include "fish.hpp"
 #include "interpolation.hpp"
 #include "rock.hpp"
 
@@ -26,6 +25,20 @@ void scene_structure::initialize()
 	display_info();
 
 	global_frame.initialize_data_on_gpu(mesh_primitive_frame());
+
+	// Shadow mapping
+	//*********************************************//
+	//  Shader used to create the depth map
+	opengl_shader_structure shader_depth_map;
+	// Shader used to display the shadow on standard meshes
+	opengl_shader_structure shader_mesh_with_shadow;
+
+	// Load the shaders
+	shader_depth_map.load(project::path + "shaders/depth_map/depth_map.vert.glsl", project::path + "shaders/depth_map/depth_map.frag.glsl");
+	shader_mesh_with_shadow.load(project::path + "shaders/mesh_with_shadow/mesh_with_shadow.vert.glsl", project::path + "shaders/mesh_with_shadow/mesh_with_shadow.frag.glsl");
+
+	// Initialize the shadow mapping structure
+	shadow_mapping.initialize(shader_depth_map);
 
 	// Load skybox
 	// ***************************************** //
@@ -68,9 +81,7 @@ void scene_structure::initialize()
 	newTerrain.mesh.shader = terrain_shader;
 	for (int i = 0; i < 9; i++)
 	{
-		// terrain_array[i].create_terrain_mesh(N_water_samples, water_length);
-		// terrain_array[i].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg", GL_REPEAT, GL_REPEAT);
-		// terrain_array[i].mesh.shader = terrain_shader;
+
 		terrain_array[i] = newTerrain;
 	}
 	float depth = -10.0f;
@@ -78,10 +89,8 @@ void scene_structure::initialize()
 	terrain_array[0].hollowCenters = newTerrain.hollowCenters;
 
 	terrain_array[1].mesh.model.translation = {water_length, water_length, depth};
-	// terrain_array[1].hollowCenters = terrain_array[0].hollowCenters;
 	for (int j = 0; j < terrain_array[1].hollowCenters.size(); j++)
 	{
-		// terrain_array[1].hollowCenters[j] = terrain_array[0].hollowCenters[j] + {water_length, water_length};
 		terrain_array[1].hollowCenters[j].x = terrain_array[0].hollowCenters[j].x + water_length;
 		terrain_array[1].hollowCenters[j].y = terrain_array[0].hollowCenters[j].y + water_length;
 		std::cout << "1st terrain's " << j << "'s hollow: " << terrain_array[1].hollowCenters[j].x << "  " << terrain_array[1].hollowCenters[j].y << std::endl;
@@ -183,11 +192,14 @@ void scene_structure::initialize()
 	// boat2.model.scaling = 0.0001f;
 	boat2.model.translation = {0.0f, 0.0f, 1.0f};
 	initial_position_rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
+	house_initial_rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
 	boat2.model.rotation = initial_position_rotation;
 	boat2.shader = boat_shader;
-	boat2.material.phong.diffuse = 5.0f;
+	// boat2.shader = shader_mesh_with_shadow;
+	boat2.material.phong.diffuse = 1.0f;
 
 	// Load fish
+	// Open source file https://sketchfab.com/3d-models/flying-fish-tobiuo-77e1a00a725148a1b4601b7482e60e30
 	mesh fish_mesh = mesh_load_file_obj(project::path + "assets/fish/20230116_Tobiuo.obj");
 	fish.initialize_data_on_gpu(fish_mesh);
 	fish.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Body_Normal.png");
@@ -236,18 +248,8 @@ void scene_structure::initialize()
 	fish_interval.t_max = fish_times[N - 2];
 	fish_interval.t = fish_interval.t_min;
 
-	// Load Rocks
-	/*rock_mesh = mesh_primitive_ellipsoid(vec3{3, 10, 15});
-	rock_drawable.initialize_data_on_gpu(rock_mesh);
-	update_rock(rock_mesh, rock_drawable, parameters);
-
-	rock_mesh2 = mesh_primitive_ellipsoid(vec3{3, 10, 15});
-	rock_drawable2.initialize_data_on_gpu(rock_mesh2);
-	update_rock2(rock_mesh2, rock_drawable2, parameters);*/
-
-	// rock_drawable2.material.color = vec3 { 0.8f, 0.5f, 0.7f };
-	// hierarchy.add(rock_drawable, "Rock1");
-	// hierarchy.add(rock_drawable2, "Rock2", "Rock1", { 0, -5, 0 });
+	// Load rocks
+	//  ***************************************** //
 
 	rock_mesh1 = mesh_load_file_obj(project::path + "assets/rocks/rock_newl.obj");
 	resize_rock1(rock_mesh1, 0.5f);
@@ -255,15 +257,10 @@ void scene_structure::initialize()
 	// update_rock(rock_mesh1, rock1, parameters);
 	// rock1.shader.load(project::path + "shaders/mesh_multi_texture/mesh_multi_texture.vert.glsl", project::path + "shaders/mesh_multi_texture/mesh_multi_texture.frag.glsl");
 	rock1.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
-	// rock1.supplementary_texture["image_texture_2"].load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/moss.jpeg");
-	// rock.model.rotation = rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi/2);
 	rock1.model.scaling = 5.0f;
-	// rock1.model.translation = { 0, 15, 0 };
 	rock1.material.phong.specular = 0.0f; // non-specular rock material
 	rock1.shader = terrain_shader;
-	// for (int i = 0; i < rock_mesh1.position.size(); i++) {
-	//	std::cout << "pos x:" << rock_mesh1.position[i].x << " pos y: " << rock_mesh1.position[i].y << " pos z: " << rock_mesh1.position[i].z << std::endl;
-	// }
+	// rock1.shader = shader_mesh_with_shadow;
 
 	rock_mesh2 = mesh_load_file_obj(project::path + "assets/rocks/rock2_2.obj");
 	resize_rock2(rock_mesh2, 0.5f);
@@ -272,6 +269,7 @@ void scene_structure::initialize()
 	rock2.model.scaling = 5.0f;
 	rock2.material.phong.specular = 0.0f; // non-specular rock material
 	rock2.shader = terrain_shader;
+	// rock2.shader = shader_mesh_with_shadow;
 
 	rock_mesh3 = mesh_load_file_obj(project::path + "assets/rocks/rock3_2.obj");
 	resize_rock3(rock_mesh3, 0.5f);
@@ -280,7 +278,8 @@ void scene_structure::initialize()
 	rock3.model.scaling = 5.0f;
 	rock3.material.phong.specular = 0.0f;
 	rock3.shader = terrain_shader;
-	// rock3.model.translation = { 0, -15, 0 }; // translations de la shpere
+	// rock3.shader = shader_mesh_with_shadow;
+	//  rock3.model.translation = { 0, -15, 0 }; // translations de la shpere
 
 	rock_mesh4 = mesh_load_file_obj(project::path + "assets/rocks/rock4_2.obj");
 	resize_rock4(rock_mesh4, 0.5f);
@@ -289,6 +288,7 @@ void scene_structure::initialize()
 	rock4.model.scaling = 5.0f;
 	rock4.material.phong.specular = 0.0f;
 	rock4.shader = terrain_shader;
+	// rock4.shader = shader_mesh_with_shadow;
 
 	// genrate_rocks_type(rocks_type);
 
@@ -325,10 +325,50 @@ void scene_structure::initialize()
 	{
 		std::cout << terrain_array[1].hollowCenters[i].x << "  " << terrain_array[1].hollowCenters[i].y << std::endl;
 	}
+
+	// Load house
+	// Link to open source file : https://www.cgtrader.com/items/4637728/download-page
+	// ***************************************** //
+	mesh house_mesh = mesh_load_file_obj(project::path + "assets/houses/thaihouse/thaihouse.obj");
+	house.initialize_data_on_gpu(house_mesh);
+	house.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/houses/thaihouse/Texture/Door_Window/Door_Window_BaseColor.png");
+	house.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/houses/thaihouse/Texture/stairs/stairs_BaseColor.png");
+	house.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/houses/thaihouse/Texture/structure/structure_BaseColor.png");
+	house.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/houses/thaihouse/Texture/wooden_planks/wooden planks_BaseColor.png");
+	house.model.scaling = 0.1f;
+	house.model.translation = {0, 0, 5.0f};
+	house.model.rotation = initial_position_rotation;
+	house_number = rand() % 4 + 1;
+
+	// Create the light matrix
+	view_light = camera_control.camera_model.matrix_view();
+	environment.uniform_generic.uniform_mat4["projection_light"] = projection_orthographic(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 30.0f);
 }
 
 void scene_structure::display_frame()
 {
+	// Set the "view matrix" from the light
+	environment.uniform_generic.uniform_mat4["view_light"] = view_light;
+
+	// 1st Pass - Draw the scene from the light "point of view" and store the depth map
+	// ************************************************************************ //
+	shadow_mapping.start_pass_depth_map_creation();
+
+	// Use shadow_mapping.draw_depth_map(drawable, environment) on all shape that emits shadows
+	shadow_mapping.draw_depth_map(boat2, environment);
+	shadow_mapping.draw_depth_map(rock1, environment);
+	shadow_mapping.draw_depth_map(rock2, environment);
+	shadow_mapping.draw_depth_map(rock3, environment);
+	shadow_mapping.draw_depth_map(rock4, environment);
+	shadow_mapping.draw_depth_map(house, environment);
+
+	if (gui.display_frame)
+		shadow_mapping.draw_depth_map(global_frame, environment);
+
+	shadow_mapping.end_pass_depth_map_creation();
+
+	// 2nd Pass - Draw the standard scene
+	// ************************************************************************ //
 	timer.update();
 	// std::cout << "Global time: " << timer.t << std::endl;
 	skybox.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, 0.01f * timer.t);
@@ -346,16 +386,17 @@ void scene_structure::display_frame()
 	// sphere_light_central_position = terrain_array[0].mesh.model.translation;
 	sphere_light.model.translation = boat2.model.translation;
 	sphere_light.model.translation.z = 10.0f;
-	sphere_light.model.translation = {10 * std::cos(timer.t), 10 * std::sin(timer.t), 2};
+
 	environment.light_position = sphere_light.model.translation;
 	vec3 morning_sunlight = vec3(1.0, 0.8, 0.6);
 	float beta = (0.5 * sin(timer.t / 10.0 + 3.1415) + 0.5);
 	vec3 white = vec3(1.0f, 1.0f, 1.0f);
 	sphere_light.material.color = beta * morning_sunlight + (1 - beta) * white;
 	sphere_light.material.texture_settings.two_sided = true;
-
 	draw(sphere_light, environment);
-	// environment.background_color = background_color;
+
+	// Load rocks
+	/***********************************************/
 
 	draw(global_frame, environment);
 	for (int i = 0; i < 9; i++)
@@ -364,6 +405,23 @@ void scene_structure::display_frame()
 		for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
 		{
 			int choice = terrain_array[i].type_rock[j];
+
+			if (j % 3 == 0)
+			{
+				house_number += 1;
+				house_number = house_number % 4 + 1;
+				for (int l = 0; l < house_number; l++)
+				{
+					if (terrain_array[i].type_rock[j] == 1)
+					{
+						house.model.translation = vec3{terrain_array[i].hollowCenters[j].x + (l + 1) * 5.0f, terrain_array[i].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
+					}
+					house.model.translation = vec3{terrain_array[i].hollowCenters[j].x + (l + 1) * 7.0f, terrain_array[i].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
+					house.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, l * 15.0f) * house_initial_rotation;
+					draw(house, environment);
+					house.model.rotation = house_initial_rotation;
+				};
+			}
 
 			if (choice == 0)
 			{
@@ -391,13 +449,6 @@ void scene_structure::display_frame()
 			}
 		}
 	}
-
-	// draw(rock_drawable, environment);
-	// draw(rock_drawable2, environment);
-	// draw(hierarchy, environment);
-
-	// if (gui.display_wireframe)
-	// draw_wireframe(rock_drawable, environment);
 
 	draw(boat2, environment);
 	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
@@ -445,13 +496,15 @@ void scene_structure::display_frame()
 
 	// Detect collisions
 	// Detect collisions
-	const float collisionThreshold = 5.0f;
+	const float collisionThreshold = 9.0f;
+	const float rock2threshold = 5.5f;
 	const float moveback = 1.0f;
 
 	for (int j = 0; j < 9; j++)
 	{
 		for (int i = 0; i < terrain_array[j].hollowCenters.size(); i++)
 		{
+			float rocktype = terrain_array[j].type_rock[i];
 			float rockX = terrain_array[j].hollowCenters[i].x;
 			float rockY = terrain_array[j].hollowCenters[i].y;
 
@@ -462,10 +515,10 @@ void scene_structure::display_frame()
 			float distY = boat2.model.translation.y - rockY;
 			float distanceSquared = distX * distX + distY * distY;
 
-			if (distanceSquared < collisionThreshold * collisionThreshold)
+			if ((distanceSquared < collisionThreshold * collisionThreshold && rocktype != 1) || (distanceSquared < rock2threshold * rock2threshold && rocktype == 1))
 			{
 				// std::cout << "Collision detected" << std::endl;
-
+				// boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.1f) * boat2.model.rotation;
 				// Apply a simple correction by moving the boat away from the rock
 				if (std::abs(distX) > std::abs(distY))
 				{
@@ -562,12 +615,6 @@ void scene_structure::display_semiTransparent()
 	for (int i = 0; i < 9; i++)
 	{
 		draw(water_array[i], environment);
-		/*draw(terrain_array[i].mesh, environment);
-		for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
-		{
-			// A modifier pour changer
-			draw(rock2, environment);
-		}*/
 	}
 
 	glDepthMask(false);

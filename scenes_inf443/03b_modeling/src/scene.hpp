@@ -2,10 +2,9 @@
 
 #include "cgp/cgp.hpp"
 #include "environment.hpp"
-
-#include "key_positions_structure.hpp"
 #include "rock.hpp"
 #include "terrain.hpp"
+#include "shadow_mapping/shadow_mapping.hpp"
 
 // This definitions allow to use the structures: mesh, mesh_drawable, etc. without mentionning explicitly cgp::
 using cgp::mesh;
@@ -28,8 +27,8 @@ struct scene_structure : cgp::scene_inputs_generic
 	// ****************************** //
 	// Elements and shapes of the scene
 	// ****************************** //
-	// camera_controller_orbit_euler camera_control; // Camera controller figé
-	camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
+	camera_controller_orbit_euler camera_control; // Camera controller figé
+	// camera_controller_2d_displacement camera_control; // Adapted to 2D displacement
 	camera_projection_perspective camera_projection;
 	window_structure window;
 
@@ -40,12 +39,11 @@ struct scene_structure : cgp::scene_inputs_generic
 	input_devices inputs; // Storage for inputs status (mouse, keyboard, window dimension)
 	gui_parameters gui;	  // Standard GUI element storage
 
-	// ****************************** //
-	// Elements and shapes of the scene
-	// ****************************** //
+	// Shadow mapping
+	shadow_mapping_structure shadow_mapping; // Helper structure to handle the shadow mapping
+	mat4 view_light;						 // view matrix of the light.
 
 	timer_basic timer;
-	struct keyframe_structure keyframe;
 
 	mesh_drawable sphere_light; // Light source
 	vec3 sphere_light_central_position = {0.0f, 0.0f, 0.0f};
@@ -74,6 +72,12 @@ struct scene_structure : cgp::scene_inputs_generic
 	mesh_drawable boat2;
 
 	cgp::rotation_transform initial_position_rotation; // Boat position for rotations
+
+	// House
+	/************************************/
+	cgp::mesh_drawable house;
+	cgp::rotation_transform house_initial_rotation;
+	int house_number;
 
 	// Rock elements
 	/************************************/

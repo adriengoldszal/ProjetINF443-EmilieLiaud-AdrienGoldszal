@@ -82,7 +82,7 @@ void main() {
 
     vec3 morning_sunlight = vec3(1.0, 0.8, 0.6);
     float alpha = min(0.5 * sin(time / 10.0) + 0.5, 0.7);
-    float beta = min(0.5 * sin(time / 10.0 + 3.1415 / 2.0) + 0.5, 0.4);
+    float beta = min(0.5 * sin(time / 10.0 + 3.1415 / 2.0) + 0.5, 0.2);
 
     // Apply fog effect
     vec3 fogcolor = vec3(0.15);
