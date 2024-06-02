@@ -5,6 +5,7 @@
 
 using namespace cgp;
 
+/*
 void update_rock(cgp::mesh &rock, cgp::mesh_drawable &rock_visual, perlin_noise_parameters const &parameters)
 {
     // mesh rock_ref = mesh_primitive_grid({ -5, -5, 0 }, { 5, -5, 0 }, { 5, 5, 0 }, { -5, 5, 0 }, 100, 100);
@@ -77,7 +78,23 @@ void update_rock2(cgp::mesh &rock, cgp::mesh_drawable &rock_visual, perlin_noise
     rock_visual.vbo_normal.update(rock.normal);
     rock_visual.vbo_color.update(rock.color);
 }
+*/
 
+void RockData::resize(cgp::mesh& obj, vec3 ratio)
+{
+    for (int k = 0; k < obj.position.size(); ++k)
+    {
+        vec3& p = obj.position[k];  // Get a reference to the current vertex position
+
+        p.x *= ratio.x;              // Scale the Y-coordinate of the vertex position
+        p.y *= ratio.y;
+        p.z *= ratio.z;
+
+        obj.position[k] = p;        // Update the position of the vertex in the mesh (UTILE ...????)
+    }
+}
+
+/*
 void resize_rock1(cgp::mesh &rock, float facteur)
 {
     for (int k = 0; k < rock.position.size(); ++k)
@@ -137,7 +154,7 @@ void resize_rock4(cgp::mesh &rock, float facteur)
         rock.position[k] = p;
     }
 }
-/*
+
 void genrate_rocks_type(std::vector<int> &rocks_type)
 {
     std::random_device rd;
