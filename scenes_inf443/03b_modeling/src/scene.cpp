@@ -26,20 +26,6 @@ void scene_structure::initialize()
 
 	global_frame.initialize_data_on_gpu(mesh_primitive_frame());
 
-	// Shadow mapping
-	//*********************************************//
-	//  Shader used to create the depth map
-	opengl_shader_structure shader_depth_map;
-	// Shader used to display the shadow on standard meshes
-	opengl_shader_structure shader_mesh_with_shadow;
-
-	// Load the shaders
-	shader_depth_map.load(project::path + "shaders/depth_map/depth_map.vert.glsl", project::path + "shaders/depth_map/depth_map.frag.glsl");
-	shader_mesh_with_shadow.load(project::path + "shaders/mesh_with_shadow/mesh_with_shadow.vert.glsl", project::path + "shaders/mesh_with_shadow/mesh_with_shadow.frag.glsl");
-
-	// Initialize the shadow mapping structure
-	shadow_mapping.initialize(shader_depth_map);
-
 	// Load skybox
 	// ***************************************** //
 	image_structure image_skybox_template = image_load_file("assets/skybox/hdr_01.png"); // hdr_01.png OR skybox_01.jpg
@@ -339,36 +325,10 @@ void scene_structure::initialize()
 	house.model.translation = {0, 0, 5.0f};
 	house.model.rotation = initial_position_rotation;
 	house_number = rand() % 4 + 1;
-
-	// Create the light matrix
-	view_light = camera_control.camera_model.matrix_view();
-	environment.uniform_generic.uniform_mat4["projection_light"] = projection_orthographic(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 30.0f);
 }
 
 void scene_structure::display_frame()
 {
-	// Set the "view matrix" from the light
-	environment.uniform_generic.uniform_mat4["view_light"] = view_light;
-
-	// 1st Pass - Draw the scene from the light "point of view" and store the depth map
-	// ************************************************************************ //
-	shadow_mapping.start_pass_depth_map_creation();
-
-	// Use shadow_mapping.draw_depth_map(drawable, environment) on all shape that emits shadows
-	shadow_mapping.draw_depth_map(boat2, environment);
-	shadow_mapping.draw_depth_map(rock1, environment);
-	shadow_mapping.draw_depth_map(rock2, environment);
-	shadow_mapping.draw_depth_map(rock3, environment);
-	shadow_mapping.draw_depth_map(rock4, environment);
-	shadow_mapping.draw_depth_map(house, environment);
-
-	if (gui.display_frame)
-		shadow_mapping.draw_depth_map(global_frame, environment);
-
-	shadow_mapping.end_pass_depth_map_creation();
-
-	// 2nd Pass - Draw the standard scene
-	// ************************************************************************ //
 	timer.update();
 	// std::cout << "Global time: " << timer.t << std::endl;
 	skybox.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, 0.01f * timer.t);

@@ -4,7 +4,6 @@
 #include "environment.hpp"
 #include "rock.hpp"
 #include "terrain.hpp"
-#include "shadow_mapping/shadow_mapping.hpp"
 
 // This definitions allow to use the structures: mesh, mesh_drawable, etc. without mentionning explicitly cgp::
 using cgp::mesh;
@@ -38,10 +37,6 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	input_devices inputs; // Storage for inputs status (mouse, keyboard, window dimension)
 	gui_parameters gui;	  // Standard GUI element storage
-
-	// Shadow mapping
-	shadow_mapping_structure shadow_mapping; // Helper structure to handle the shadow mapping
-	mat4 view_light;						 // view matrix of the light.
 
 	timer_basic timer;
 
