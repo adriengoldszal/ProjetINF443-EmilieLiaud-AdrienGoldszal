@@ -13,6 +13,10 @@ namespace cgp
             return GL_RGB;
         case GL_RGBA8:
             return GL_RGBA;
+        case GL_DEPTH_COMPONENT:
+            return GL_DEPTH_COMPONENT24;
+        case GL_DEPTH_COMPONENT32F:
+            return GL_DEPTH_COMPONENT32F;
         default:
             error_cgp("Unknown format");
         }
@@ -27,6 +31,8 @@ namespace cgp
             return GL_UNSIGNED_BYTE;
         case GL_RGB32F:
             return GL_FLOAT;
+        case GL_DEPTH_COMPONENT:
+            return GL_UNSIGNED_INT;
         default:
             error_cgp("Unknown format");
         }
@@ -65,8 +71,8 @@ namespace cgp
 
     void opengl_texture_image_structure::bind() const
     {
-        glBindTexture(texture_type, id); opengl_check;
         assert_cgp(id!=0, "Incorrect texture id");
+        glBindTexture(texture_type, id); opengl_check;
     }
     void opengl_texture_image_structure::unbind() const
     {

@@ -83,10 +83,34 @@ namespace cgp
 		glBindVertexArray(0); opengl_check;
 	}
 
+	template<typename T>
+	void mesh_drawable::update_supplementary_data_on_gpu(numarray<T> const& data, GLuint location_index, int size_elements_update)
+	{
+		assert_cgp(location_index >= 4, "Supplementary data should have location >=4 for mesh_drawable.");
+		if (location_index < 4) return;
+
+		int k = location_index - 4;
+    	if (k >= supplementary_vbo.size()) {
+    		std::cerr << "Error: No supplementary VBO exists at location index " << location_index << ". Initialize it first." << std::endl;
+        	return;
+    	}
+		supplementary_vbo[k].update(data, size_elements_update);
+
+		
+		// Update VAO (User responsability to not have conflicted location)
+		glBindVertexArray(vao); opengl_check;
+		opengl_set_vao_location(supplementary_vbo[k], location_index);
+		glBindVertexArray(0); opengl_check;
+	}
+
 	template void mesh_drawable::initialize_supplementary_data_on_gpu(numarray<vec2> const& data, GLuint location_index, GLuint divisor);
 	template void mesh_drawable::initialize_supplementary_data_on_gpu(numarray<vec3> const& data, GLuint location_index, GLuint divisor);
 	template void mesh_drawable::initialize_supplementary_data_on_gpu(numarray<vec4> const& data, GLuint location_index, GLuint divisor);
 
+	template void mesh_drawable::update_supplementary_data_on_gpu(numarray<vec2> const& data, GLuint location_index, int size_elements_update);
+	template void mesh_drawable::update_supplementary_data_on_gpu(numarray<vec3> const& data, GLuint location_index, int size_elements_update);
+	template void mesh_drawable::update_supplementary_data_on_gpu(numarray<vec4> const& data, GLuint location_index, int size_elements_update);
+	
 	void mesh_drawable::clear()
 	{
 		vbo_position.clear();
@@ -148,7 +172,7 @@ namespace cgp
 		drawable.send_opengl_uniform(expected_uniforms);
 
 		// send the uniform values for the environment
-		environment.send_opengl_uniform(drawable.shader, expected_uniforms);
+		environment.send_opengl_uniform(drawable.shader, expected_uniforms && environment.default_expected_uniform);
 
 		// [Optionnal] send any additional uniform for this specidic draw call
 		additional_uniforms.send_opengl_uniform(drawable.shader, expected_uniforms);
@@ -158,7 +182,7 @@ namespace cgp
 		// ********************************** //
 		glActiveTexture(GL_TEXTURE0); opengl_check;
 		drawable.texture.bind();
-		opengl_uniform(drawable.shader, "image_texture", 0);  opengl_check;
+		opengl_uniform(drawable.shader, "image_texture", 0, expected_uniforms);  opengl_check;
 
 		//Set any additional texture
 		int texture_count = 1;
@@ -173,6 +197,7 @@ namespace cgp
 
 			texture_count++;
 		}
+
 
 
 		// Prepare for draw call
