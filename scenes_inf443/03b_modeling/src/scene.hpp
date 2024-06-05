@@ -3,7 +3,6 @@
 #include "cgp/cgp.hpp"
 #include "environment.hpp"
 
-#include "key_positions_structure.hpp"
 #include "rock.hpp"
 #include "terrain.hpp"
 
@@ -45,8 +44,6 @@ struct scene_structure : cgp::scene_inputs_generic
 	// *********************************** //
 
 	timer_basic timer;
-	struct keyframe_structure keyframe;
-
 
 	mesh_drawable sphere_light; // Light source
 	vec3 sphere_light_central_position = {0.0f, 0.0f, 0.0f};
