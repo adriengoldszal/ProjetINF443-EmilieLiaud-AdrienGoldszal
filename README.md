@@ -1,13 +1,13 @@
 # ProjetINF443 - Ha Long Bay
 This project, for Ecole Polytechnique's INF443 Computer Graphics class, was made my Adrien Goldszal and Emilie Liaud. It depicts a user-controlled boat moving around a 3D scene inspired by Ha Long Bay in Vietnam. 
 
-<div style="display: flex; justify-content: space-around;">
-  <figure style="margin: 10px;">
-    <img src="Scene.png" alt="Our Scene" style="width: 45%;">
+<div style="display: flex; justify-content: space-around; align-items: center;">
+  <figure style="margin: 10px; text-align: center;">
+    <img src="images/Scene.png" alt="Our Scene" style="width: 45%;">
     <figcaption>Our Scene</figcaption>
   </figure>
-  <figure style="margin: 10px;">
-    <img src="ha-long-bay-in-vietnam.jpg" alt="Reality" style="width: 45%;">
+  <figure style="margin: 10px; text-align: center;">
+    <img src="images/ha-long-bay-in-vietnam.jpg" alt="Reality" style="width: 45%;">
     <figcaption>Reality</figcaption>
   </figure>
 </div>
