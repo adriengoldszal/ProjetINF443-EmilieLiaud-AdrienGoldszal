@@ -3,11 +3,11 @@ This project, for Ecole Polytechnique's INF443 Computer Graphics class, was made
 
 <div style="display: flex; justify-content: space-around; align-items: center;">
   <figure style="margin: 10px; text-align: center;">
-    <img src="images/Scene.png" alt="Our Scene" style="width: 45%;">
+    <img src="Scene.png" alt="Our Scene" style="width: 45%;">
     <figcaption>Our Scene</figcaption>
   </figure>
   <figure style="margin: 10px; text-align: center;">
-    <img src="images/ha-long-bay-in-vietnam.jpg" alt="Reality" style="width: 45%;">
+    <img src="ha-long-bay-in-vietnam.jpg" alt="Reality" style="width: 45%;">
     <figcaption>Reality</figcaption>
   </figure>
 </div>
