@@ -4,13 +4,19 @@ This project, for Ecole Polytechnique's INF443 Computer Graphics class, was made
 <div style="display: flex; justify-content: space-around; align-items: center;">
   <figure style="margin: 10px; text-align: center;">
     <img src="Scene.png" alt="Our Scene" style="width: 45%;">
-    <figcaption>Our Scene</figcaption>
   </figure>
   <figure style="margin: 10px; text-align: center;">
     <img src="ha-long-bay-in-vietnam.jpg" alt="Reality" style="width: 45%;">
-    <figcaption>Reality</figcaption>
   </figure>
 </div>
+
+Our scene and its comparison with the real Ha Long Bay.
+
+### Short Video Playthrough
+
+<video controls>
+  <source src="Scene_INF443_Video.mp4" type="video/mp4">
+</video>
 
 
 
