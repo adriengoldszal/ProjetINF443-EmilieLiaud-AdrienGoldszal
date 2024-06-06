@@ -16,7 +16,10 @@ Our scene and its comparison with the real Ha Long Bay.
 
 [https://youtu.be/HoY5HOhMbnk](https://youtu.be/HoY5HOhMbnk)
 
-
+### Instructions for Windows users
+1) Clone the repository locally
+2) Compile (For example using windows_cmake_visual.bat in scenesinf443 > 03b_modeling > scripts)
+3) Run (For example on Visual Studio)
 
 ### Objectifs
 - [X] Déplacement problématique des rochers à chaque changement de mesh
