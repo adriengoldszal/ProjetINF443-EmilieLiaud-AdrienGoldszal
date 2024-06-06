@@ -159,11 +159,11 @@ void scene_structure::initialize()
 	// Update the current time
 	// Adjusted fish positions to the boat referential, is getting multiplied by rotation matrix later on for correction and updated positions
 	initial_fish_positions =
-		{{0, 1.0, 10.0},
-		 {0, 1.0, 5.0},
-		 {0, 1.0, 0.0},
-		 {0, 1.0, -5.0},
-		 {0, 1.0, -10.0},
+		{{0, 0.3, 20.0},
+		 {0, 0.3, 15.0},
+		 {0, 0.3, 5.0},
+		 {0, 0.3, -5.0},
+		 {0, 0.3, -10.0},
 		 {0, -10.0, -15.0},
 		 {0, -10.0, -20.0}};
 
@@ -383,7 +383,7 @@ void scene_structure::display_frame()
 	draw(boat2, environment);
 	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
 
-	boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.08f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
+	boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.05f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
 	boat2.model.scaling = 0.01f; // Ne marche plus correctement;
 
 	// Update the fish time
