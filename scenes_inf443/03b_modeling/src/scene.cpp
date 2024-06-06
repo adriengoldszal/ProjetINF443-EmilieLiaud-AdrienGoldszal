@@ -52,82 +52,34 @@ void scene_structure::initialize()
 	// Load Terrain
 	N_water_samples = 400;
 	water_length = 50;
-	int nb_hollow = 6;
+	nb_hollow = 4;
+	float depth = -10.0f;
 
 	opengl_shader_structure terrain_shader;
 	terrain_shader.load(
 		project::path + "shaders/mesh/mesh.vert.glsl",
 		project::path + "shaders/mesh/mesh.frag.glsl");
 
-	TerrainData newTerrain;
-	newTerrain.create_terrain_mesh(N_water_samples, water_length, nb_hollow);
-	newTerrain.generate_type_rock(nb_hollow);
-	newTerrain.generate_rock_rotation(nb_hollow);
-	newTerrain.mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg", GL_REPEAT, GL_REPEAT);
-	newTerrain.mesh.shader = terrain_shader;
-	for (int i = 0; i < 9; i++)
-	{
+	std::srand(static_cast<unsigned int>(std::time(0)));                    // Seed for randomness
 
-		terrain_array[i] = newTerrain;
-	}
-	float depth = -10.0f;
-	terrain_array[0].mesh.model.translation = {0.0f, 0.0f, depth};
-	terrain_array[0].hollowCenters = newTerrain.hollowCenters;
+	Cini = 1;
+	Rini = 1;
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			// Create reference terrain
+			terrain_array[i][j].create_terrain_mesh(N_water_samples, water_length, nb_hollow);
+			terrain_array[i][j].generate_type_rock(nb_hollow);
+			terrain_array[i][j].generate_rock_rotation(nb_hollow);
+			terrain_array[i][j].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/sand.jpg", GL_REPEAT, GL_REPEAT);
+			terrain_array[i][j].mesh.shader = terrain_shader;
 
-	terrain_array[1].mesh.model.translation = {water_length, water_length, depth};
-	for (int j = 0; j < terrain_array[1].hollowCenters.size(); j++)
-	{
-		terrain_array[1].hollowCenters[j].x = terrain_array[0].hollowCenters[j].x + water_length;
-		terrain_array[1].hollowCenters[j].y = terrain_array[0].hollowCenters[j].y + water_length;
-		std::cout << "1st terrain's " << j << "'s hollow: " << terrain_array[1].hollowCenters[j].x << "  " << terrain_array[1].hollowCenters[j].y << std::endl;
-	}
-	terrain_array[2].mesh.model.translation = {water_length, 0.0f, depth};
-	terrain_array[2].hollowCenters = terrain_array[0].hollowCenters;
-
-	for (int j = 0; j < terrain_array[2].hollowCenters.size(); j++)
-	{
-		terrain_array[2].hollowCenters[j] += {water_length, 0.0f};
-	}
-	terrain_array[3].mesh.model.translation = {water_length, -water_length, depth};
-	terrain_array[3].hollowCenters = terrain_array[0].hollowCenters;
-
-	for (int j = 0; j < terrain_array[3].hollowCenters.size(); j++)
-	{
-		terrain_array[3].hollowCenters[j] += {water_length, -water_length};
-	}
-	terrain_array[4].mesh.model.translation = {0.0f, -water_length, depth};
-	terrain_array[4].hollowCenters = terrain_array[0].hollowCenters;
-	for (int j = 0; j < terrain_array[4].hollowCenters.size(); j++)
-	{
-		terrain_array[4].hollowCenters[j] += {0.0f, -water_length};
-	}
-	terrain_array[5].mesh.model.translation = {-water_length, -water_length, depth};
-	terrain_array[5].hollowCenters = terrain_array[0].hollowCenters;
-
-	for (int j = 0; j < terrain_array[5].hollowCenters.size(); j++)
-	{
-		terrain_array[5].hollowCenters[j] += {-water_length, -water_length};
-	}
-	terrain_array[6].mesh.model.translation = {-water_length, 0.0f, depth};
-	terrain_array[6].hollowCenters = terrain_array[0].hollowCenters;
-
-	for (int j = 0; j < terrain_array[6].hollowCenters.size(); j++)
-	{
-		terrain_array[6].hollowCenters[j] += {-water_length, 0.0f};
-	}
-	terrain_array[7].mesh.model.translation = {-water_length, water_length, depth};
-	terrain_array[7].hollowCenters = terrain_array[0].hollowCenters;
-
-	for (int j = 0; j < terrain_array[7].hollowCenters.size(); j++)
-	{
-		terrain_array[7].hollowCenters[j] += {-water_length, water_length};
-	}
-	terrain_array[8].mesh.model.translation = {0.0f, water_length, depth};
-	terrain_array[8].hollowCenters = terrain_array[0].hollowCenters;
-
-	for (int j = 0; j < terrain_array[8].hollowCenters.size(); j++)
-	{
-		terrain_array[8].hollowCenters[j] += {0.0f, water_length};
+			// Set the intial terrain layout centered on (Cini, Rini)
+			terrain_array[i][j].mesh.model.translation = { water_length * (i - Cini), water_length * (j - Rini), depth };
+			for (int k = 0; k < nb_hollow; k++) {
+				terrain_array[i][j].hollowCenters[k].x += water_length * (i - Cini);
+				terrain_array[i][j].hollowCenters[k].y += water_length * (j - Rini);
+			}
+		}
 	}
 
 	// Load water terrain
@@ -236,8 +188,17 @@ void scene_structure::initialize()
 
 	// Load rocks
 	//  ***************************************** //
+	for (int i = 0; i < 4; i++) {
+		rock_mesh[i] = mesh_load_file_obj(project::path + "assets/rocks/rock" + str(i + 1) + "_2.obj");
+		rock_array[i].resize(rock_mesh[i], resize_ratios[i]);
+		rock_array[i].mesh.initialize_data_on_gpu(rock_mesh[i]);
+		rock_array[i].mesh.model.scaling = 5.0f;
+		rock_array[i].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
+		rock_array[i].mesh.shader = terrain_shader;
+		rock_array[i].mesh.material.phong.specular = 0.0f; // non-specular rock material
+	}
 
-	rock_mesh1 = mesh_load_file_obj(project::path + "assets/rocks/rock_newl.obj");
+	/*rock_mesh1 = mesh_load_file_obj(project::path + "assets/rocks/rock_newl.obj");
 	resize_rock1(rock_mesh1, 0.5f);
 	rock1.initialize_data_on_gpu(rock_mesh1);
 	// update_rock(rock_mesh1, rock1, parameters);
@@ -292,6 +253,7 @@ void scene_structure::initialize()
 		vec3 transformedVertex = scalingFactor * vertex;
 		rock1_position.push_back(transformedVertex);
 	}
+	*/
 
 	// Print or use the transformed vertices
 	// for (const vec3& vertex : transformedVertices) {
@@ -301,17 +263,12 @@ void scene_structure::initialize()
 	// Load grass
 	// grass_position = generate_grass_positions_on_terrain(50, terrain_length);
 
-	mesh quad_mesh = mesh_primitive_quadrangle({-0.25f, 0, 0}, {0.25f, 0, 0}, {0.25f, 0, 0.5f}, {-0.25f, 0, 0.5f});
+	mesh quad_mesh = mesh_primitive_quadrangle({ -0.25f, 0, 0 }, { 0.25f, 0, 0 }, { 0.25f, 0, 0.5f }, { -0.25f, 0, 0.5f });
 	grass.initialize_data_on_gpu(quad_mesh);
+
 	grass.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/grass.png");
-	grass.material.phong = {0.4f, 0.6f, 0, 1};
-
-	std::cout << "Rock pos:" << std::endl;
-	for (int i = 0; i < terrain_array[0].hollowCenters.size(); i++)
-	{
-		std::cout << terrain_array[1].hollowCenters[i].x << "  " << terrain_array[1].hollowCenters[i].y << std::endl;
-	}
-
+	grass.material.phong = { 0.4f, 0.6f, 0, 1 };
+	
 	// Load house
 	// Link to open source file : https://www.cgtrader.com/items/4637728/download-page
 	// ***************************************** //
@@ -324,14 +281,14 @@ void scene_structure::initialize()
 	house.model.scaling = 0.1f;
 	house.model.translation = {0, 0, 5.0f};
 	house.model.rotation = initial_position_rotation;
-	house_number = rand() % 4 + 1;
+	//house_number = rand() % 4 + 1;
 }
 
 void scene_structure::display_frame()
 {
 	timer.update();
 	// std::cout << "Global time: " << timer.t << std::endl;
-	skybox.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, 0.01f * timer.t);
+	skybox.model.rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, 0.01f * timer.t);
 
 	vec3 camera_position = environment.get_camera_position();
 
@@ -355,57 +312,71 @@ void scene_structure::display_frame()
 	sphere_light.material.texture_settings.two_sided = true;
 	draw(sphere_light, environment);
 
+	draw(global_frame, environment);
+
 	// Load rocks
 	/***********************************************/
 
-	draw(global_frame, environment);
-	for (int i = 0; i < 9; i++)
-	{
-		draw(terrain_array[i].mesh, environment);
-		for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
-		{
-			int choice = terrain_array[i].type_rock[j];
+	int Cmov = (int)(boat2.model.translation.x / water_length + 1.5 + 999) - Cini - 999;
+	int Cshift = (999 + Cini - Cmov) % 3;
 
-			if (j % 3 == 0)
+	int Rmov = (int)(boat2.model.translation.y / water_length + 1.5 + 999) - Rini - 999;
+	int Rshift = (999 + Rini - Rmov) % 3;
+
+	// Recycle terrains whenever it is required
+	if (Cmov) {
+		std::cout << std::endl;
+		std::cout << "Cini Cmov " << Cini << " " << Cmov << std::endl;
+		std::cout << "Boat X: " << boat2.model.translation.x << " Y: " << boat2.model.translation.y << std::endl;
+		for (int j = 0; j < 3; j++) {
+			//std::cout << "Terrain (Cshift, j): (" << Cshift << "," << j << ")" << std::endl;
+			//std::cout << "     BEF X: " << terrain_array[Cshift][j].mesh.model.translation.x << " Y: " << terrain_array[Cshift][j].mesh.model.translation.y << std::endl;
+			terrain_array[Cshift][j].mesh.model.translation.x += 3 * water_length * Cmov;
+			//std::cout << "     AFT X: " << terrain_array[Cshift][j].mesh.model.translation.x << " Y: " << terrain_array[Cshift][j].mesh.model.translation.y << std::endl;
+			for (int k = 0; k < nb_hollow; k++) terrain_array[Cshift][j].hollowCenters[k].x += 3 * water_length * Cmov;
+		}
+		Cini += Cmov;
+		std::cout << "NEW Cini " << Cini << std::endl;
+	}
+	if (Rmov) {
+		std::cout << std::endl;
+		std::cout << "Rini Rmov " << Rini << " " << Rmov << std::endl;
+		std::cout << "Boat X: " << boat2.model.translation.x << " Y: " << boat2.model.translation.y << std::endl;
+		for (int i = 0; i < 3; i++) {
+			//std::cout << "Terrain (i, Rshift): (" << i << ", " << Rshift << ")"  << std::endl;
+			//std::cout << "     BEF X: " << terrain_array[i][Rshift].mesh.model.translation.x << " Y: " << terrain_array[i][Rshift].mesh.model.translation.y << std::endl;
+			terrain_array[i][Rshift].mesh.model.translation.y += 3 * water_length * Rmov;
+			//std::cout << "     AFT X: " << terrain_array[i][Rshift].mesh.model.translation.x << " Y: " << terrain_array[i][Rshift].mesh.model.translation.y << std::endl;
+			for (int k = 0; k < nb_hollow; k++) terrain_array[i][Rshift].hollowCenters[k].y += 3 * water_length * Rmov;
+		}
+		Rini += Rmov;
+		std::cout << "NEW Rini " << Rini << std::endl;
+	}
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			/*if ((j + i) % 3 == 0)
 			{
 				house_number += 1;
 				house_number = house_number % 4 + 1;
 				for (int l = 0; l < house_number; l++)
 				{
-					if (terrain_array[i].type_rock[j] == 1)
+					if (terrain_array[i][j].type_rock[j] == 1)
 					{
-						house.model.translation = vec3{terrain_array[i].hollowCenters[j].x + (l + 1) * 5.0f, terrain_array[i].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
+						house.model.translation = vec3{ terrain_array[i][j].hollowCenters[j].x + (l + 1) * 5.0f, terrain_array[i][j].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
 					}
-					house.model.translation = vec3{terrain_array[i].hollowCenters[j].x + (l + 1) * 7.0f, terrain_array[i].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
-					house.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, l * 15.0f) * house_initial_rotation;
+					house.model.translation = vec3{ terrain_array[i][j].hollowCenters[j].x + (l + 1) * 7.0f, terrain_array[i][j].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
+					house.model.rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, l * 15.0f) * house_initial_rotation;
 					draw(house, environment);
 					house.model.rotation = house_initial_rotation;
-				};
-			}
-
-			if (choice == 0)
-			{
-				rock1.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				rock1.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i].rock_rotation[j]);
-				draw(rock1, environment);
-			}
-			else if (choice == 1)
-			{
-				rock2.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				rock2.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i].rock_rotation[j]);
-				draw(rock2, environment);
-			}
-			else if (choice == 2)
-			{
-				rock3.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				rock3.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i].rock_rotation[j]);
-				draw(rock3, environment);
-			}
-			else
-			{
-				rock4.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				rock4.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i].rock_rotation[j]);
-				draw(rock4, environment);
+				}
+			}*/
+			draw(terrain_array[i][j].mesh, environment);
+			for (int k = 0; k < nb_hollow; k++) {
+				int rock_type = terrain_array[i][j].type_rock[k];
+				rock_array[rock_type].mesh.model.translation = vec3{ terrain_array[i][j].hollowCenters[k].x, terrain_array[i][j].hollowCenters[k].y, -2.0f };
+				rock_array[rock_type].mesh.model.rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, terrain_array[i][j].rock_rotation[k]);
+				draw(rock_array[rock_type].mesh, environment);
 			}
 		}
 	}
@@ -460,46 +431,45 @@ void scene_structure::display_frame()
 	const float rock2threshold = 5.5f;
 	const float moveback = 1.0f;
 
-	for (int j = 0; j < 9; j++)
-	{
-		for (int i = 0; i < terrain_array[j].hollowCenters.size(); i++)
-		{
-			float rocktype = terrain_array[j].type_rock[i];
-			float rockX = terrain_array[j].hollowCenters[i].x;
-			float rockY = terrain_array[j].hollowCenters[i].y;
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			for (int k = 0; k < nb_hollow; k++) {
+				float rockX = terrain_array[i][j].hollowCenters[k].x;
+				float rockY = terrain_array[i][j].hollowCenters[k].y;
 
-			// std::cout << "Boat Position: X" << boat2.model.translation.x << " Y: " << boat2.model.translation.y << " Z: " << boat2.model.translation.z << std::endl;
+				// std::cout << "Boat Position: X" << boat2.model.translation.x << " Y: " << boat2.model.translation.y << " Z: " << boat2.model.translation.z << std::endl;
 
-			// Calculate the distance between the boat and the rock
-			float distX = boat2.model.translation.x - rockX;
-			float distY = boat2.model.translation.y - rockY;
-			float distanceSquared = distX * distX + distY * distY;
+				// Calculate the distance between the boat and the rock
+				float distX = boat2.model.translation.x - rockX;
+				float distY = boat2.model.translation.y - rockY;
+				float distanceSquared = distX * distX + distY * distY;
 
-			if ((distanceSquared < collisionThreshold * collisionThreshold && rocktype != 1) || (distanceSquared < rock2threshold * rock2threshold && rocktype == 1))
-			{
-				// std::cout << "Collision detected" << std::endl;
-				// boat2.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.1f) * boat2.model.rotation;
-				// Apply a simple correction by moving the boat away from the rock
-				if (std::abs(distX) > std::abs(distY))
+				if (distanceSquared < collisionThreshold * collisionThreshold)
 				{
-					if (distX > 0)
+					// std::cout << "Collision detected" << std::endl;
+
+					// Apply a simple correction by moving the boat away from the rock
+					if (std::abs(distX) > std::abs(distY))
 					{
-						boat2.model.translation.x += moveback;
+						if (distX > 0)
+						{
+							boat2.model.translation.x += moveback;
+						}
+						else
+						{
+							boat2.model.translation.x -= moveback;
+						}
 					}
 					else
 					{
-						boat2.model.translation.x -= moveback;
-					}
-				}
-				else
-				{
-					if (distY > 0)
-					{
-						boat2.model.translation.y += moveback;
-					}
-					else
-					{
-						boat2.model.translation.y -= moveback;
+						if (distY > 0)
+						{
+							boat2.model.translation.y += moveback;
+						}
+						else
+						{
+							boat2.model.translation.y -= moveback;
+						}
 					}
 				}
 			}
@@ -525,12 +495,6 @@ void scene_structure::display_semiTransparent()
 		for (int i = 0; i < 9; i++)
 		{
 			water_array[i].model.translation.x += water_length;
-			terrain_array[i].mesh.model.translation.x += water_length;
-			// sphere_light_central_position.x += water_length / 2.0f;
-			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
-			{
-				terrain_array[i].hollowCenters[j].x += water_length;
-			}
 		}
 	}
 	if (boat2.model.translation.x < water_array[center].model.translation.x - water_length / 2.0f)
@@ -538,12 +502,6 @@ void scene_structure::display_semiTransparent()
 		for (int i = 0; i < 9; i++)
 		{
 			water_array[i].model.translation.x -= water_length;
-			terrain_array[i].mesh.model.translation.x -= water_length;
-			// sphere_light_central_position.x -= water_length / 2.0f;
-			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
-			{
-				terrain_array[i].hollowCenters[j].x -= water_length;
-			}
 		}
 	}
 	if (boat2.model.translation.y > water_array[center].model.translation.y + water_length / 2.0f)
@@ -551,12 +509,6 @@ void scene_structure::display_semiTransparent()
 		for (int i = 0; i < 9; i++)
 		{
 			water_array[i].model.translation.y += water_length;
-			terrain_array[i].mesh.model.translation.y += water_length;
-			// sphere_light_central_position.y += water_length / 2.0f;
-			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
-			{
-				terrain_array[i].hollowCenters[j].y += water_length;
-			}
 		}
 	}
 	if (boat2.model.translation.y < water_array[center].model.translation.y - water_length / 2.0f)
@@ -564,12 +516,6 @@ void scene_structure::display_semiTransparent()
 		for (int i = 0; i < 9; i++)
 		{
 			water_array[i].model.translation.y -= water_length;
-			terrain_array[i].mesh.model.translation.y -= water_length;
-			// sphere_light_central_position.y -= water_length / 2.0f;
-			for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
-			{
-				terrain_array[i].hollowCenters[j].y -= water_length;
-			}
 		}
 	}
 	for (int i = 0; i < 9; i++)
@@ -593,7 +539,7 @@ void scene_structure::display_semiTransparent()
 	// Transform matrix (the same matrix which is applied in the vertices in the shader: T = Projection x View)
 	mat4 T = camera_projection.matrix() * camera.matrix_view();
 
-	srand(42);
+	/*srand(42);
 	// Create a vector to store the random integers
 	std::vector<int> randomNumbers;
 
@@ -609,7 +555,7 @@ void scene_structure::display_semiTransparent()
 		grass.model.scaling = 2;
 		grass.model.translation = rock1_position[val];
 		// draw(grass, environment);
-	}
+	}*/
 
 	// Don't forget to re-activate the depth-buffer write
 	glDepthMask(true);

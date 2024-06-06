@@ -2,6 +2,7 @@
 
 #include "cgp/cgp.hpp"
 #include "environment.hpp"
+
 #include "rock.hpp"
 #include "terrain.hpp"
 
@@ -38,6 +39,10 @@ struct scene_structure : cgp::scene_inputs_generic
 	input_devices inputs; // Storage for inputs status (mouse, keyboard, window dimension)
 	gui_parameters gui;	  // Standard GUI element storage
 
+	// *********************************** //
+	// Elements and shapes of the scene
+	// *********************************** //
+
 	timer_basic timer;
 
 	mesh_drawable sphere_light; // Light source
@@ -57,26 +62,28 @@ struct scene_structure : cgp::scene_inputs_generic
 	int center;
 	float water_length;
 	int N_water_samples;
+	int nb_hollow;
 
 	cgp::mesh_drawable fish;
-
 	cgp::mesh_drawable fish2;
 
+	// *********************************** //
 	// Boat elements
-	/************************************/
+	// *********************************** //
 	mesh_drawable boat2;
 
 	cgp::rotation_transform initial_position_rotation; // Boat position for rotations
 
+	// *********************************** //
 	// House
-	/************************************/
+	// *********************************** //
 	cgp::mesh_drawable house;
 	cgp::rotation_transform house_initial_rotation;
 	int house_number;
 
+	// *********************************** //
 	// Rock elements
 	/************************************/
-	cgp::mesh rock_mesh;
 	cgp::mesh_drawable rock_drawable;
 	cgp::mesh_drawable rock_drawable2;
 	cgp::hierarchy_mesh_drawable hierarchy;
@@ -92,29 +99,28 @@ struct scene_structure : cgp::scene_inputs_generic
 	cgp::mesh rock_mesh4;
 	cgp::mesh_drawable rock4;
 
-	std::vector<int> rocks_type;
+	std::vector<int> rocks_type; 
+	mesh rock_mesh[4];
+	RockData rock_array[4];
+	cgp::vec3 resize_ratios[4] = { {0.5f, 0.25f, 0.8f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 0.75f} };
 
+	// *********************************** //
 	// Grass elements
-	/************************************/
+	// *********************************** //
 	cgp::mesh_drawable grass;
 	std::vector<cgp::vec3> grass_position;
 	// perlin_noise_parameters parameters;
 
+	// ***********************************//
 	// Terrain elements
-	/************************************/
-	TerrainData terrain;
-	TerrainData terrain2;
-	TerrainData terrain3;
-	TerrainData terrain4;
-	TerrainData terrain5;
-	TerrainData terrain6;
-	TerrainData terrain7;
-	TerrainData terrain8;
-	TerrainData terrain9;
-	TerrainData terrain_array[9] = {terrain, terrain2, terrain3, terrain4, terrain5, terrain6, terrain7, terrain8, terrain9};
+	// *********************************** //
+	TerrainData terrain_array[3][3];
+	int Cini;
+	int Rini;
 
+	// ***********************************//
 	// Fishes
-	/****************************************/
+	// ***********************************//
 
 	// Timer used for the interpolation of the position
 	float fish_timer;
