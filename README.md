@@ -14,7 +14,7 @@ Our scene and its comparison with the real Ha Long Bay.
 
 ### Short Video Playthrough
 
-https://github.com/adriengoldszal/ProjetINF443-EmilieLiaud-AdrienGoldszal/blob/main/Scene_INF443_Video.mp4
+[<img src="Scene.png" width="50%">](Scene_INF443_Video.mp4 "Now in Android: 55")
 
 
 
