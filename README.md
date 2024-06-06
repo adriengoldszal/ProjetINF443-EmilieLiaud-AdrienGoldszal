@@ -14,7 +14,7 @@ Our scene and its comparison with the real Ha Long Bay.
 
 ### Short Video Playthrough
 
-Scene_INF443_Video.mp4
+https://github.com/adriengoldszal/ProjetINF443-EmilieLiaud-AdrienGoldszal/blob/main/Scene_INF443_Video.mp4
 
 
 
