@@ -14,7 +14,9 @@ Our scene and its comparison with the real Ha Long Bay.
 
 ### Short Video Playthrough
 
-[<img src="Scene.png" width="50%">](Scene_INF443_Video.mp4 "Now in Android: 55")
+<div align="center">
+  <iframe width="560" height="315" src="https://www.youtube.com/watch?v=BKTM-NnxFXg&ab_channel=GenXTech" frameborder="0" allowfullscreen></iframe>
+</div>
 
 
 
