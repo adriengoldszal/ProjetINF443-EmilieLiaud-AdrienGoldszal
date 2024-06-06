@@ -1,0 +1,6 @@
+﻿  scene.cpp
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.cpp(425,14): warning C4189: 'rock2threshold': local variable is initialized but not referenced
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.cpp(571,7): warning C4189: 'update': local variable is initialized but not referenced
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.cpp(610,81): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\src\scene.cpp(629,82): warning C4305: 'argument': truncation from 'double' to 'float'
+  03b_modeling.vcxproj -> D:\GitHub\ProjetINF443-EmilieLiaud-AdrienGoldszal\scenes_inf443\03b_modeling\03b_modeling.exe

@@ -94,6 +94,26 @@ void RockData::resize(cgp::mesh& obj, vec3 ratio)
     }
 }
 
+void RockData::generate_grass_pos(cgp::mesh& obj, cgp::mesh_drawable& obj_draw) {
+    grass_position.clear();
+    cgp::numarray<cgp::vec3>& originalVertices = obj.position;
+
+    // Get the scaling factor applied to rock1
+    float scalingFactor = obj_draw.model.scaling;
+
+    // Create a vector to store the transformed vertices
+
+    // Apply the scaling transformation to each vertex position
+    for (const vec3& vertex : originalVertices)
+    {
+        // Apply scaling transformation to each vertex position
+        vec3 transformedVertex = 5.0f * vertex;
+
+        grass_position.push_back(transformedVertex);
+    }
+}
+
+
 /*
 void resize_rock1(cgp::mesh &rock, float facteur)
 {

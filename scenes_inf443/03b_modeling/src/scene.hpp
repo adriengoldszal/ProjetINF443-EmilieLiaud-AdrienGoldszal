@@ -102,7 +102,8 @@ struct scene_structure : cgp::scene_inputs_generic
 	std::vector<int> rocks_type; 
 	mesh rock_mesh[4];
 	RockData rock_array[4];
-	cgp::vec3 resize_ratios[4] = { {0.5f, 0.25f, 0.8f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 0.75f} };
+	//cgp::vec3 resize_ratios[4] = { {2.5f, 1.75f, 4.0f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 0.75f} };
+	cgp::vec3 resize_ratios[4] = { {5.0f, 5.0f, 5.0f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 0.75f} };
 
 	// *********************************** //
 	// Grass elements

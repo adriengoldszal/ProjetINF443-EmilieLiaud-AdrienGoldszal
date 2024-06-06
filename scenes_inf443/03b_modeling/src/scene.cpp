@@ -188,7 +188,16 @@ void scene_structure::initialize()
 
 	// Load rocks
 	//  ***************************************** //
-	for (int i = 0; i < 4; i++) {
+	rock_mesh[0] = mesh_load_file_obj(project::path + "assets/rocks/lastpl.obj");
+	rock_array[0].resize(rock_mesh[0], resize_ratios[0]);
+	rock_array[0].mesh.initialize_data_on_gpu(rock_mesh[0]);
+	rock_array[0].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_l.png", GL_REPEAT, GL_REPEAT);
+	rock_array[0].mesh.model.scaling = 2.0f;
+	rock_array[0].mesh.shader = terrain_shader;
+	rock_array[0].mesh.material.phong.specular = 0.0f; // non-specular rock material
+	//rock_array[0].generate_grass_pos(rock_mesh[i], rock_array[i].mesh);
+
+	for (int i = 1; i < 4; i++) {
 		rock_mesh[i] = mesh_load_file_obj(project::path + "assets/rocks/rock" + str(i + 1) + "_2.obj");
 		rock_array[i].resize(rock_mesh[i], resize_ratios[i]);
 		rock_array[i].mesh.initialize_data_on_gpu(rock_mesh[i]);
@@ -196,6 +205,7 @@ void scene_structure::initialize()
 		rock_array[i].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
 		rock_array[i].mesh.shader = terrain_shader;
 		rock_array[i].mesh.material.phong.specular = 0.0f; // non-specular rock material
+		//rock_array[i].generate_grass_pos(rock_mesh[i], rock_array[i].mesh);
 	}
 
 	/*rock_mesh1 = mesh_load_file_obj(project::path + "assets/rocks/rock_newl.obj");
@@ -237,23 +247,7 @@ void scene_structure::initialize()
 	rock4.shader = terrain_shader;
 	// rock4.shader = shader_mesh_with_shadow;
 
-	// genrate_rocks_type(rocks_type);
-
-	cgp::numarray<cgp::vec3> &originalVertices = rock_mesh1.position;
-
-	// Get the scaling factor applied to rock1
-	float scalingFactor = rock1.model.scaling;
-
-	// Create a vector to store the transformed vertices
-
-	// Apply the scaling transformation to each vertex position
-	for (const vec3 &vertex : originalVertices)
-	{
-		// Apply scaling transformation to each vertex position
-		vec3 transformedVertex = scalingFactor * vertex;
-		rock1_position.push_back(transformedVertex);
-	}
-	*/
+	// genrate_rocks_type(rocks_type);*/
 
 	// Print or use the transformed vertices
 	// for (const vec3& vertex : transformedVertices) {
@@ -537,26 +531,33 @@ void scene_structure::display_semiTransparent()
 	//   This step can be skipped, but it will be associated to visual artifacts
 
 	// Transform matrix (the same matrix which is applied in the vertices in the shader: T = Projection x View)
-	mat4 T = camera_projection.matrix() * camera.matrix_view();
+	/*mat4 T = camera_projection.matrix() * camera.matrix_view();
 
-	/*srand(42);
 	// Create a vector to store the random integers
-	std::vector<int> randomNumbers;
+	std::vector<std::vector<int>> randomNumbers(4);
 
-	// Generate 50 random integers between 0 and 500
-	for (int i = 0; i < 1500; ++i)
-	{
-		int randomNumber = rand() % (rock1_position.size() + 1); // Generates a number between 0 and 500
-		randomNumbers.push_back(randomNumber);
-	}
-
-	for (int val : randomNumbers)
-	{
-		grass.model.scaling = 2;
-		grass.model.translation = rock1_position[val];
-		// draw(grass, environment);
+	// Generate 50 random integers between 0 and..
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 1000; ++j)
+		{
+			int randomNumber = rand() % (rock_array[i].grass_position.size() + 1); // Generates a number between 0 and ..
+			randomNumbers[i].push_back(randomNumber);
+		}
 	}*/
 
+	/*for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			for (int k = 0; k < nb_hollow; k++) {
+				int rock_type = terrain_array[i][j].type_rock[k];
+				for (int val : randomNumbers[rock_type])
+				{
+					grass.model.scaling = 2;
+					grass.model.translation = rock_array[rock_type].grass_position[val];
+					//draw(grass, environment);
+				}
+			}
+		}
+	}*/
 	// Don't forget to re-activate the depth-buffer write
 	glDepthMask(true);
 	glDisable(GL_BLEND);

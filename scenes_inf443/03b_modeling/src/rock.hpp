@@ -37,6 +37,8 @@ struct RockData
 {
 public:
 	cgp::mesh_drawable mesh;
+	std::vector<cgp::vec3> grass_position;
 
 	void RockData::resize(cgp::mesh& obj, cgp::vec3 ratio);
+	void RockData::generate_grass_pos(cgp::mesh& obj, cgp::mesh_drawable& obj_draw);
 };
