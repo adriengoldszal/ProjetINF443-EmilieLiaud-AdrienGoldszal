@@ -1,9 +1,17 @@
-# ProjetINF443-EmilieLiaud-AdrienGoldszal
+# ProjetINF443- Ha Long Bay
+This project, for Ecole Polytechnique's INF443 Computer Graphics class, was made my Adrien Goldszal and Emilie Liaud. It depicts a user-controlled boat moving around a 3D scene inspired by Ha Long Bay in Vietnam. 
+
+
+
+### Objectifs
 - [X] Déplacement problématique des rochers à chaque changement de mesh
 - [X] Rochers choisis de manière aléatoire (pour l'instant rock2)
 - [X] Problèmes de texture du fond marin
-- [ ] COLLISIONS
-- [ ] La lumière est actuellement fixée sur le bateau -> Ombres bizarres
+- [X] COLLISIONS --> Pas parfait
+- [X] La lumière est actuellement fixée sur le bateau -> Ombres bizarres
+- [X] Utiliser cette idée de lumière pour faire un cycle jour nuit : trop rouge le soir
+- [X] Plus de choses sur l'eau :  maisons ?
 - [ ] Bateau qui tangue trop
-- [ ] Utiliser cette idée de lumière pour faire un cycle jour nuit : trop rouge le soir
-- [ ] Plus de choses sur l'eau :  maisons ? 
+- [ ] Nuit plus foncée
+- [ ] Herbe sur les rochers
+- [ ] Déplaçage de la caméra quand on est dans le rocher
