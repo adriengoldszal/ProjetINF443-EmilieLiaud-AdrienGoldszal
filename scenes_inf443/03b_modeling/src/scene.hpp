@@ -45,8 +45,6 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	timer_basic timer;
 
-	mesh_drawable sphere_light; // Light source
-	vec3 sphere_light_central_position = {0.0f, 0.0f, 0.0f};
 	vec3 background_color; // Background color
 
 	cgp::mesh_drawable water;
@@ -99,10 +97,10 @@ struct scene_structure : cgp::scene_inputs_generic
 	cgp::mesh rock_mesh4;
 	cgp::mesh_drawable rock4;
 
-	std::vector<int> rocks_type; 
+	std::vector<int> rocks_type;
 	mesh rock_mesh[4];
 	RockData rock_array[4];
-	cgp::vec3 resize_ratios[4] = { {0.5f, 0.25f, 0.8f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 1.0f}, {0.5f, 0.25f, 0.75f} };
+	cgp::vec3 resize_ratios[4] = {{2.0f, 1.0f, 3.4f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 3.2f}};
 
 	// *********************************** //
 	// Grass elements

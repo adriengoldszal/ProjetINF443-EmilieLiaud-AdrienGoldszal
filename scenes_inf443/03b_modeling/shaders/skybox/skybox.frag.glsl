@@ -18,7 +18,7 @@ void main() {
 
     vec3 backgroundcolor = vec3(0.5, 0.59, 0.59);
 
-    vec3 fogcolor = vec3(0.15);
+    vec3 fogcolor = vec3(0.09);
     vec3 morning_sunlight = vec3(1.0, 0.8, 0.6);
     vec3 red = vec3(1.0, 0.0, 0.0);
     float alpha = min(0.5 * sin(time / 10.0) + 0.5, 0.7);
@@ -30,8 +30,8 @@ void main() {
     backgroundcolor = (backgroundcolor * (1.0 - alpha)) + (fogcolor * alpha);
     backgroundcolor = backgroundcolor * (1.0 - beta) + (morning_sunlight * beta);
 
-    if(fragment.position.z < 1 && fragment.position.z > -0.2) {
-        float gamma = min(fragment.position.z + 0.2, 1.0);
+    if(fragment.position.z < 1 && fragment.position.z > -0.3) {
+        float gamma = min(fragment.position.z + 0.3, 1.0);
         current_color = mix(backgroundcolor, current_color, gamma);
     }
 

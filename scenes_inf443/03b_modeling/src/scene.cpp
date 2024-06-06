@@ -42,17 +42,12 @@ void scene_structure::initialize()
 		project::path + "shaders/skybox/skybox.vert.glsl",
 		project::path + "shaders/skybox/skybox.frag.glsl");
 
-	// Load light source
-	sphere_light.initialize_data_on_gpu(mesh_primitive_sphere(0.2f));
-	sphere_light.model.translation = {0, 0, 2};
 	environment.background_color = {0.0f, 1.0f, 1.0f};
-	sphere_light.initialize_data_on_gpu(mesh_primitive_sphere(0.1f));
-	sphere_light.model.translation = {0, 0, 2};
 
 	// Load Terrain
 	N_water_samples = 400;
 	water_length = 50;
-	nb_hollow = 4;
+	nb_hollow = 2;
 	float depth = -10.0f;
 
 	opengl_shader_structure terrain_shader;
@@ -60,12 +55,14 @@ void scene_structure::initialize()
 		project::path + "shaders/mesh/mesh.vert.glsl",
 		project::path + "shaders/mesh/mesh.frag.glsl");
 
-	std::srand(static_cast<unsigned int>(std::time(0)));                    // Seed for randomness
+	std::srand(static_cast<unsigned int>(std::time(0))); // Seed for randomness
 
 	Cini = 1;
 	Rini = 1;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
 			// Create reference terrain
 			terrain_array[i][j].create_terrain_mesh(N_water_samples, water_length, nb_hollow);
 			terrain_array[i][j].generate_type_rock(nb_hollow);
@@ -74,8 +71,9 @@ void scene_structure::initialize()
 			terrain_array[i][j].mesh.shader = terrain_shader;
 
 			// Set the intial terrain layout centered on (Cini, Rini)
-			terrain_array[i][j].mesh.model.translation = { water_length * (i - Cini), water_length * (j - Rini), depth };
-			for (int k = 0; k < nb_hollow; k++) {
+			terrain_array[i][j].mesh.model.translation = {water_length * (i - Cini), water_length * (j - Rini), depth};
+			for (int k = 0; k < nb_hollow; k++)
+			{
 				terrain_array[i][j].hollowCenters[k].x += water_length * (i - Cini);
 				terrain_array[i][j].hollowCenters[k].y += water_length * (j - Rini);
 			}
@@ -188,7 +186,8 @@ void scene_structure::initialize()
 
 	// Load rocks
 	//  ***************************************** //
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++)
+	{
 		rock_mesh[i] = mesh_load_file_obj(project::path + "assets/rocks/rock" + str(i + 1) + "_2.obj");
 		rock_array[i].resize(rock_mesh[i], resize_ratios[i]);
 		rock_array[i].mesh.initialize_data_on_gpu(rock_mesh[i]);
@@ -263,12 +262,12 @@ void scene_structure::initialize()
 	// Load grass
 	// grass_position = generate_grass_positions_on_terrain(50, terrain_length);
 
-	mesh quad_mesh = mesh_primitive_quadrangle({ -0.25f, 0, 0 }, { 0.25f, 0, 0 }, { 0.25f, 0, 0.5f }, { -0.25f, 0, 0.5f });
+	mesh quad_mesh = mesh_primitive_quadrangle({-0.25f, 0, 0}, {0.25f, 0, 0}, {0.25f, 0, 0.5f}, {-0.25f, 0, 0.5f});
 	grass.initialize_data_on_gpu(quad_mesh);
 
 	grass.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/grass.png");
-	grass.material.phong = { 0.4f, 0.6f, 0, 1 };
-	
+	grass.material.phong = {0.4f, 0.6f, 0, 1};
+
 	// Load house
 	// Link to open source file : https://www.cgtrader.com/items/4637728/download-page
 	// ***************************************** //
@@ -281,14 +280,14 @@ void scene_structure::initialize()
 	house.model.scaling = 0.1f;
 	house.model.translation = {0, 0, 5.0f};
 	house.model.rotation = initial_position_rotation;
-	//house_number = rand() % 4 + 1;
+	// house_number = rand() % 4 + 1;
 }
 
 void scene_structure::display_frame()
 {
 	timer.update();
 	// std::cout << "Global time: " << timer.t << std::endl;
-	skybox.model.rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, 0.01f * timer.t);
+	skybox.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, 0.01f * timer.t);
 
 	vec3 camera_position = environment.get_camera_position();
 
@@ -299,18 +298,8 @@ void scene_structure::display_frame()
 	environment.uniform_generic.uniform_float["time"] = timer.t;
 	environment.uniform_generic.uniform_float["water_length"] = water_length;
 
-	// Update light position & fog
-	// sphere_light_central_position = terrain_array[0].mesh.model.translation;
-	sphere_light.model.translation = boat2.model.translation;
-	sphere_light.model.translation.z = 10.0f;
-
-	environment.light_position = sphere_light.model.translation;
-	vec3 morning_sunlight = vec3(1.0, 0.8, 0.6);
-	float beta = (0.5 * sin(timer.t / 10.0 + 3.1415) + 0.5);
-	vec3 white = vec3(1.0f, 1.0f, 1.0f);
-	sphere_light.material.color = beta * morning_sunlight + (1 - beta) * white;
-	sphere_light.material.texture_settings.two_sided = true;
-	draw(sphere_light, environment);
+	// Update light position & fog parameters
+	environment.light_position = {boat2.model.translation.x, boat2.model.translation.y, 10.0f};
 
 	draw(global_frame, environment);
 
@@ -324,59 +313,69 @@ void scene_structure::display_frame()
 	int Rshift = (999 + Rini - Rmov) % 3;
 
 	// Recycle terrains whenever it is required
-	if (Cmov) {
+	if (Cmov)
+	{
 		std::cout << std::endl;
 		std::cout << "Cini Cmov " << Cini << " " << Cmov << std::endl;
 		std::cout << "Boat X: " << boat2.model.translation.x << " Y: " << boat2.model.translation.y << std::endl;
-		for (int j = 0; j < 3; j++) {
-			//std::cout << "Terrain (Cshift, j): (" << Cshift << "," << j << ")" << std::endl;
-			//std::cout << "     BEF X: " << terrain_array[Cshift][j].mesh.model.translation.x << " Y: " << terrain_array[Cshift][j].mesh.model.translation.y << std::endl;
+		for (int j = 0; j < 3; j++)
+		{
+			// std::cout << "Terrain (Cshift, j): (" << Cshift << "," << j << ")" << std::endl;
+			// std::cout << "     BEF X: " << terrain_array[Cshift][j].mesh.model.translation.x << " Y: " << terrain_array[Cshift][j].mesh.model.translation.y << std::endl;
 			terrain_array[Cshift][j].mesh.model.translation.x += 3 * water_length * Cmov;
-			//std::cout << "     AFT X: " << terrain_array[Cshift][j].mesh.model.translation.x << " Y: " << terrain_array[Cshift][j].mesh.model.translation.y << std::endl;
-			for (int k = 0; k < nb_hollow; k++) terrain_array[Cshift][j].hollowCenters[k].x += 3 * water_length * Cmov;
+			// std::cout << "     AFT X: " << terrain_array[Cshift][j].mesh.model.translation.x << " Y: " << terrain_array[Cshift][j].mesh.model.translation.y << std::endl;
+			for (int k = 0; k < nb_hollow; k++)
+				terrain_array[Cshift][j].hollowCenters[k].x += 3 * water_length * Cmov;
 		}
 		Cini += Cmov;
 		std::cout << "NEW Cini " << Cini << std::endl;
 	}
-	if (Rmov) {
+	if (Rmov)
+	{
 		std::cout << std::endl;
 		std::cout << "Rini Rmov " << Rini << " " << Rmov << std::endl;
 		std::cout << "Boat X: " << boat2.model.translation.x << " Y: " << boat2.model.translation.y << std::endl;
-		for (int i = 0; i < 3; i++) {
-			//std::cout << "Terrain (i, Rshift): (" << i << ", " << Rshift << ")"  << std::endl;
-			//std::cout << "     BEF X: " << terrain_array[i][Rshift].mesh.model.translation.x << " Y: " << terrain_array[i][Rshift].mesh.model.translation.y << std::endl;
+		for (int i = 0; i < 3; i++)
+		{
+			// std::cout << "Terrain (i, Rshift): (" << i << ", " << Rshift << ")"  << std::endl;
+			// std::cout << "     BEF X: " << terrain_array[i][Rshift].mesh.model.translation.x << " Y: " << terrain_array[i][Rshift].mesh.model.translation.y << std::endl;
 			terrain_array[i][Rshift].mesh.model.translation.y += 3 * water_length * Rmov;
-			//std::cout << "     AFT X: " << terrain_array[i][Rshift].mesh.model.translation.x << " Y: " << terrain_array[i][Rshift].mesh.model.translation.y << std::endl;
-			for (int k = 0; k < nb_hollow; k++) terrain_array[i][Rshift].hollowCenters[k].y += 3 * water_length * Rmov;
+			// std::cout << "     AFT X: " << terrain_array[i][Rshift].mesh.model.translation.x << " Y: " << terrain_array[i][Rshift].mesh.model.translation.y << std::endl;
+			for (int k = 0; k < nb_hollow; k++)
+				terrain_array[i][Rshift].hollowCenters[k].y += 3 * water_length * Rmov;
 		}
 		Rini += Rmov;
 		std::cout << "NEW Rini " << Rini << std::endl;
 	}
 
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			/*if ((j + i) % 3 == 0)
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+
+			draw(terrain_array[i][j].mesh, environment);
+			for (int k = 0; k < nb_hollow; k++)
 			{
+				int rock_type = terrain_array[i][j].type_rock[k];
+				rock_array[rock_type].mesh.model.translation = vec3{terrain_array[i][j].hollowCenters[k].x, terrain_array[i][j].hollowCenters[k].y, -2.0f};
+				rock_array[rock_type].mesh.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i][j].rock_rotation[k]);
+				draw(rock_array[rock_type].mesh, environment);
+
 				house_number += 1;
 				house_number = house_number % 4 + 1;
 				for (int l = 0; l < house_number; l++)
 				{
+					/*
 					if (terrain_array[i][j].type_rock[j] == 1)
 					{
-						house.model.translation = vec3{ terrain_array[i][j].hollowCenters[j].x + (l + 1) * 5.0f, terrain_array[i][j].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
+						house.model.translation = vec3{terrain_array[i][j].hollowCenters[j].x + (l + 1) * 9.0f, terrain_array[i][j].hollowCenters[j].y + (l + 1) * 7.0f, -1.0f};
 					}
-					house.model.translation = vec3{ terrain_array[i][j].hollowCenters[j].x + (l + 1) * 7.0f, terrain_array[i][j].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
-					house.model.rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, l * 15.0f) * house_initial_rotation;
+					*/
+					house.model.translation = vec3{terrain_array[i][j].hollowCenters[k].x + (l + 1) * 9.0f, terrain_array[i][j].hollowCenters[k].y + (l + 1) * 7.0f, -1.0f};
+					house.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, l * 15.0f) * house_initial_rotation;
 					draw(house, environment);
 					house.model.rotation = house_initial_rotation;
 				}
-			}*/
-			draw(terrain_array[i][j].mesh, environment);
-			for (int k = 0; k < nb_hollow; k++) {
-				int rock_type = terrain_array[i][j].type_rock[k];
-				rock_array[rock_type].mesh.model.translation = vec3{ terrain_array[i][j].hollowCenters[k].x, terrain_array[i][j].hollowCenters[k].y, -2.0f };
-				rock_array[rock_type].mesh.model.rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, terrain_array[i][j].rock_rotation[k]);
-				draw(rock_array[rock_type].mesh, environment);
 			}
 		}
 	}
@@ -426,14 +425,16 @@ void scene_structure::display_frame()
 	draw(fish2, environment);
 
 	// Detect collisions
-	// Detect collisions
-	const float collisionThreshold = 9.0f;
-	const float rock2threshold = 5.5f;
+	const float collisionThreshold = 15.5f;
+	const float rock2threshold = 7.5f;
 	const float moveback = 1.0f;
 
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			for (int k = 0; k < nb_hollow; k++) {
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			for (int k = 0; k < nb_hollow; k++)
+			{
 				float rockX = terrain_array[i][j].hollowCenters[k].x;
 				float rockY = terrain_array[i][j].hollowCenters[k].y;
 
