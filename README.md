@@ -14,9 +14,7 @@ Our scene and its comparison with the real Ha Long Bay.
 
 ### Short Video Playthrough
 
-<video controls>
-  <source src="Scene_INF443_Video.mp4" type="video/mp4">
-</video>
+Scene_INF443_Video.mp4
 
 
 
