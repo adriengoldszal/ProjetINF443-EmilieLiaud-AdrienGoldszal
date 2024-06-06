@@ -281,7 +281,7 @@ void scene_structure::initialize()
 	house.model.scaling = 0.1f;
 	house.model.translation = {0, 0, 5.0f};
 	house.model.rotation = initial_position_rotation;
-	house_number = rand() % 4 + 1;
+	//house_number = rand() % 4 + 1;
 }
 
 void scene_structure::display_frame()
@@ -355,6 +355,22 @@ void scene_structure::display_frame()
 
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
+			/*if ((j + i) % 3 == 0)
+			{
+				house_number += 1;
+				house_number = house_number % 4 + 1;
+				for (int l = 0; l < house_number; l++)
+				{
+					if (terrain_array[i][j].type_rock[j] == 1)
+					{
+						house.model.translation = vec3{ terrain_array[i][j].hollowCenters[j].x + (l + 1) * 5.0f, terrain_array[i][j].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
+					}
+					house.model.translation = vec3{ terrain_array[i][j].hollowCenters[j].x + (l + 1) * 7.0f, terrain_array[i][j].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
+					house.model.rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, l * 15.0f) * house_initial_rotation;
+					draw(house, environment);
+					house.model.rotation = house_initial_rotation;
+				}
+			}*/
 			draw(terrain_array[i][j].mesh, environment);
 			for (int k = 0; k < nb_hollow; k++) {
 				int rock_type = terrain_array[i][j].type_rock[k];
@@ -364,57 +380,6 @@ void scene_structure::display_frame()
 			}
 		}
 	}
-
-	/*for (int i = 0; i < 9; i++)
-	{
-		draw(terrain_array[i].mesh, environment);
-		for (int j = 0; j < terrain_array[i].hollowCenters.size(); j++)
-		{
-			int choice = terrain_array[i].type_rock[j];
-
-			if (j % 3 == 0)
-			{
-				house_number += 1;
-				house_number = house_number % 4 + 1;
-				for (int l = 0; l < house_number; l++)
-				{
-					if (terrain_array[i].type_rock[j] == 1)
-					{
-						house.model.translation = vec3{terrain_array[i].hollowCenters[j].x + (l + 1) * 5.0f, terrain_array[i].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
-					}
-					house.model.translation = vec3{terrain_array[i].hollowCenters[j].x + (l + 1) * 7.0f, terrain_array[i].hollowCenters[j].y + (l + 1) * 4.0f, -1.0f};
-					house.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, l * 15.0f) * house_initial_rotation;
-					draw(house, environment);
-					house.model.rotation = house_initial_rotation;
-				};
-			}
-
-			if (choice == 0)
-			{
-				rock1.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				rock1.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i].rock_rotation[j]);
-				draw(rock1, environment);
-			}
-			else if (choice == 1)
-			{
-				rock2.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				rock2.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i].rock_rotation[j]);
-				draw(rock2, environment);
-			}
-			else if (choice == 2)
-			{
-				rock3.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				rock3.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i].rock_rotation[j]);
-				draw(rock3, environment);
-			}
-			else
-			{
-				rock4.model.translation = vec3{terrain_array[i].hollowCenters[j].x, terrain_array[i].hollowCenters[j].y, -2.0f};
-				rock4.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i].rock_rotation[j]);
-				draw(rock4, environment);
-			}
-		}
-	}*/
 
 	draw(boat2, environment);
 	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
