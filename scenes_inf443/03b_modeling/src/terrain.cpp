@@ -146,6 +146,5 @@ void TerrainData::generate_houses(int nb_hollow) {
     {
         int random_value = dis(gen);
         nb_houses.push_back(random_value);
-        std::cout << random_value << std::endl;
     }
 }
