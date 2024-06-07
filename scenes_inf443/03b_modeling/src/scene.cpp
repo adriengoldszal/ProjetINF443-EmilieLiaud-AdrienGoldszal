@@ -186,13 +186,35 @@ void scene_structure::initialize()
 
 	// Load rocks
 	//  ***************************************** //
+		/*rock_mesh[0] = mesh_load_file_obj(project::path + "assets/rocks/rock1_3.obj");
+		rock_array[0].resize(rock_mesh[0], resize_ratios[0]);
+		rock_array[0].mesh.initialize_data_on_gpu(rock_mesh[0]);
+		rock_array[0].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock1.png", GL_REPEAT, GL_REPEAT);
+		rock_array[0].mesh.shader = terrain_shader;
+		rock_array[0].mesh.material.phong.specular = 0.0f; // non-specular rock material
+		
+		rock_mesh[1] = mesh_load_file_obj(project::path + "assets/rocks/rock2_3.obj");
+		rock_array[1].resize(rock_mesh[1], resize_ratios[1]);
+		rock_array[1].mesh.initialize_data_on_gpu(rock_mesh[1]);
+		rock_array[1].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock2.png", GL_REPEAT, GL_REPEAT);
+		rock_array[1].mesh.shader = terrain_shader;
+		rock_array[1].mesh.material.phong.specular = 0.0f; // non-specular rock material
+
+
+		rock_mesh[2] = mesh_load_file_obj(project::path + "assets/rocks/rock3_3.obj");
+		rock_array[2].resize(rock_mesh[2], resize_ratios[2]);
+		rock_array[2].mesh.initialize_data_on_gpu(rock_mesh[2]);
+		rock_array[2].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock3.png", GL_REPEAT, GL_REPEAT);
+		rock_array[2].mesh.shader = terrain_shader;
+		rock_array[2].mesh.material.phong.specular = 0.0f; // non-specular rock material
+		*/
 	for (int i = 0; i < 4; i++)
 	{
-		rock_mesh[i] = mesh_load_file_obj(project::path + "assets/rocks/rock" + str(i + 1) + "_2.obj");
+		rock_mesh[i] = mesh_load_file_obj(project::path + "assets/rocks/rock" + str(i + 1) + "_3.obj");
 		rock_array[i].resize(rock_mesh[i], resize_ratios[i]);
 		rock_array[i].mesh.initialize_data_on_gpu(rock_mesh[i]);
-		rock_array[i].mesh.model.scaling = 5.0f;
-		rock_array[i].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock_o.png", GL_REPEAT, GL_REPEAT);
+		//rock_array[i].mesh.model.scaling = 5.0f;
+		rock_array[i].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock" + str(i + 1) +".png", GL_REPEAT, GL_REPEAT);
 		rock_array[i].mesh.shader = terrain_shader;
 		rock_array[i].mesh.material.phong.specular = 0.0f; // non-specular rock material
 	}
@@ -357,7 +379,7 @@ void scene_structure::display_frame()
 			for (int k = 0; k < nb_hollow; k++)
 			{
 				int rock_type = terrain_array[i][j].type_rock[k];
-				rock_array[rock_type].mesh.model.translation = vec3{terrain_array[i][j].hollowCenters[k].x, terrain_array[i][j].hollowCenters[k].y, -2.0f};
+				rock_array[rock_type].mesh.model.translation = vec3{terrain_array[i][j].hollowCenters[k].x, terrain_array[i][j].hollowCenters[k].y, 5.0f};
 				rock_array[rock_type].mesh.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, terrain_array[i][j].rock_rotation[k]);
 				draw(rock_array[rock_type].mesh, environment);
 
