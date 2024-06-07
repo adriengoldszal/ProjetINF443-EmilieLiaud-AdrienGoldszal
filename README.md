@@ -3,7 +3,7 @@ This project, for Ecole Polytechnique's INF443 Computer Graphics class, was made
 
 <div style="display: flex; justify-content: space-around; align-items: center;">
   <figure style="margin: 10px; text-align: center;">
-    <img src="Scene.png" alt="Our Scene" style="width: 45%;">
+    <img src="INF443_Scene_Image.png" alt="Our Scene" style="width: 45%;">
   </figure>
   <figure style="margin: 10px; text-align: center;">
     <img src="ha-long-bay-in-vietnam.jpg" alt="Reality" style="width: 45%;">
