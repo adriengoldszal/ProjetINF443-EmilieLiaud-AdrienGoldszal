@@ -47,68 +47,13 @@ struct scene_structure : cgp::scene_inputs_generic
 
 	vec3 background_color; // Background color
 
-	cgp::mesh_drawable water;
-	cgp::mesh_drawable water2;
-	cgp::mesh_drawable water3;
-	cgp::mesh_drawable water4;
-	cgp::mesh_drawable water5;
-	cgp::mesh_drawable water6;
-	cgp::mesh_drawable water7;
-	cgp::mesh_drawable water8;
-	cgp::mesh_drawable water9;
-	cgp::mesh_drawable water_array[9] = {water, water2, water3, water4, water5, water6, water7, water8, water9};
-	int center;
+	// *********************************** //
+	// Water elements
+	// *********************************** //
+	cgp::mesh_drawable water_array[3][3];
 	float water_length;
 	int N_water_samples;
 	int nb_hollow;
-
-	cgp::mesh_drawable fish;
-	cgp::mesh_drawable fish2;
-
-	// *********************************** //
-	// Boat elements
-	// *********************************** //
-	mesh_drawable boat2;
-
-	cgp::rotation_transform initial_position_rotation; // Boat position for rotations
-
-	// *********************************** //
-	// House
-	// *********************************** //
-	cgp::mesh_drawable house;
-	cgp::rotation_transform house_initial_rotation;
-	int house_number;
-
-	// *********************************** //
-	// Rock elements
-	/************************************/
-	cgp::mesh_drawable rock_drawable;
-	cgp::mesh_drawable rock_drawable2;
-	cgp::hierarchy_mesh_drawable hierarchy;
-
-	cgp::mesh rock_mesh1;
-	cgp::mesh_drawable rock1;
-	std::vector<vec3> rock1_position;
-
-	cgp::mesh rock_mesh2;
-	cgp::mesh_drawable rock2;
-	cgp::mesh rock_mesh3;
-	cgp::mesh_drawable rock3;
-	cgp::mesh rock_mesh4;
-	cgp::mesh_drawable rock4;
-
-	std::vector<int> rocks_type;
-	mesh rock_mesh[4];
-	RockData rock_array[4];
-	//cgp::vec3 resize_ratios[4] = {{2.0f, 1.0f, 3.4f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 3.2f}};
-	cgp::vec3 resize_ratios[4] = {{12.0f, 12.0f, 12.0f}, {12.0f, 12.0f, 12.0f}, {12.0f, 12.0f, 12.0f}, {2.0f, 1.0f, 3.2f}};
-
-	// *********************************** //
-	// Grass elements
-	// *********************************** //
-	cgp::mesh_drawable grass;
-	std::vector<cgp::vec3> grass_position;
-	// perlin_noise_parameters parameters;
 
 	// ***********************************//
 	// Terrain elements
@@ -117,12 +62,38 @@ struct scene_structure : cgp::scene_inputs_generic
 	int Cini;
 	int Rini;
 
+	// *********************************** //
+	// Fish elements
+	// *********************************** //
+	cgp::mesh_drawable fish[2];
+
+	// *********************************** //
+	// Boat elements
+	// *********************************** //
+	mesh_drawable boat;
+	cgp::rotation_transform initial_position_rotation; // Boat position for rotations
+
+	// *********************************** //
+	// House
+	// *********************************** //
+	cgp::mesh_drawable house;
+	cgp::rotation_transform house_initial_rotation;
+	int house_number;
+	std::vector<cgp::vec3> house_position;
+
+	// *********************************** //
+	// Rock elements
+	// *********************************** //
+	std::vector<int> rocks_type;
+	mesh rock_mesh[4];
+	RockData rock_array[4];
+	//cgp::vec3 resize_ratios[4] = {{2.0f, 1.0f, 3.4f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 3.2f}};
+	cgp::vec3 resize_ratios[4] = {{12.0f, 12.0f, 12.0f}, {12.0f, 12.0f, 12.0f}, {12.0f, 12.0f, 12.0f}, {12.0f, 12.0f, 12.0f}};
+
 	// ***********************************//
 	// Fishes
 	// ***********************************//
-
-	// Timer used for the interpolation of the position
-	float fish_timer;
+	float fish_timer;  	// Timer used for the interpolation of the position
 	cgp ::timer_interval fish_interval;
 	numarray<vec3> initial_fish_positions;
 	numarray<vec3> fish_positions;

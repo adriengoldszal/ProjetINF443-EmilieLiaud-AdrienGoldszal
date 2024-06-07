@@ -3,9 +3,6 @@
 #include "cgp/cgp.hpp"
 #include "environment.hpp"
 
-// extern std::vector<cgp::vec2> hollowCenters;
-// extern std::vector<cgp::vec3> hollowPos;
-
 struct TerrainData
 {
 public:
@@ -13,6 +10,7 @@ public:
     std::vector<cgp::vec2> hollowCenters;
     std::vector<int> type_rock;
     std::vector<float> rock_rotation;
+    std::vector<int> nb_houses;
 
     float gaussian(float x, float y, float a, float b, float sigma);
     float terrainFunction(float x, float y, std::vector<cgp::vec2> centers);
@@ -21,4 +19,5 @@ public:
     void TerrainData::create_terrain_mesh(int N, int terrain_length, int nb_hollow);
     void TerrainData::generate_type_rock(int nb_hollow);
     void TerrainData::generate_rock_rotation(int nb_hollow);
+    void TerrainData::generate_houses(int nb_hollow);
 };

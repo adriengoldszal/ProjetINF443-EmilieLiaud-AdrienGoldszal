@@ -16,15 +16,15 @@ float TerrainData::gaussian(float x, float y, float a, float b, float sigma)
 }
 
 // max set at 10 on each center position, 6.1 at 1sigma = 2, 1.4 at 2sigma = 4
-// secondary max at 0.8 (10 x 2 x exp[-25/8]) in the middle of two nearest centers spearater by 10 (= 2 x (5/2)sigma si sigma=2)
+// secondary max at 0.8 (10 x 2 x exp[-25/8]) in the middle of two nearest centers spearater by 10 (= 2 x (5/2)sigma if sigma=2)
 float TerrainData::terrainFunction(float x, float y, std::vector<cgp::vec2> centers)
 {
     float result = 0.0f;
     for (vec2 center : centers)
     {
-        result += gaussian(x, y, center.x, center.y, 2);                    // Sigma = 2
+        result += gaussian(x, y, center.x, center.y, 6);                    // Sigma = 6
     }
-    return 10.0f * result;
+    return 6.0f * result;
 }
 
 bool TerrainData::nocolision(std::vector<cgp::vec2> center, float taille, cgp::vec2 new_pos)
@@ -42,10 +42,11 @@ std::vector<cgp::vec2> TerrainData::generateRandomCenters(int terrain_length, in
     while (nb < nb_hollow)
     {
         vec2 center;
-        center.x = (std::rand() % (terrain_length)) - terrain_length / 2;   // Random x within terrain bounds
-        center.y = (std::rand() % (terrain_length)) - terrain_length / 2;   // Random y within terrain bounds
+        
+        center.x = (std::rand() % (terrain_length - 25)) - (terrain_length - 25) / 2;   // Random x within terrain bounds, with a distance of 25 to the borders
+        center.y = (std::rand() % (terrain_length - 25)) - (terrain_length - 25) / 2;   // Random y within terrain bounds, with a distance of 25 to the borders
 
-        if (nocolision(centers, 10, center))                                // Min distance 10 between centers
+        if (nocolision(centers, 40, center))                                // Min distance 40 between centers
         {
             centers.push_back(center);
             nb++;
@@ -56,13 +57,7 @@ std::vector<cgp::vec2> TerrainData::generateRandomCenters(int terrain_length, in
 
 void TerrainData::create_terrain_mesh(int N, int terrain_length, int nb_hollow)
 {
-    std::cout << "start" << std::endl;
-
     hollowCenters = generateRandomCenters(terrain_length, nb_hollow);
-
-    std::cout << "&hollowCenters; " << &hollowCenters << "  ==> ";
-    for (int i = 0; i < nb_hollow; i++) std::cout << " x:" << hollowCenters[i].x << " y:" << hollowCenters[i].y;
-    std::cout << std::endl;
 
     cgp::mesh terrain; // temporary terrain storage (CPU only)
     terrain.position.resize(N * N);
@@ -71,8 +66,7 @@ void TerrainData::create_terrain_mesh(int N, int terrain_length, int nb_hollow)
     // Fill terrain geometry
     for (int ku = 0; ku < N; ++ku)
     {
-        for (int kv = 0; kv < N; ++kv)
-        {
+        for (int kv = 0; kv < N; ++kv){
             // Compute local parametric coordinates (u,v) \in [0,1]
             float u = ku / (N - 1.0f);
             float v = kv / (N - 1.0f);
@@ -137,8 +131,21 @@ void TerrainData::generate_rock_rotation(int nb_hollow) {
     for (int i = 0; i < nb_hollow; ++i)
     {
         int random_value = dis(gen);
-        int random_value2 = dis(gen);
-        std::cout << 2 * (float)random_value / 100 << std::endl;
-        rock_rotation.push_back(2 * (float)random_value / 100);
+        rock_rotation.push_back(2 * (float) random_value / 100);
+    }
+}
+
+void TerrainData::generate_houses(int nb_hollow) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 3);
+
+    nb_houses.clear();  // Ensure the vector is empty before filling it with new values
+
+    for (int i = 0; i < nb_hollow; i++)
+    {
+        int random_value = dis(gen);
+        nb_houses.push_back(random_value);
+        std::cout << random_value << std::endl;
     }
 }
