@@ -15,6 +15,7 @@ Our scene and its comparison with the real Ha Long Bay.
 ### Short Video Playthrough
 
 [https://youtu.be/SadnpyytqMc]
+
 The video is also accessible as a file in the repository. 
 
 ### Instructions for Windows users
