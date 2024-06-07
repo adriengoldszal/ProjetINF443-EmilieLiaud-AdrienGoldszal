@@ -28,11 +28,11 @@ The video is also accessible as a file in the repository.
 - [X] Déplacement problématique des rochers à chaque changement de mesh
 - [X] Rochers choisis de manière aléatoire (pour l'instant rock2)
 - [X] Problèmes de texture du fond marin
-- [X] COLLISIONS --> Pas parfait
+- [X] COLLISIONS
 - [X] La lumière est actuellement fixée sur le bateau -> Ombres bizarres
 - [X] Utiliser cette idée de lumière pour faire un cycle jour nuit : trop rouge le soir
 - [X] Plus de choses sur l'eau :  maisons ?
-- [ ] Bateau qui tangue trop
+- [X] Bateau qui tangue trop
+- [X] Herbe sur les rochers
 - [ ] Nuit plus foncée
-- [ ] Herbe sur les rochers
 - [ ] Déplaçage de la caméra quand on est dans le rocher
