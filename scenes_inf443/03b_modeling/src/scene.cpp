@@ -79,7 +79,7 @@ void scene_structure::initialize()
 			water_array[i][j].initialize_data_on_gpu(create_water_mesh(N_water_samples, water_length));
 			water_array[i][j].shader = water_shader;
 			water_array[i][j].material.color = {0.0f, 0.5f, 1.0f}; // blue color for water
-			water_array[i][j].material.phong.specular = 0.0f;		// non-specular terrain material
+			water_array[i][j].material.phong.specular = 0.0f;	   // non-specular terrain material
 
 			// Sending the skybox texture to the water shader as a uniform
 			glUseProgram(water_array[i][j].shader.id);
@@ -125,7 +125,8 @@ void scene_structure::initialize()
 	// Open source file https://sketchfab.com/3d-models/flying-fish-tobiuo-77e1a00a725148a1b4601b7482e60e30
 
 	mesh fish_mesh = mesh_load_file_obj(project::path + "assets/fish/20230116_Tobiuo.obj");
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2; i++)
+	{
 		fish[i].initialize_data_on_gpu(fish_mesh);
 		fish[i].texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Body_Normal.png");
 		fish[i].texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/fish/Winf3_Normal.png");
@@ -173,8 +174,8 @@ void scene_structure::initialize()
 		rock_mesh[i] = mesh_load_file_obj(project::path + "assets/rocks/rock" + str(i + 1) + "_3.obj");
 		rock_array[i].resize(rock_mesh[i], resize_ratios[i]);
 		rock_array[i].mesh.initialize_data_on_gpu(rock_mesh[i]);
-		//rock_array[i].mesh.model.scaling = 5.0f;
-		rock_array[i].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock" + str(i + 1) +".png", GL_REPEAT, GL_REPEAT);
+		// rock_array[i].mesh.model.scaling = 5.0f;
+		rock_array[i].mesh.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/rocks/rock" + str(i + 1) + ".png", GL_REPEAT, GL_REPEAT);
 		rock_array[i].mesh.shader = terrain_shader;
 		rock_array[i].mesh.material.phong.specular = 0.0f; // non-specular rock material
 	}
@@ -188,10 +189,10 @@ void scene_structure::initialize()
 	house.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/thaihouse/Texture/stairs/stairs_BaseColor.png");
 	house.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/thaihouse/Texture/structure/structure_BaseColor.png");
 	house.texture.load_and_initialize_texture_2d_on_gpu(project::path + "assets/thaihouse/Texture/wooden_planks/wooden planks_BaseColor.png");
-	
+
 	house.model.scaling = 0.1f;
 	house.model.translation = {0, 0, 5.0f};
-	house_initial_rotation = rotation_transform::from_axis_angle({ 0, 0, 1 }, Pi) * rotation_transform::from_axis_angle({ 1, 0, 0 }, Pi / 2);
+	house_initial_rotation = rotation_transform::from_axis_angle({0, 0, 1}, Pi) * rotation_transform::from_axis_angle({1, 0, 0}, Pi / 2);
 	house.model.rotation = house_initial_rotation;
 	house_position.clear();
 }
@@ -219,7 +220,7 @@ void scene_structure::display_frame()
 	// Draw Terrains & Rocks & Houses
 	//  ***************************************** //
 	int Cmov = (int)(boat.model.translation.x / water_length + 1.5 + 999) - Cini - 999;
-	int Cshift = (999 + Cini - Cmov) % 3; //making sure that (999 + Cini - Cmov) > 0
+	int Cshift = (999 + Cini - Cmov) % 3; // making sure that (999 + Cini - Cmov) > 0
 
 	int Rmov = (int)(boat.model.translation.y / water_length + 1.5 + 999) - Rini - 999;
 	int Rshift = (999 + Rini - Rmov) % 3;
@@ -266,7 +267,7 @@ void scene_structure::display_frame()
 
 				for (int l = 0; l < terrain_array[i][j].nb_houses[k]; l++)
 				{
-					vec3 new_pos = vec3{ terrain_array[i][j].hollowCenters[k].x + (l + 1) * 10.0f, terrain_array[i][j].hollowCenters[k].y + (l + 1) * 10.0f, -1.0f };
+					vec3 new_pos = vec3{terrain_array[i][j].hollowCenters[k].x + (l + 1) * 10.0f, terrain_array[i][j].hollowCenters[k].y + (l + 1) * 10.0f, -1.0f};
 					house.model.translation = new_pos;
 					house_position.push_back(new_pos);
 					house.model.rotation = rotation_transform::from_axis_angle({0, 0, 1}, l * 15.0f) * house_initial_rotation;
@@ -282,9 +283,8 @@ void scene_structure::display_frame()
 	draw(boat, environment);
 	display_semiTransparent(); // Display water and terrain as semi transparent for underwater effect
 
-	boat.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.05f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
+	boat.model.rotation = rotation_transform::from_axis_angle({0, 1, 0}, 0.03f * sin(timer.t)) * rotation_transform::from_axis_angle({1, 0, 0}, 0.2f * sin(timer.t)) * initial_position_rotation;
 	boat.model.scaling = 0.01f; // Ne marche plus correctement;
-
 
 	// Draw Fish
 	//  ***************************************** //
@@ -324,11 +324,10 @@ void scene_structure::display_frame()
 	draw(fish[0], environment);
 	draw(fish[1], environment);
 
-
 	// Detect collisions
 	//  ***************************************** //
-	const float collisionThreshold = 15.5f;
-	const float HousecollisionThreshold = 7.0f;
+	const float collisionThreshold = 16.5f;
+	const float HousecollisionThreshold = 6.0f;
 	const float moveback = 1.0f;
 
 	for (int i = 0; i < 3; i++)
@@ -422,7 +421,6 @@ void scene_structure::display_gui()
 {
 	ImGui::Checkbox("Frame", &gui.display_frame);
 	ImGui::Checkbox("Wireframe", &gui.display_wireframe);
-
 }
 
 void scene_structure::mouse_move_event()

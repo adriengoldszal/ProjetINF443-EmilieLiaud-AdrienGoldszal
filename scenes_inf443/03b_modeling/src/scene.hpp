@@ -87,13 +87,13 @@ struct scene_structure : cgp::scene_inputs_generic
 	std::vector<int> rocks_type;
 	mesh rock_mesh[4];
 	RockData rock_array[4];
-	//cgp::vec3 resize_ratios[4] = {{2.0f, 1.0f, 3.4f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 3.2f}};
-	cgp::vec3 resize_ratios[4] = {{12.0f, 12.0f, 12.0f}, {12.0f, 12.0f, 12.0f}, {12.0f, 12.0f, 12.0f}, {12.0f, 12.0f, 12.0f}};
+	// cgp::vec3 resize_ratios[4] = {{2.0f, 1.0f, 3.4f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 4.2f}, {2.0f, 1.0f, 3.2f}};
+	cgp::vec3 resize_ratios[4] = {{12.0f, 12.0f, 16.0f}, {12.0f, 12.0f, 16.0f}, {12.0f, 12.0f, 18.0f}, {12.0f, 12.0f, 18.0f}};
 
 	// ***********************************//
 	// Fishes
 	// ***********************************//
-	float fish_timer;  	// Timer used for the interpolation of the position
+	float fish_timer; // Timer used for the interpolation of the position
 	cgp ::timer_interval fish_interval;
 	numarray<vec3> initial_fish_positions;
 	numarray<vec3> fish_positions;

@@ -11,14 +11,6 @@ in struct fragment_data {
 
 } fragment;
 
-// Coefficients of phong illumination model
-struct phong_structure {
-    float ambient;
-    float diffuse;
-    float specular;
-    float specular_exponent;
-};
-
 // Output of the fragment shader - output color
 layout(location = 0) out vec4 FragColor;
 
